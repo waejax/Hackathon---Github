@@ -1051,9 +1051,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 466f1b9bb6dfbad4f9601d979eb08f7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subjectInput: {fileID: 0}
-  incidentDetailsInput: {fileID: 0}
-  peopleInvolvedInput: {fileID: 0}
+  subjectInput: {fileID: 1938595673}
+  incidentDetailsInput: {fileID: 1824883381}
+  peopleInvolvedInput: {fileID: 2062732852}
   reporterNameInput: {fileID: 0}
   emailInput: {fileID: 0}
   numberInput: {fileID: 0}

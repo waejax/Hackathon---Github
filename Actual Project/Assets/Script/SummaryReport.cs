@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class summaryReport : MonoBehaviour
 {
     public Text summaryText;
+    public string dbURL = "http://localhost/hackathon/insert_report.php";
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,7 +20,6 @@ public class summaryReport : MonoBehaviour
 
     public void Submit(string sceneName)
     {
-        ReportData.Instance.Clear();
-        SceneManager.LoadScene(sceneName);
+        StartCoroutine(Report.SendReport(dbURL, sceneName));
     }
 }

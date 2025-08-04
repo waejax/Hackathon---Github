@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Text.RegularExpressions;
+using System.Collections;
+using UnityEngine.Networking;
 
 public class LoginManager : MonoBehaviour
 {
@@ -9,13 +11,15 @@ public class LoginManager : MonoBehaviour
     public InputField PasswordInput;
     public Button LoginButton;
     public Button SignupButton;
-    public Text warningText; // Assign in Inspector
+    public Text warningText;
+
+    string loginURL = "http://localhost/hackathon/login.php";
 
     void Start()
     {
         LoginButton.onClick.AddListener(OnLoginClicked);
         SignupButton.onClick.AddListener(OnSignupClicked);
-        warningText.gameObject.SetActive(false); // Hide warning at start
+        warningText.gameObject.SetActive(false);
     }
 
     void OnLoginClicked()
@@ -33,8 +37,36 @@ public class LoginManager : MonoBehaviour
         }
         else
         {
-            warningText.gameObject.SetActive(false);
-            SceneManager.LoadScene("LevelSelectScene");
+            StartCoroutine(VerifyLogin(email, password));
+        }
+    }
+
+    IEnumerator VerifyLogin(string email, string password)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("emailPost", email);
+        form.AddField("passwordPost", password);
+
+        UnityWebRequest www = UnityWebRequest.Post(loginURL, form);
+        yield return www.SendWebRequest();
+
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            ShowWarning("Server error: " + www.error);
+        }
+        else
+        {
+            string response = www.downloadHandler.text.Trim();
+            Debug.Log("Server response: " + response);
+
+            if (response.Contains("Login success"))
+            {
+                SceneManager.LoadScene("LevelSelectScene");
+            }
+            else
+            {
+                ShowWarning("Invalid email or password.");
+            }
         }
     }
 

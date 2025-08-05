@@ -307,7 +307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadButton: {fileID: 998974112}
-  sceneToLoadName: LevelSelector
+  sceneToLoadName: LevelSelectScene
 --- !u!4 &154322181
 Transform:
   m_ObjectHideFlags: 0

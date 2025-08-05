@@ -33,9 +33,9 @@ public class contact : MonoBehaviour
 
             foreach (ContactData contact in contactList.contacts) {
                 if (contact.name.Contains("HQ"))
-                    bandar.text = "Address: " + contact.address + "\nPhone: " + contact.phone + "\nLocation: ";
+                    bandar.text = "Address: " + contact.address + "\nEnquiries: " + contact.Qphone1 + "\t/ " + contact.Qphone2 + "\nReporting Phone: " + contact.Rphone1 + "\t/ " + contact.Rphone2 + "\nLocation: ";
                 else if (contact.name.Contains("Kuala Belait"))
-                    kb.text = "Address: " + contact.address + "\nPhone: " + contact.phone + "\nLocation: ";
+                    kb.text = "Address: " + contact.address + "\nEnquiries: " + contact.Qphone1 + "\nReporting Phone: " + contact.Rphone1 + "\t/ " + contact.Rphone2 + "\nLocation: ";
             }
         }
         else
@@ -46,7 +46,7 @@ public class contact : MonoBehaviour
 
     [System.Serializable]
     public class ContactData {
-        public string name, address, phone;
+        public string name, address, Qphone1, Qphone2, Rphone1, Rphone2;
     }
 
     [System.Serializable]

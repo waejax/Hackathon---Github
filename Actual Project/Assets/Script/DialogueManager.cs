@@ -15,34 +15,43 @@ public class DialogueManager : MonoBehaviour
 
     public static DialogueManager Instance { get; private set; }
 
+    List<string> fullDialog;
+    int currentLine;
+    int endLine;
+    bool isTyping;
+
     private void Awake()
     {
         Instance = this;
     }
 
-    Dialog dialog;
-    int currentLine = 0;
-    bool isTyping;
-
-    public IEnumerator ShowDialog(Dialog dialog)
+    public IEnumerator ShowDialog(List<string> lines, int startIndex, int count)
     {
         yield return new WaitForEndOfFrame();
 
         OnShowDialog?.Invoke();
 
-        this.dialog = dialog;
+        fullDialog = lines;
+        currentLine = startIndex;
+        endLine = Mathf.Min(startIndex + count, fullDialog.Count);
+
         dialogBox.SetActive(true);
-        StartCoroutine(TypeDialog(dialog.Lines[0]));
+        StartCoroutine(TypeDialog(fullDialog[currentLine]));
+    }
+
+    void Update()
+    {
+        HandleUpdate();
     }
 
     public void HandleUpdate()
     {
         if (Input.GetKeyDown(KeyCode.Space) && !isTyping)
         {
-            ++currentLine;
-            if (currentLine < dialog.Lines.Count)
+            currentLine++;
+            if (currentLine < endLine)
             {
-                StartCoroutine(TypeDialog(dialog.Lines[currentLine]));
+                StartCoroutine(TypeDialog(fullDialog[currentLine]));
             }
             else
             {
@@ -57,7 +66,8 @@ public class DialogueManager : MonoBehaviour
     {
         isTyping = true;
         dialogText.text = "";
-        foreach (var letter in line.ToCharArray())
+
+        foreach (char letter in line.ToCharArray())
         {
             dialogText.text += letter;
             yield return new WaitForSeconds(1f / lettersPerSecond);

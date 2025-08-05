@@ -2,13 +2,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using System.Collections;
+using System.Collections.Generic;
 
 public class DialogueLoader : MonoBehaviour
 {
-    public Text bandar;
-    public Text kb;
-
     public string dbURL = "http://localhost/hackathon/demo.php";
+    List<string> allDialog;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,12 +29,21 @@ public class DialogueLoader : MonoBehaviour
             Debug.Log("wrraped json: " + json);
 
             Dialog dialog = JsonUtility.FromJson<Dialog>(json);
+            allDialog = dialog.Lines;
 
-            StartCoroutine(DialogueManager.Instance.ShowDialog(dialog));
+            StartCoroutine(DialogueManager.Instance.ShowDialog(allDialog, 0, 7));
         }
         else
         {
             Debug.LogError("Error: " + www.error);
+        }
+    }
+
+    public void TriggerNextDialog(int startIndex, int count)
+    {
+        if (allDialog != null && startIndex < allDialog.Count)
+        {
+            DialogueManager.Instance.StartCoroutine(DialogueManager.Instance.ShowDialog(allDialog, startIndex, count));
         }
     }
 }

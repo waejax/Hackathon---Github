@@ -13,6 +13,7 @@ public class ConsequencesLogic : MonoBehaviour
     public Button nextButton;
     public Slider moralitySlider;
     public Text moralityValueText;
+    public Button ChatbotButton;
 
     private bool resultShown = false;
     private ConsequenceData currentData;
@@ -52,9 +53,15 @@ public class ConsequencesLogic : MonoBehaviour
                 Debug.LogWarning("No previous scene set!");
             }
         });
-        
+
         nextButton.interactable = true;
         nextButton.onClick.AddListener(() => SceneManager.LoadScene(currentData.nextScene));
+        
+        ChatbotButton.onClick.AddListener(() =>
+        {
+            GameManager.Instance.chatbotReturnScene = SceneManager.GetActiveScene().name;
+            SceneManager.LoadScene("Chatbot");
+        });
     }
 
     void ShowFinalConsequence()

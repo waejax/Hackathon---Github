@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     public ConsequenceData lieConsequence;
     public int moralityScore = 0;
     public string previousScene = "";
+    public string chatbotReturnScene = "";
 
     private void Awake()
     {

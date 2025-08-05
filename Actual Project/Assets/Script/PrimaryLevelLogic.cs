@@ -7,6 +7,7 @@ public class PrimaryLevelLogic : MonoBehaviour
     public Button truthButton;
     public Button lieButton;
     public Text scenarioText;
+    public Button ChatbotButton;
 
     void Start()
     {
@@ -56,6 +57,12 @@ public class PrimaryLevelLogic : MonoBehaviour
             GameManager.Instance.currentChoice = ChoiceType.Lie;
             GameManager.Instance.selectedChoiceText = lieButton.GetComponentInChildren<Text>().text;
             SceneManager.LoadScene("ConsequenceScene");
+        });
+
+        ChatbotButton.onClick.AddListener(() =>
+        {
+            GameManager.Instance.chatbotReturnScene = SceneManager.GetActiveScene().name;
+            SceneManager.LoadScene("Chatbot");
         });
     }
 }

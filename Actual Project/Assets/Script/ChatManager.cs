@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class ChatManager : MonoBehaviour
@@ -12,8 +13,14 @@ public class ChatManager : MonoBehaviour
     public Transform contentTransform; // Content object under ScrollView
     public InputField userInput; // Regular Unity UI InputField
     public ScrollRect scrollRect; // for auto-scrolling
-
     public OpenAIChatAPI openAIChatAPI;
+    public Button closeButton;
+
+    void Start()
+    {
+        // Assign Exit button action
+        closeButton.onClick.AddListener(OnCloseButtonClicked);
+    }
 
     public void OnSendButtonClicked()
     {
@@ -25,6 +32,18 @@ public class ChatManager : MonoBehaviour
             userInput.text = "";
 
             openAIChatAPI.SendMessageToOpenAI(message);
+        }
+    }
+
+    void OnCloseButtonClicked()
+    {
+        if (!string.IsNullOrEmpty(GameManager.Instance.chatbotReturnScene))
+        {
+            SceneManager.LoadScene(GameManager.Instance.chatbotReturnScene);
+        }
+        else
+        {
+            Debug.LogWarning("Chatbot return scene not set in GameManager.");
         }
     }
 

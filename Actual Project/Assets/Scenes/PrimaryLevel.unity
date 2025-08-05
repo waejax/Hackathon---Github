@@ -1028,6 +1028,7 @@ MonoBehaviour:
   truthButton: {fileID: 366716470}
   lieButton: {fileID: 1716342980}
   scenarioText: {fileID: 1313605066}
+  ChatbotButton: {fileID: 1858790858}
 --- !u!4 &1803756503
 Transform:
   m_ObjectHideFlags: 0

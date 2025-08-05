@@ -8,6 +8,7 @@ public class DialogueManager : MonoBehaviour
 {
     [SerializeField] GameObject dialogBox;
     [SerializeField] Text dialogText;
+    [SerializeField] Text continueText;
     [SerializeField] int lettersPerSecond;
 
     public event Action OnShowDialog;
@@ -46,9 +47,12 @@ public class DialogueManager : MonoBehaviour
 
     public void HandleUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !isTyping)
+        if (Input.GetKeyDown(KeyCode.Z) && !isTyping)
         {
             currentLine++;
+
+            continueText.text = "";
+            
             if (currentLine < endLine)
             {
                 StartCoroutine(TypeDialog(fullDialog[currentLine]));
@@ -57,6 +61,7 @@ public class DialogueManager : MonoBehaviour
             {
                 currentLine = 0;
                 dialogBox.SetActive(false);
+                continueText.text = "";
                 OnCloseDialog?.Invoke();
             }
         }
@@ -66,12 +71,16 @@ public class DialogueManager : MonoBehaviour
     {
         isTyping = true;
         dialogText.text = "";
+        continueText.text = "";
 
         foreach (char letter in line.ToCharArray())
         {
             dialogText.text += letter;
             yield return new WaitForSeconds(1f / lettersPerSecond);
         }
+
         isTyping = false;
+        yield return new WaitForSeconds(1f);
+        continueText.text = "Press Z to continue";
     }
 }

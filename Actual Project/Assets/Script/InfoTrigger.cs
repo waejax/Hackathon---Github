@@ -4,7 +4,7 @@ public class InfoTrigger : MonoBehaviour
 {
     private bool trigger = false;
 
-    void OTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (!trigger && collision.CompareTag("Player"))
         {

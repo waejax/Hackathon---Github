@@ -37,15 +37,17 @@ public class ChatManager : MonoBehaviour
 
     void OnCloseButtonClicked()
     {
-        if (!string.IsNullOrEmpty(GameManager.Instance.chatbotReturnScene))
+        if (GameManager.Instance != null && !string.IsNullOrEmpty(GameManager.Instance.chatbotReturnScene))
         {
             SceneManager.LoadScene(GameManager.Instance.chatbotReturnScene);
         }
         else
         {
-            Debug.LogWarning("Chatbot return scene not set in GameManager.");
+            Debug.LogWarning("GameManager.Instance or chatbotReturnScene not set. Returning to Start scene.");
+            SceneManager.LoadScene("Start");
         }
     }
+
 
     public void CreateMessage(string message, bool isUser)
     {

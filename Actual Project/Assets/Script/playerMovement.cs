@@ -1,28 +1,60 @@
+using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class playerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 5.0f; // Set player's movement speed.
-    public float jumpForce = 5.0f;
+    float horizontalInput;
+    float moveSpeed = 5f;
+    bool isFacingRight = false;
+    float jumpPower = 5f;
+    bool isGrounded = false;
 
-    public Rigidbody2D rb; // Reference to player's Rigidbody.
-    float horizontalMovement;
+    Rigidbody2D rb;
+    Animator animator;
 
     // Start is called before the first frame update
-    private void Start()
+    void Start()
     {
-        rb = GetComponent<Rigidbody2D>(); // Access player's Rigidbody.
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        rb.linearVelocity = new Vector2(horizontalMovement * speed, rb.linearVelocity.y);
+        horizontalInput = Input.GetAxis("Horizontal");
+
+        FlipSprite();
+
+        if(Input.GetButtonDown("Jump") && isGrounded)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
+            isGrounded = false;
+            animator.SetBool("isJumping", !isGrounded);
+        }
     }
 
-    public void Move(InputAction.CallbackContext context)
+    private void FixedUpdate()
     {
-        horizontalMovement = context.ReadValue<Vector2>().x;
+        rb.linearVelocity = new Vector2(horizontalInput * moveSpeed, rb.linearVelocity.y);
+        animator.SetFloat("xVelocity", Math.Abs(rb.linearVelocity.x));
+        animator.SetFloat("yVelocity", rb.linearVelocity.y);
+    }
+
+    void FlipSprite()
+    {
+        if(isFacingRight && horizontalInput < 0f || !isFacingRight && horizontalInput > 0f)
+        {
+            isFacingRight = !isFacingRight;
+            Vector3 ls = transform.localScale;
+            ls.x *= -1f;
+            transform.localScale = ls;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        isGrounded = true;
+        animator.SetBool("isJumping", !isGrounded);
     }
 }

@@ -47,6 +47,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ConsequenceScene.unity
     guid: b4b4aae4cef781b4aaa2fa7ea01fe994
+  - enabled: 1
+    path: Assets/Scenes/Contact.unity
+    guid: 9f7982d3bb87159419e469fbf9be90dd
+  - enabled: 1
+    path: Assets/Scenes/infoCollected.unity
+    guid: 09ff68b404563f641821d4f37be928b9
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

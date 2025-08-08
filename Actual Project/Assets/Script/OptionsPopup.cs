@@ -11,7 +11,9 @@ public class PopupSceneManager : MonoBehaviour
     public Button ChatbotButton;
     public Button infoButton;
     public Button contactButton;
-    public Button closeButton; 
+    public Button closeButton;
+
+    private string homeScene = "Start";
 
     void Start()
     {
@@ -20,20 +22,42 @@ public class PopupSceneManager : MonoBehaviour
 
         // Assign button listeners
         openPopupButton.onClick.AddListener(OpenPopup);
+        closeButton.onClick.AddListener(ClosePopup);
+
         ReportButton.onClick.AddListener(() => LoadScene("IncidentReport"));
         ChatbotButton.onClick.AddListener(() => LoadScene("Chatbot"));
         infoButton.onClick.AddListener(() => LoadScene("infoCollected"));
         contactButton.onClick.AddListener(() => LoadScene("Contact"));
-        closeButton.onClick.AddListener(() => LoadScene("Start"));
     }
 
-    void OpenPopup()
+    public void OpenPopup()
     {
         popupPanel.SetActive(true);
+    }
+
+    void ClosePopup() {
+        popupPanel.SetActive(false);
     }
 
     void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+    }
+
+    void AssignSceneButton(Button button, string targetScene)
+    {
+        button.onClick.AddListener(() =>
+        {
+            string currentScene = SceneManager.GetActiveScene().name;
+
+            if (currentScene == homeScene)
+            {
+                SceneManager.LoadScene(targetScene);
+            }
+            else if (currentScene == targetScene)
+            {
+                SceneManager.LoadScene(homeScene);
+            }
+        });
     }
 }

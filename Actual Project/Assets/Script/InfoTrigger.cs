@@ -10,6 +10,11 @@ public class InfoTrigger : MonoBehaviour
         {
             trigger = true;
             DialogueLoader loader = FindObjectOfType<DialogueLoader>();
+
+            if (loader != null)
+            {
+                loader.TriggerInfoDialog(this.gameObject);
+            }
         }
     }
 }

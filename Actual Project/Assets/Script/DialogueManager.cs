@@ -10,6 +10,15 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] Text dialogText;
     [SerializeField] Text continueText;
     [SerializeField] int lettersPerSecond;
+    [SerializeField] private Transform playerTransform;
+    private Vector2 originalSize;
+    private Vector2 infoDialogSize = new Vector2(500, 200);
+    private RectTransform dialogRectTransform;
+    private Vector3 originalPos;
+
+    private RectTransform continueTextRect;
+    private Vector3 originalContinuePos;
+    private Vector3 infoContinuePos = new Vector3(500, -20, 0);
 
     public event Action OnShowDialog;
     public event Action OnCloseDialog;
@@ -24,9 +33,16 @@ public class DialogueManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+
+        dialogRectTransform = dialogBox.GetComponent<RectTransform>();
+        originalSize = dialogRectTransform.sizeDelta;
+        originalPos = dialogRectTransform.localPosition;
+
+        continueTextRect = continueText.GetComponent<RectTransform>();
+        originalContinuePos = continueTextRect.localPosition;
     }
 
-    public IEnumerator ShowDialog(List<string> lines, int startIndex, int count)
+    public IEnumerator ShowDialog(List<string> lines, int startIndex, int count, bool isInfoDialogue = false, Action onDialogComplete = null)
     {
         yield return new WaitForEndOfFrame();
 
@@ -36,8 +52,38 @@ public class DialogueManager : MonoBehaviour
         currentLine = startIndex;
         endLine = Mathf.Min(startIndex + count, fullDialog.Count);
 
+        if (isInfoDialogue)
+        {
+            dialogRectTransform.sizeDelta = infoDialogSize;
+
+            Vector3 worldPos = playerTransform.position + new Vector3(-5f, 1.5f, 0);
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
+
+            Vector2 localPoint;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(dialogRectTransform.parent as RectTransform, screenPos, null, out localPoint);
+
+            dialogRectTransform.localPosition = localPoint;
+
+            continueTextRect.localPosition = new Vector3(infoDialogSize.x / 2 - 10, 10, 0);
+        }
+        else
+        {
+            dialogRectTransform.sizeDelta = originalSize;
+            dialogBox.transform.localPosition = originalPos;
+
+            continueTextRect.localPosition = originalContinuePos;
+        }
+
         dialogBox.SetActive(true);
         StartCoroutine(TypeDialog(fullDialog[currentLine]));
+
+        while (dialogBox.activeSelf)
+            yield return null;
+
+        dialogRectTransform.sizeDelta = originalSize;
+        dialogBox.transform.localPosition = originalPos;
+
+        onDialogComplete?.Invoke();
     }
 
     void Update()

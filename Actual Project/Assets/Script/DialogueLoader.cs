@@ -41,7 +41,7 @@ public class DialogueLoader : MonoBehaviour
         }
     }
 
-    public IEnumerator GetInfoDialog()
+    public IEnumerator GetInfoDialog(GameObject infoIcon)
     {
         UnityWebRequest www = UnityWebRequest.Get(infoURL);
         yield return www.SendWebRequest();
@@ -60,7 +60,10 @@ public class DialogueLoader : MonoBehaviour
             {
                 List<string> splitSentences = SplitIntoSentences(dialog.Lines[0]);
 
-                StartCoroutine(DialogueManager.Instance.ShowDialog(splitSentences, 0, splitSentences.Count));
+                yield return StartCoroutine(DialogueManager.Instance.ShowDialog(splitSentences, 0, splitSentences.Count, true, () =>
+                {
+                    infoIcon.SetActive(false);
+                }));
             }
         }
         else
@@ -94,8 +97,8 @@ public class DialogueLoader : MonoBehaviour
         }
     }
 
-    public void TriggerInfoDialog()
+    public void TriggerInfoDialog(GameObject infoIcon)
     {
-        StartCoroutine(GetInfoDialog());
+        StartCoroutine(GetInfoDialog(infoIcon));
     }
 }

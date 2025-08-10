@@ -60,12 +60,12 @@ public class movePlayer : MonoBehaviour
     void FixedUpdate()
     {
         // Apply horizontal movement
-        rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
+        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
 
         // Handle jump in FixedUpdate for physics
         if (jumpRequest)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             jumpRequest = false;
         }
         // Apply horizontal movement using physics

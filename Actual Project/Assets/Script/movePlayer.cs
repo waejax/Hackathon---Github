@@ -53,6 +53,7 @@ public class movePlayer : MonoBehaviour
         {
             jumpRequest = true;
             animator.SetTrigger("Jump"); // Optional: if you have a jump trigger animation
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
     }
 
@@ -67,6 +68,8 @@ public class movePlayer : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             jumpRequest = false;
         }
+        // Apply horizontal movement using physics
+        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
     }
 
     void OnDrawGizmosSelected()

@@ -4,19 +4,35 @@ using UnityEngine.SceneManagement;
 
 public class SecondaryLevelLogic : MonoBehaviour
 {
-    public Button truthButton;
-    public Button lieButton;
+    [Header("Choice Colliders (UI or World Objects)")]
+    public Collider2D truthCollider;
+    public Collider2D lieCollider;
+
+    [Header("UI Elements")]
     public Text scenarioText;
+    public Text truthChoiceText;
+    public Text lieChoiceText;    
     public Button ChatbotButton;
+
+    [Header("Animation Settings")]
+    public float pulseSpeed = 2f;      // Pulsing speed
+    public float pulseAmount = 0.05f;  // Pulsing size change
+
+    private Vector3 truthOriginalScale;
+    private Vector3 lieOriginalScale;
 
     void Start()
     {
-        scenarioText.text = "You failed your exam by 2 marks. Your parent is the teacher. Do you ask them to pass you?";
+        truthOriginalScale = truthCollider.transform.localScale;
+        lieOriginalScale = lieCollider.transform.localScale;
 
-        truthButton.GetComponentInChildren<Text>().text = "Accept the grade and retake the test";
-        lieButton.GetComponentInChildren<Text>().text = "Ask for a fake passing mark";
+        // Typewriter effect for scenario
+        StartCoroutine(TypeSentence("You failed your exam by 2 marks. Your parent is the teacher. Do you ask them to pass you?"));
 
-        // Configure consequences for this level
+	truthChoiceText.text = "Accept the grade and retake the test";
+	lieChoiceText.text = "Ask for a fake passing mark";
+
+        // Set consequences for truth
         GameManager.Instance.truthConsequence = new ConsequenceData
         {
             previewText = "Potential Consequences:\n- You may be admired for fairness\nOR\n- Retake the test later",
@@ -29,6 +45,7 @@ public class SecondaryLevelLogic : MonoBehaviour
             nextScene = "UniLevel"
         };
 
+        // Set consequences for lie
         GameManager.Instance.lieConsequence = new ConsequenceData
         {
             previewText = "Potential Consequences:\n- You might pass\nOR\n- Get caught",
@@ -41,22 +58,7 @@ public class SecondaryLevelLogic : MonoBehaviour
             nextScene = "UniLevel"
         };
 
-        truthButton.onClick.AddListener(() =>
-        {
-            GameManager.Instance.previousScene = SceneManager.GetActiveScene().name;
-            GameManager.Instance.currentChoice = ChoiceType.Truth;
-            GameManager.Instance.selectedChoiceText = truthButton.GetComponentInChildren<Text>().text;
-            SceneManager.LoadScene("ConsequenceScene");
-        });
-
-        lieButton.onClick.AddListener(() =>
-        {
-            GameManager.Instance.previousScene = SceneManager.GetActiveScene().name;
-            GameManager.Instance.currentChoice = ChoiceType.Lie;
-            GameManager.Instance.selectedChoiceText = lieButton.GetComponentInChildren<Text>().text;
-            SceneManager.LoadScene("ConsequenceScene");
-        });
-
+        // Keep only Chatbot button as clickable
         ChatbotButton.onClick.AddListener(() =>
         {
             GameManager.Instance.chatbotReturnScene = SceneManager.GetActiveScene().name;
@@ -64,4 +66,22 @@ public class SecondaryLevelLogic : MonoBehaviour
         });
     }
 
+    void Update()
+    {
+        // Pulse animation for the choice objects
+        float pulse = 1 + Mathf.Sin(Time.time * pulseSpeed) * pulseAmount;
+        truthCollider.transform.localScale = truthOriginalScale * pulse;
+        lieCollider.transform.localScale = lieOriginalScale * pulse;
+    }
+
+    // Typewriter effect
+    System.Collections.IEnumerator TypeSentence(string sentence)
+    {
+        scenarioText.text = "";
+        foreach (char letter in sentence)
+        {
+            scenarioText.text += letter;
+            yield return new WaitForSeconds(0.05f); // Typing speed
+        }
+    }
 }

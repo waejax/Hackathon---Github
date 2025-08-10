@@ -4,18 +4,35 @@ using UnityEngine.SceneManagement;
 
 public class WorkLevelLogic : MonoBehaviour
 {
-    public Button truthButton;
-    public Button lieButton;
+    [Header("Choice Colliders (UI or World Objects)")]
+    public Collider2D truthCollider;
+    public Collider2D lieCollider;
+
+    [Header("UI Elements")]
     public Text scenarioText;
+    public Text truthChoiceText;
+    public Text lieChoiceText;    
     public Button ChatbotButton;
+
+    [Header("Animation Settings")]
+    public float pulseSpeed = 2f;      // Pulsing speed
+    public float pulseAmount = 0.05f;  // Pulsing size change
+
+    private Vector3 truthOriginalScale;
+    private Vector3 lieOriginalScale;
 
     void Start()
     {
-        scenarioText.text = "You've been job hunting for months. Your uncle is a director at a big company and offers you a position — without going through an interview.";
+        truthOriginalScale = truthCollider.transform.localScale;
+        lieOriginalScale = lieCollider.transform.localScale;
 
-        truthButton.GetComponentInChildren<Text>().text = "Go through the proper application process";
-        lieButton.GetComponentInChildren<Text>().text = "Accept the job through family connection";
+        // Typewriter effect for scenario
+        StartCoroutine(TypeSentence("You've been job hunting for months. Your uncle is a director at a big company and offers you a position — without going through an interview."));
 
+	truthChoiceText.text = "Go through the proper application process";
+	lieChoiceText.text = "Accept the job through family connection";
+
+        // Set consequences for truth
         GameManager.Instance.truthConsequence = new ConsequenceData
         {
             previewText = "Potential Consequences:\n- You might get rejected\nOR\n- You earn respect",
@@ -25,9 +42,10 @@ public class WorkLevelLogic : MonoBehaviour
             resultOption2 = "You prove your worth through fairness and eventually succeed.",
             scoreOption1 = 5,
             scoreOption2 = 10,
-            nextScene = "FinalResult" // replace with your actual final scene
+            nextScene = "Start"
         };
 
+        // Set consequences for lie
         GameManager.Instance.lieConsequence = new ConsequenceData
         {
             previewText = "Potential Consequences:\n- You get the job\nOR\n- Face distrust",
@@ -37,29 +55,33 @@ public class WorkLevelLogic : MonoBehaviour
             resultOption2 = "You get the job, but you’re excluded from team projects.",
             scoreOption1 = -5,
             scoreOption2 = -10,
-            nextScene = "FinalResult" // replace with your actual final scene
+            nextScene = "Start"
         };
 
-        truthButton.onClick.AddListener(() =>
-        {
-            GameManager.Instance.previousScene = SceneManager.GetActiveScene().name;
-            GameManager.Instance.currentChoice = ChoiceType.Truth;
-            GameManager.Instance.selectedChoiceText = truthButton.GetComponentInChildren<Text>().text;
-            SceneManager.LoadScene("ConsequenceScene");
-        });
-
-        lieButton.onClick.AddListener(() =>
-        {
-            GameManager.Instance.previousScene = SceneManager.GetActiveScene().name;
-            GameManager.Instance.currentChoice = ChoiceType.Lie;
-            GameManager.Instance.selectedChoiceText = lieButton.GetComponentInChildren<Text>().text;
-            SceneManager.LoadScene("ConsequenceScene");
-        });
-
+        // Keep only Chatbot button as clickable
         ChatbotButton.onClick.AddListener(() =>
         {
             GameManager.Instance.chatbotReturnScene = SceneManager.GetActiveScene().name;
             SceneManager.LoadScene("Chatbot");
         });
+    }
+
+    void Update()
+    {
+        // Pulse animation for the choice objects
+        float pulse = 1 + Mathf.Sin(Time.time * pulseSpeed) * pulseAmount;
+        truthCollider.transform.localScale = truthOriginalScale * pulse;
+        lieCollider.transform.localScale = lieOriginalScale * pulse;
+    }
+
+    // Typewriter effect
+    System.Collections.IEnumerator TypeSentence(string sentence)
+    {
+        scenarioText.text = "";
+        foreach (char letter in sentence)
+        {
+            scenarioText.text += letter;
+            yield return new WaitForSeconds(0.05f); // Typing speed
+        }
     }
 }

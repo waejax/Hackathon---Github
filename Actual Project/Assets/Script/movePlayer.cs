@@ -1,78 +1,132 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class movePlayer : MonoBehaviour
 {
-    [Header("Movement")]
-    public float moveSpeed = 6f;
-    public float jumpForce = 12f;
+    float horizontalInput;
+    public float moveSpeed = 5f;
+    bool isFacingRight = false;
+    public float jumpPower = 8f;
+    bool isGrounded = false;
+
+    Rigidbody2D rb;
+    Animator animator;
 
     [Header("Ground Check")]
     public Transform groundCheck;
     public float groundCheckRadius = 0.15f;
     public LayerMask groundLayer;
 
-    public Animator animator;
+    [Header("Choice Colliders")]
+    public Collider2D truthCollider;
+    public Collider2D lieCollider;
 
-    private Rigidbody2D rb;
-    private float moveInput;
-    private bool isGrounded;
-    private bool jumpRequest;
-    private Vector3 originalScale;
+    private Collider2D playerCollider;
+    private bool hasChosen = false;
 
-    void Awake()
+    void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        originalScale = transform.localScale;  // save original scale
+        playerCollider = GetComponent<Collider2D>();
     }
 
     void Update()
     {
-        // Get input and store in class-level variable
-        moveInput = Input.GetAxisRaw("Horizontal");
+        horizontalInput = Input.GetAxis("Horizontal");
 
-        // Flip sprite based on direction
-        if (moveInput > 0)
-        // moving right but sprite faces left by default, so flip left
-        transform.localScale = new Vector3(-Mathf.Abs(originalScale.x), originalScale.y, originalScale.z);
-    else if (moveInput < 0)
-        // moving left, so flip right
-        transform.localScale = new Vector3(Mathf.Abs(originalScale.x), originalScale.y, originalScale.z);
+        FlipSprite();
 
-        // Update animator Speed parameter for walking animation
-        animator.SetFloat("Speed", Mathf.Abs(moveInput));
-
-        // Check if player is grounded
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-
-        // Update animator for jumping/landing
-        animator.SetBool("IsGrounded", isGrounded);
-
-        // Check jump input, set jumpRequest flag
+        // Jump input
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            jumpRequest = true;
-            animator.SetTrigger("Jump"); // Optional: if you have a jump trigger animation
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
+            isGrounded = false;
+            animator.SetBool("isJumping", true);
+        }
+
+        // Check if grounded using OverlapCircle
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        if (isGrounded)
+        {
+            animator.SetBool("isJumping", false);
+        }
+
+        // Check for overlap with truth/lie colliders only once
+        if (!hasChosen)
+        {
+            if (truthCollider != null && playerCollider.bounds.Intersects(truthCollider.bounds))
+            {
+                hasChosen = true;
+                Debug.Log("Player chose TRUTH!");
+
+                // Set GameManager values for truth choice
+                GameManager.Instance.previousScene = SceneManager.GetActiveScene().name;
+                GameManager.Instance.currentChoice = ChoiceType.Truth;
+                GameManager.Instance.selectedChoiceText = truthCollider.GetComponentInChildren<UnityEngine.UI.Text>()?.text ?? "Tell the truth";
+
+                SceneManager.LoadScene("ConsequenceScene");
+            }
+            else if (lieCollider != null && playerCollider.bounds.Intersects(lieCollider.bounds))
+            {
+                hasChosen = true;
+                Debug.Log("Player chose LIE!");
+
+                // Set GameManager values for lie choice
+                GameManager.Instance.previousScene = SceneManager.GetActiveScene().name;
+                GameManager.Instance.currentChoice = ChoiceType.Lie;
+                GameManager.Instance.selectedChoiceText = lieCollider.GetComponentInChildren<UnityEngine.UI.Text>()?.text ?? "Make up an excuse";
+
+                SceneManager.LoadScene("ConsequenceScene");
+            }
+        }
+    }
+
+    // Trigger when player sprite collides with choice collider
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (hasChosen) return;
+
+        if (other == truthCollider)
+        {
+            Debug.Log("Triggered TRUTH collider!");
+            hasChosen = true;
+            GameManager.Instance.previousScene = SceneManager.GetActiveScene().name;
+            GameManager.Instance.currentChoice = ChoiceType.Truth;
+            GameManager.Instance.selectedChoiceText = truthCollider.GetComponentInChildren<UnityEngine.UI.Text>()?.text ?? "Tell the truth";
+            SceneManager.LoadScene("ConsequenceScene");
+        }
+        else if (other == lieCollider)
+        {
+            Debug.Log("Triggered LIE collider!");
+            hasChosen = true;
+            GameManager.Instance.previousScene = SceneManager.GetActiveScene().name;
+            GameManager.Instance.currentChoice = ChoiceType.Lie;
+            GameManager.Instance.selectedChoiceText = lieCollider.GetComponentInChildren<UnityEngine.UI.Text>()?.text ?? "Make up an excuse";
+            SceneManager.LoadScene("ConsequenceScene");
         }
     }
 
     void FixedUpdate()
     {
-        // Apply horizontal movement
-        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
+        rb.linearVelocity = new Vector2(horizontalInput * moveSpeed, rb.linearVelocity.y);
 
-        // Handle jump in FixedUpdate for physics
-        if (jumpRequest)
-        {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-            jumpRequest = false;
-        }
-        // Apply horizontal movement using physics
-        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
+        animator.SetFloat("xVelocity", Mathf.Abs(rb.linearVelocity.x));
+        animator.SetFloat("yVelocity", rb.linearVelocity.y);
     }
 
-    void OnDrawGizmosSelected()
+    void FlipSprite()
+    {
+        if (isFacingRight && horizontalInput < 0f || !isFacingRight && horizontalInput > 0f)
+        {
+            isFacingRight = !isFacingRight;
+            Vector3 ls = transform.localScale;
+            ls.x *= -1f;
+            transform.localScale = ls;
+        }
+    }
+
+    private void OnDrawGizmosSelected()
     {
         if (groundCheck != null)
         {

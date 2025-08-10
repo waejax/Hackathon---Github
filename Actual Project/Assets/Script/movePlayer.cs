@@ -7,38 +7,66 @@ public class movePlayer : MonoBehaviour
     public float jumpForce = 12f;
 
     [Header("Ground Check")]
-    public Transform groundCheck;             // assign the GroundCheck transform
+    public Transform groundCheck;
     public float groundCheckRadius = 0.15f;
-    public LayerMask groundLayer;             // select the Ground layer in inspector
+    public LayerMask groundLayer;
+
+    public Animator animator;
 
     private Rigidbody2D rb;
     private float moveInput;
     private bool isGrounded;
+    private bool jumpRequest;
+    private Vector3 originalScale;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        originalScale = transform.localScale;  // save original scale
     }
 
     void Update()
     {
-        // Read horizontal input (-1, 0, 1)
+        // Get input and store in class-level variable
         moveInput = Input.GetAxisRaw("Horizontal");
 
-        // Update grounded status
+        // Flip sprite based on direction
+        if (moveInput > 0)
+        // moving right but sprite faces left by default, so flip left
+        transform.localScale = new Vector3(-Mathf.Abs(originalScale.x), originalScale.y, originalScale.z);
+    else if (moveInput < 0)
+        // moving left, so flip right
+        transform.localScale = new Vector3(Mathf.Abs(originalScale.x), originalScale.y, originalScale.z);
+
+        // Update animator Speed parameter for walking animation
+        animator.SetFloat("Speed", Mathf.Abs(moveInput));
+
+        // Check if player is grounded
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
-        // Jump when pressing Jump (default is Space) and grounded
+        // Update animator for jumping/landing
+        animator.SetBool("IsGrounded", isGrounded);
+
+        // Check jump input, set jumpRequest flag
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            jumpRequest = true;
+            animator.SetTrigger("Jump"); // Optional: if you have a jump trigger animation
         }
     }
 
     void FixedUpdate()
     {
-        // Apply horizontal movement using physics
+        // Apply horizontal movement
         rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
+
+        // Handle jump in FixedUpdate for physics
+        if (jumpRequest)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            jumpRequest = false;
+        }
     }
 
     void OnDrawGizmosSelected()

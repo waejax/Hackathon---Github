@@ -10,14 +10,21 @@ public class DialogueLoader : MonoBehaviour
     public string infoURL = "http://localhost/hackathon/info.php";
     List<string> allDemo;
     List<string> allInfo;
+    public int demoStart = 0;
+    public int demoLineCount = 7;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        StartCoroutine(GetDemoDialog());
+        LoadDemo(demoStart, demoLineCount);
     }
 
-    public IEnumerator GetDemoDialog()
+    public void LoadDemo(int startIndex, int count, bool isInfoDialogue = false)
+    {
+        StartCoroutine(GetDemoDialog(startIndex, count, isInfoDialogue));
+    }
+
+    public IEnumerator GetDemoDialog(int startIndex, int count, bool isInfoDialogue = false)
     {
         UnityWebRequest www = UnityWebRequest.Get(demoURL);
         yield return www.SendWebRequest();
@@ -33,7 +40,7 @@ public class DialogueLoader : MonoBehaviour
             Dialog dialog = JsonUtility.FromJson<Dialog>(json);
             allDemo = dialog.Lines;
 
-            StartCoroutine(DialogueManager.Instance.ShowDialog(allDemo, 0, 7));
+            StartCoroutine(DialogueManager.Instance.ShowDialog(allDemo, startIndex, count, isInfoDialogue));
         }
         else
         {
@@ -41,8 +48,13 @@ public class DialogueLoader : MonoBehaviour
         }
     }
 
-    public IEnumerator GetInfoDialog(GameObject infoIcon)
+    public IEnumerator GetInfoDialog(GameObject infoIcon, playerMove movementScript)
     {
+        if (movementScript != null)
+        {
+            movementScript.enabled = false;
+        }
+
         UnityWebRequest www = UnityWebRequest.Get(infoURL);
         yield return www.SendWebRequest();
 
@@ -63,12 +75,24 @@ public class DialogueLoader : MonoBehaviour
                 yield return StartCoroutine(DialogueManager.Instance.ShowDialog(splitSentences, 0, splitSentences.Count, true, () =>
                 {
                     infoIcon.SetActive(false);
+
+                    if (movementScript != null)
+                    {
+                        movementScript.enabled = true;
+                    }
+
+                    LoadDemo(7, 2, true);
                 }));
             }
         }
         else
         {
             Debug.LogError("Error: " + www.error);
+
+            if (movementScript != null)
+            {
+                movementScript.enabled = true;
+            }
         }
     }
 
@@ -89,6 +113,11 @@ public class DialogueLoader : MonoBehaviour
         return sentences;
     }
 
+    public void onEvidenceIncrease()
+    {
+        LoadDemo(9, 6, true);
+    }
+
     public void TriggerNextDialog(int startIndex, int count)
     {
         if (allDemo != null && startIndex < allDemo.Count)
@@ -97,8 +126,8 @@ public class DialogueLoader : MonoBehaviour
         }
     }
 
-    public void TriggerInfoDialog(GameObject infoIcon)
+    public void TriggerInfoDialog(GameObject infoIcon, playerMove movementScript)
     {
-        StartCoroutine(GetInfoDialog(infoIcon));
+        StartCoroutine(GetInfoDialog(infoIcon, movementScript));
     }
 }

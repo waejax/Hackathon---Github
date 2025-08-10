@@ -13,7 +13,13 @@ public class InfoTrigger : MonoBehaviour
 
             if (loader != null)
             {
-                loader.TriggerInfoDialog(this.gameObject);
+                playerMove movement = collision.GetComponent<playerMove>();
+                if (movement != null)
+                {
+                    movement.enabled = false;
+                }
+
+                loader.TriggerInfoDialog(this.gameObject, movement);
             }
         }
     }

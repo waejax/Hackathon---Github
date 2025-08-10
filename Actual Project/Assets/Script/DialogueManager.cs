@@ -12,13 +12,15 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] int lettersPerSecond;
     [SerializeField] private Transform playerTransform;
     private Vector2 originalSize;
-    private Vector2 infoDialogSize = new Vector2(500, 200);
+    private Vector2 infoDialogSize = new Vector2(700, 200);
     private RectTransform dialogRectTransform;
     private Vector3 originalPos;
 
     private RectTransform continueTextRect;
     private Vector3 originalContinuePos;
-    private Vector3 infoContinuePos = new Vector3(500, -20, 0);
+    // private Vector3 infoContinuePos = new Vector3(500, -20, 0);
+    // private Vector2 demoDialogSize;
+    // private Vector3 demoDialogPos;
 
     public event Action OnShowDialog;
     public event Action OnCloseDialog;
@@ -40,6 +42,9 @@ public class DialogueManager : MonoBehaviour
 
         continueTextRect = continueText.GetComponent<RectTransform>();
         originalContinuePos = continueTextRect.localPosition;
+
+        // demoDialogSize = originalSize;
+        // demoDialogPos = playerTransform.position + new Vector3(-12f, 0, 0);
     }
 
     public IEnumerator ShowDialog(List<string> lines, int startIndex, int count, bool isInfoDialogue = false, Action onDialogComplete = null)
@@ -56,7 +61,7 @@ public class DialogueManager : MonoBehaviour
         {
             dialogRectTransform.sizeDelta = infoDialogSize;
 
-            Vector3 worldPos = playerTransform.position + new Vector3(-5f, 1.5f, 0);
+            Vector3 worldPos = playerTransform.position + new Vector3(-15.5f, -2f, 0);
             Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
 
             Vector2 localPoint;

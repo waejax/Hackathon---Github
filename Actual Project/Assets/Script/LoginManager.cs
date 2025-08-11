@@ -61,7 +61,7 @@ public class LoginManager : MonoBehaviour
 
             if (response.Contains("Login success"))
             {
-                SceneManager.LoadScene("PrimaryLevel");
+                SceneManager.LoadScene("GameDemo");
             }
             else
             {

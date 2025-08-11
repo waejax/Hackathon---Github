@@ -9,8 +9,6 @@ public class Evidence : MonoBehaviour
     public Text evidenceText;
     public GameObject door;
     private bool doorDestroyed = false;
-    public string nextSceneName;
-    public Collider2D sceneTrigger;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,7 +23,18 @@ public class Evidence : MonoBehaviour
         if (evidenceCount >= 2 && !doorDestroyed)
         {
             doorDestroyed = true;
-            Destroy(door);
+
+            if (door != null)
+            {
+                SpriteRenderer sr = door.GetComponent<SpriteRenderer>();
+                if (sr != null)
+                    sr.enabled = false;
+
+                foreach (Transform child in door.transform)
+                {
+                    child.gameObject.SetActive(false);
+                }
+            }
         }
     }
 
@@ -48,13 +57,5 @@ public class Evidence : MonoBehaviour
     private void UpdateEvidenceText()
     {
         evidenceText.text = "Evidence: " + evidenceCount;
-    }
-
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (doorDestroyed && collision.CompareTag("Player") && sceneTrigger != null && collision == sceneTrigger)
-        {
-            SceneManager.LoadScene(nextSceneName);
-        }
     }
 }

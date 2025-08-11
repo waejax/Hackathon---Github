@@ -1511,6 +1511,8 @@ MonoBehaviour:
     m_Bits: 256
   truthCollider: {fileID: 1034306218}
   lieCollider: {fileID: 1242586127}
+  truthText: {fileID: 898249924}
+  lieText: {fileID: 1705523409}
 --- !u!61 &1633503030
 BoxCollider2D:
   m_ObjectHideFlags: 0

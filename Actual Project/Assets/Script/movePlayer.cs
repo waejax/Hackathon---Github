@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class movePlayer : MonoBehaviour
@@ -18,8 +19,11 @@ public class movePlayer : MonoBehaviour
     public LayerMask groundLayer;
 
     [Header("Choice Colliders")]
-    public Collider2D truthCollider;
-    public Collider2D lieCollider;
+    public Collider2D truthCollider; // Also used as backCollider in ConsequenceScene
+    public Collider2D lieCollider;   // Also used as proceedCollider in ConsequenceScene
+
+    public Text truthText;
+    public Text lieText;
 
     private Collider2D playerCollider;
     private bool hasChosen = false;
@@ -52,32 +56,56 @@ public class movePlayer : MonoBehaviour
             animator.SetBool("isJumping", false);
         }
 
-        // Check for overlap with truth/lie colliders only once
         if (!hasChosen)
         {
+            string currentScene = SceneManager.GetActiveScene().name;
+
             if (truthCollider != null && playerCollider.bounds.Intersects(truthCollider.bounds))
             {
                 hasChosen = true;
-                Debug.Log("Player chose TRUTH!");
 
-                // Set GameManager values for truth choice
-                GameManager.Instance.previousScene = SceneManager.GetActiveScene().name;
-                GameManager.Instance.currentChoice = ChoiceType.Truth;
-                GameManager.Instance.selectedChoiceText = truthCollider.GetComponentInChildren<UnityEngine.UI.Text>()?.text ?? "Tell the truth";
+                if (currentScene == "ConsequenceScene")
+                {
+                    // truthCollider acts as backCollider: load previous scene
+                    if (!string.IsNullOrEmpty(GameManager.Instance.previousScene))
+                    {
+                        SceneManager.LoadScene(GameManager.Instance.previousScene);
+                    }
+                }
+                else
+                {
+                    Debug.Log("Player chose TRUTH!");
 
-                SceneManager.LoadScene("ConsequenceScene");
+                    GameManager.Instance.previousScene = currentScene;
+                    GameManager.Instance.currentChoice = ChoiceType.Truth;
+                    GameManager.Instance.selectedChoiceText = truthText != null ? truthText.text : "Tell the truth";
+
+                    SceneManager.LoadScene("ConsequenceScene");
+                }
             }
             else if (lieCollider != null && playerCollider.bounds.Intersects(lieCollider.bounds))
             {
                 hasChosen = true;
-                Debug.Log("Player chose LIE!");
 
-                // Set GameManager values for lie choice
-                GameManager.Instance.previousScene = SceneManager.GetActiveScene().name;
-                GameManager.Instance.currentChoice = ChoiceType.Lie;
-                GameManager.Instance.selectedChoiceText = lieCollider.GetComponentInChildren<UnityEngine.UI.Text>()?.text ?? "Make up an excuse";
+                if (currentScene == "ConsequenceScene")
+                {
+                    // lieCollider acts as proceedCollider: trigger popup in ConsequencesLogic
+                    var logic = FindObjectOfType<ConsequencesLogic>();
+                    if (logic != null)
+                    {
+                        logic.ShowFinalConsequence();
+                    }
+                }
+                else
+                {
+                    Debug.Log("Player chose LIE!");
 
-                SceneManager.LoadScene("ConsequenceScene");
+                    GameManager.Instance.previousScene = currentScene;
+                    GameManager.Instance.currentChoice = ChoiceType.Lie;
+                    GameManager.Instance.selectedChoiceText = lieText != null ? lieText.text : "Make up an excuse";
+
+                    SceneManager.LoadScene("ConsequenceScene");
+                }
             }
         }
     }
@@ -87,23 +115,49 @@ public class movePlayer : MonoBehaviour
     {
         if (hasChosen) return;
 
+        string currentScene = SceneManager.GetActiveScene().name;
+
         if (other == truthCollider)
         {
-            Debug.Log("Triggered TRUTH collider!");
             hasChosen = true;
-            GameManager.Instance.previousScene = SceneManager.GetActiveScene().name;
-            GameManager.Instance.currentChoice = ChoiceType.Truth;
-            GameManager.Instance.selectedChoiceText = truthCollider.GetComponentInChildren<UnityEngine.UI.Text>()?.text ?? "Tell the truth";
-            SceneManager.LoadScene("ConsequenceScene");
+
+            if (currentScene == "ConsequenceScene")
+            {
+                if (!string.IsNullOrEmpty(GameManager.Instance.previousScene))
+                {
+                    SceneManager.LoadScene(GameManager.Instance.previousScene);
+                }
+            }
+            else
+            {
+                Debug.Log("Triggered TRUTH collider!");
+                GameManager.Instance.previousScene = currentScene;
+                GameManager.Instance.currentChoice = ChoiceType.Truth;
+                GameManager.Instance.selectedChoiceText = truthText != null ? truthText.text : "Tell the truth";
+                SceneManager.LoadScene("ConsequenceScene");
+            }
         }
         else if (other == lieCollider)
         {
-            Debug.Log("Triggered LIE collider!");
             hasChosen = true;
-            GameManager.Instance.previousScene = SceneManager.GetActiveScene().name;
-            GameManager.Instance.currentChoice = ChoiceType.Lie;
-            GameManager.Instance.selectedChoiceText = lieCollider.GetComponentInChildren<UnityEngine.UI.Text>()?.text ?? "Make up an excuse";
-            SceneManager.LoadScene("ConsequenceScene");
+
+            if (currentScene == "ConsequenceScene")
+            {
+                var logic = FindObjectOfType<ConsequencesLogic>();
+                if (logic != null)
+                {
+                    logic.ShowFinalConsequence();
+                }
+            }
+            else
+            {
+                Debug.Log("Triggered LIE collider!");
+                GameManager.Instance.previousScene = currentScene;
+                GameManager.Instance.currentChoice = ChoiceType.Lie;
+                GameManager.Instance.selectedChoiceText = lieText != null ? lieText.text : "Make up an excuse";
+
+                SceneManager.LoadScene("ConsequenceScene");
+            }
         }
     }
 

@@ -61,7 +61,7 @@ public class LoginManager : MonoBehaviour
 
             if (response.Contains("Login success"))
             {
-                SceneManager.LoadScene("LevelSelectScene");
+                SceneManager.LoadScene("PrimaryLevel");
             }
             else
             {

@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class DialogueLoader : MonoBehaviour
 {
@@ -70,6 +71,7 @@ public class DialogueLoader : MonoBehaviour
 
             if (dialog.Lines != null && dialog.Lines.Count > 0)
             {
+                string fullInfo = dialog.Lines[0];
                 List<string> splitSentences = SplitIntoSentences(dialog.Lines[0]);
 
                 yield return StartCoroutine(DialogueManager.Instance.ShowDialog(splitSentences, 0, splitSentences.Count, true, () =>

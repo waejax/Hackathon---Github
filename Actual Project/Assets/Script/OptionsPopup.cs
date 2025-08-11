@@ -12,6 +12,7 @@ public class PopupSceneManager : MonoBehaviour
     public Button infoButton;
     public Button contactButton;
     public Button closeButton;
+    public Button mainMenuButton;
 
     private string homeScene = "Start";
 
@@ -28,6 +29,8 @@ public class PopupSceneManager : MonoBehaviour
         ChatbotButton.onClick.AddListener(() => LoadScene("Chatbot"));
         infoButton.onClick.AddListener(() => LoadScene("infoCollected"));
         contactButton.onClick.AddListener(() => LoadScene("Contact"));
+
+        mainMenuButton.onClick.AddListener(() => LoadScene(homeScene));
     }
 
     public void OpenPopup()

@@ -10,10 +10,10 @@ public class ConsequencesLogic : MonoBehaviour
     public Text choiceMadeText;
     public Text firstPreviewText;
     public Text secPreviewText;
-    public GameObject finalResultPopup; 
+    public GameObject finalResultPopup;
     public Text finalResultText;
-    public Text scoreChangeText;        
-    public Text totalScoreText;         
+    public Text scoreChangeText;
+    public Text totalScoreText;
     public Button nextButton;
     public Button ChatbotButton;
 
@@ -33,7 +33,7 @@ public class ConsequencesLogic : MonoBehaviour
     string getMoralityURL = "http://localhost/hackathon/get_morality.php";
     string updateMoralityURL = "http://localhost/hackathon/update_morality.php";
 
-    void Start()
+    IEnumerator Start()
     {
         if (finalResultPopup != null)
             finalResultPopup.SetActive(false);
@@ -63,17 +63,17 @@ public class ConsequencesLogic : MonoBehaviour
         if (backCollider != null)
             backOriginalScale = backCollider.transform.localScale;
 
-        // Load morality score from DB
-        StartCoroutine(LoadMoralityScore());
-    }
-
-    void Update()
-    {
-        float pulse = 1 + Mathf.Sin(Time.time * pulseSpeed) * pulseAmount;
-        if (proceedCollider != null)
-            proceedCollider.transform.localScale = proceedOriginalScale * pulse;
-        if (backCollider != null)
-            backCollider.transform.localScale = backOriginalScale * pulse;
+        // Only load from DB if logged in
+        if (GameManager.Instance.userID != 0)
+        {
+            yield return LoadMoralityScore();
+        }
+        else
+        {
+            // No user logged in → just display local score
+            if (totalScoreText != null)
+                totalScoreText.text = "" + GameManager.Instance.moralityScore;
+        }
     }
 
     public void ShowFinalConsequence()
@@ -100,7 +100,7 @@ public class ConsequencesLogic : MonoBehaviour
 
         if (scoreChangeText != null)
         {
-            scoreChangeText.text = (scoreChange >= 0 ? "+" : "") + scoreChange.ToString();
+            scoreChangeText.text = (scoreChange >= 0 ? "+" : "") + scoreChange;
             scoreChangeText.color = scoreChange >= 0 ? Color.green : Color.red;
         }
 
@@ -110,8 +110,11 @@ public class ConsequencesLogic : MonoBehaviour
         if (finalResultPopup != null)
             finalResultPopup.SetActive(true);
 
-        // Save updated score to DB
-        StartCoroutine(UpdateMoralityScore(GameManager.Instance.moralityScore));
+        // Only save to DB if logged in
+        if (GameManager.Instance.userID != 0)
+        {
+            StartCoroutine(UpdateMoralityScore(GameManager.Instance.moralityScore));
+        }
     }
 
     IEnumerator LoadMoralityScore()
@@ -124,8 +127,7 @@ public class ConsequencesLogic : MonoBehaviour
 
         if (www.result == UnityWebRequest.Result.Success)
         {
-            int dbScore;
-            if (int.TryParse(www.downloadHandler.text.Trim(), out dbScore))
+            if (int.TryParse(www.downloadHandler.text.Trim(), out int dbScore))
             {
                 GameManager.Instance.moralityScore = dbScore;
                 if (totalScoreText != null)
@@ -152,4 +154,15 @@ public class ConsequencesLogic : MonoBehaviour
             Debug.LogError("Error updating morality score: " + www.error);
         }
     }
+
+    void Update()
+    {
+        float pulse = 1 + Mathf.Sin(Time.time * pulseSpeed) * pulseAmount;
+        if (proceedCollider != null)
+            proceedCollider.transform.localScale = proceedOriginalScale * pulse;
+        if (backCollider != null)
+            backCollider.transform.localScale = backOriginalScale * pulse;
+    }
 }
+
+

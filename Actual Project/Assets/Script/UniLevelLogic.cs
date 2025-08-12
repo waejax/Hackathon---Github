@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
+using System.Collections;
 
 public class UniLevelLogic : MonoBehaviour
 {
@@ -21,8 +23,13 @@ public class UniLevelLogic : MonoBehaviour
     private Vector3 truthOriginalScale;
     private Vector3 lieOriginalScale;
 
+    // 🔹 Your PHP endpoint
+    private string updateLastSceneURL = "http://localhost/hackathon/update_last_scene.php";
+
     void Start()
     {
+        StartCoroutine(UpdateLastSceneInDB("UniScene"));
+
         truthOriginalScale = truthCollider.transform.localScale;
         lieOriginalScale = lieCollider.transform.localScale;
 
@@ -72,6 +79,25 @@ public class UniLevelLogic : MonoBehaviour
         float pulse = 1 + Mathf.Sin(Time.time * pulseSpeed) * pulseAmount;
         truthCollider.transform.localScale = truthOriginalScale * pulse;
         lieCollider.transform.localScale = lieOriginalScale * pulse;
+    }
+
+    IEnumerator UpdateLastSceneInDB(string sceneName)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("userID", GameManager.Instance.userID);
+        form.AddField("lastScene", sceneName);
+
+        UnityWebRequest www = UnityWebRequest.Post(updateLastSceneURL, form);
+        yield return www.SendWebRequest();
+
+        if (www.result == UnityWebRequest.Result.Success)
+        {
+            Debug.Log("Last scene updated to: " + sceneName);
+        }
+        else
+        {
+            Debug.LogError("Failed to update last scene: " + www.error);
+        }
     }
 
     // Typewriter effect

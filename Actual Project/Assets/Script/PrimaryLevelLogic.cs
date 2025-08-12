@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
+using System.Collections;
 
 public class PrimaryLevelLogic : MonoBehaviour
 {
@@ -13,21 +15,24 @@ public class PrimaryLevelLogic : MonoBehaviour
     public Button ChatbotButton;
 
     [Header("Animation Settings")]
-    public float pulseSpeed = 2f;      // Pulsing speed
-    public float pulseAmount = 0.05f;  // Pulsing size change
+    public float pulseSpeed = 2f;
+    public float pulseAmount = 0.05f;
 
     private Vector3 truthOriginalScale;
     private Vector3 lieOriginalScale;
 
+    // 🔹 Your PHP endpoint
+    private string updateLastSceneURL = "http://localhost/hackathon/update_last_scene.php";
+
     void Start()
     {
+        StartCoroutine(UpdateLastSceneInDB("PrimaryScene"));
+
         truthOriginalScale = truthCollider.transform.localScale;
         lieOriginalScale = lieCollider.transform.localScale;
 
-        // Typewriter effect for scenario
         StartCoroutine(TypeSentence("You came to school late. The teacher asks why."));
 
-        // Set consequences for truth
         GameManager.Instance.truthConsequence = new ConsequenceData
         {
             previewText = "Potential Consequences:\n- You might be praised\nOR\n- Still get a warning",
@@ -40,7 +45,6 @@ public class PrimaryLevelLogic : MonoBehaviour
             nextScene = "SecondaryLevel"
         };
 
-        // Set consequences for lie
         GameManager.Instance.lieConsequence = new ConsequenceData
         {
             previewText = "Potential Consequences:\n- You might get away with it\nOR\n- Get caught and punished",
@@ -53,7 +57,6 @@ public class PrimaryLevelLogic : MonoBehaviour
             nextScene = "SecondaryLevel"
         };
 
-        // Keep only Chatbot button as clickable
         ChatbotButton.onClick.AddListener(() =>
         {
             GameManager.Instance.chatbotReturnScene = SceneManager.GetActiveScene().name;
@@ -63,20 +66,37 @@ public class PrimaryLevelLogic : MonoBehaviour
 
     void Update()
     {
-        // Pulse animation for the choice objects
         float pulse = 1 + Mathf.Sin(Time.time * pulseSpeed) * pulseAmount;
         truthCollider.transform.localScale = truthOriginalScale * pulse;
         lieCollider.transform.localScale = lieOriginalScale * pulse;
     }
 
-    // Typewriter effect
-    System.Collections.IEnumerator TypeSentence(string sentence)
+    IEnumerator UpdateLastSceneInDB(string sceneName)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("userID", GameManager.Instance.userID);
+        form.AddField("lastScene", sceneName);
+
+        UnityWebRequest www = UnityWebRequest.Post(updateLastSceneURL, form);
+        yield return www.SendWebRequest();
+
+        if (www.result == UnityWebRequest.Result.Success)
+        {
+            Debug.Log("Last scene updated to: " + sceneName);
+        }
+        else
+        {
+            Debug.LogError("Failed to update last scene: " + www.error);
+        }
+    }
+
+    IEnumerator TypeSentence(string sentence)
     {
         scenarioText.text = "";
         foreach (char letter in sentence)
         {
             scenarioText.text += letter;
-            yield return new WaitForSeconds(0.05f); // Typing speed
+            yield return new WaitForSeconds(0.05f);
         }
     }
 }

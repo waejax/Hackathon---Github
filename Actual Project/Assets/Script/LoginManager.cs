@@ -59,13 +59,24 @@ public class LoginManager : MonoBehaviour
             string response = www.downloadHandler.text.Trim();
             Debug.Log("Server response: " + response);
 
-            if (response.Contains("Login success"))
+            if (response.StartsWith("OK|"))
             {
-                SceneManager.LoadScene("GameDemo");
+                // Split into parts
+                string[] parts = response.Split('|');
+                GameManager.Instance.userID = int.Parse(parts[1]);      // userID
+                string lastScene = parts[2];                            // lastScene
+                GameManager.Instance.moralityScore = int.Parse(parts[3]); // moralityScore
+
+                // Go to lastScene
+                SceneManager.LoadScene(lastScene);
+            }
+            else if (response == "Invalid")
+            {
+                ShowWarning("Invalid email or password.");
             }
             else
             {
-                ShowWarning("Invalid email or password.");
+                ShowWarning("Unexpected server response.");
             }
         }
     }

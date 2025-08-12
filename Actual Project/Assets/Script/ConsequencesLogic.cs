@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
+using System.Collections;
 
 public class ConsequencesLogic : MonoBehaviour
 {
@@ -8,26 +10,28 @@ public class ConsequencesLogic : MonoBehaviour
     public Text choiceMadeText;
     public Text firstPreviewText;
     public Text secPreviewText;
-    public GameObject finalResultPopup; // Popup panel
+    public GameObject finalResultPopup; 
     public Text finalResultText;
-    public Text scoreChangeText;        // e.g. "+5" or "-10"
-    public Text totalScoreText;         // e.g. "Total Morality: 15"
+    public Text scoreChangeText;        
+    public Text totalScoreText;         
     public Button nextButton;
     public Button ChatbotButton;
 
     [Header("Colliders (World or UI)")]
-    public Collider2D proceedCollider; // The "Lie" choice collider
-    public Collider2D backCollider;    // The "Truth" choice collider
+    public Collider2D proceedCollider;
+    public Collider2D backCollider;
 
     [Header("Animation Settings")]
-    public float pulseSpeed = 2f;      // Pulsing speed
-    public float pulseAmount = 0.05f;  // Pulsing size change
+    public float pulseSpeed = 2f;
+    public float pulseAmount = 0.05f;
 
     private Vector3 proceedOriginalScale;
     private Vector3 backOriginalScale;
-
     private bool resultShown = false;
     private ConsequenceData currentData;
+
+    string getMoralityURL = "http://localhost/hackathon/get_morality.php";
+    string updateMoralityURL = "http://localhost/hackathon/update_morality.php";
 
     void Start()
     {
@@ -54,16 +58,17 @@ public class ConsequencesLogic : MonoBehaviour
             SceneManager.LoadScene("Chatbot");
         });
 
-        // Save original scales for animation
         if (proceedCollider != null)
             proceedOriginalScale = proceedCollider.transform.localScale;
         if (backCollider != null)
             backOriginalScale = backCollider.transform.localScale;
+
+        // Load morality score from DB
+        StartCoroutine(LoadMoralityScore());
     }
 
     void Update()
     {
-        // Animate pulse on proceed and back colliders
         float pulse = 1 + Mathf.Sin(Time.time * pulseSpeed) * pulseAmount;
         if (proceedCollider != null)
             proceedCollider.transform.localScale = proceedOriginalScale * pulse;
@@ -90,6 +95,7 @@ public class ConsequencesLogic : MonoBehaviour
             scoreChange = currentData.scoreOption2;
         }
 
+        // Update local score
         GameManager.Instance.moralityScore += scoreChange;
 
         if (scoreChangeText != null)
@@ -103,5 +109,47 @@ public class ConsequencesLogic : MonoBehaviour
 
         if (finalResultPopup != null)
             finalResultPopup.SetActive(true);
+
+        // Save updated score to DB
+        StartCoroutine(UpdateMoralityScore(GameManager.Instance.moralityScore));
+    }
+
+    IEnumerator LoadMoralityScore()
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("userID", GameManager.Instance.userID);
+
+        UnityWebRequest www = UnityWebRequest.Post(getMoralityURL, form);
+        yield return www.SendWebRequest();
+
+        if (www.result == UnityWebRequest.Result.Success)
+        {
+            int dbScore;
+            if (int.TryParse(www.downloadHandler.text.Trim(), out dbScore))
+            {
+                GameManager.Instance.moralityScore = dbScore;
+                if (totalScoreText != null)
+                    totalScoreText.text = "" + GameManager.Instance.moralityScore;
+            }
+        }
+        else
+        {
+            Debug.LogError("Error loading morality score: " + www.error);
+        }
+    }
+
+    IEnumerator UpdateMoralityScore(int newScore)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("userID", GameManager.Instance.userID);
+        form.AddField("newScore", newScore);
+
+        UnityWebRequest www = UnityWebRequest.Post(updateMoralityURL, form);
+        yield return www.SendWebRequest();
+
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError("Error updating morality score: " + www.error);
+        }
     }
 }

@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    public int userID = 0;
     public ChoiceType currentChoice = ChoiceType.None;
     public string selectedChoiceText = "";           // button text
     public ConsequenceData truthConsequence;

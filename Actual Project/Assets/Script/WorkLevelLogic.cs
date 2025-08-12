@@ -28,7 +28,7 @@ public class WorkLevelLogic : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(UpdateLastSceneInDB("WorkScene"));
+        StartCoroutine(UpdateLastSceneInDB("WorkLevel"));
 
         truthOriginalScale = truthCollider.transform.localScale;
         lieOriginalScale = lieCollider.transform.localScale;

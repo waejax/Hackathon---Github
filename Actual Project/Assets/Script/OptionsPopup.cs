@@ -44,6 +44,7 @@ public class PopupSceneManager : MonoBehaviour
 
     void LoadScene(string sceneName)
     {
+        GameManager.Instance.chatbotReturnScene = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(sceneName);
     }
 

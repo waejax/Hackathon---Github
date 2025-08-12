@@ -28,7 +28,7 @@ public class UniLevelLogic : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(UpdateLastSceneInDB("UniScene"));
+        StartCoroutine(UpdateLastSceneInDB("UniLevel"));
 
         truthOriginalScale = truthCollider.transform.localScale;
         lieOriginalScale = lieCollider.transform.localScale;

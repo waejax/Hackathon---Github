@@ -26,7 +26,7 @@ public class PrimaryLevelLogic : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(UpdateLastSceneInDB("PrimaryScene"));
+        StartCoroutine(UpdateLastSceneInDB("PrimaryLevel"));
 
         truthOriginalScale = truthCollider.transform.localScale;
         lieOriginalScale = lieCollider.transform.localScale;

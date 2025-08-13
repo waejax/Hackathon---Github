@@ -4,7 +4,7 @@ require 'db.php';
 $userID = $_POST['userID'];
 $lastScene = $_POST['lastScene'];
 
-$sql = "UPDATE user SET lastScene = '$lastScene' WHERE id = '$userID'";
+$sql = "UPDATE user SET lastScene = '$lastScene' WHERE userID = '$userID'";
 
 if (mysqli_query($conn, $sql)) {
     echo "success";

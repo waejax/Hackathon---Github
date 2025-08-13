@@ -7,9 +7,7 @@ using System.Collections;
 public class leaderboardManager : MonoBehaviour
 {
     public string leaderboardURL = "http://localhost/hackathon/leaderboard.php";
-
-    public Transform tableContainer;
-    public GameObject rowPrefab;
+    public Text leaderboardText;
 
     public class Leader
     {
@@ -42,20 +40,25 @@ public class leaderboardManager : MonoBehaviour
 
             LeaderList leaderList = JsonUtility.FromJson<LeaderList>(json);
 
-            foreach (var leader in leaderList.leaders)
-            {
-                GameObject row = Instantiate(rowPrefab, tableContainer);
-                Text[] texts = row.GetComponentsInChildren<Text>();
-                if (texts.Length >= 2)
-                {
-                    texts[0].text = leader.email;
-                    texts[1].text = leader.score;
-                }
-            }
+            string table = FormatAsTable(leaderList.leaders);
+            leaderboardText.text = table;
         }
         else
         {
             Debug.LogError("Error: " + www.error);
         }
+    }
+
+    string FormatAsTable(List<Leader> leaders)
+    {
+        string table = "<b>Email</b>\t\t\t\t<b>Score<b>\n";
+        table += "----------------------------------------\n";
+
+        foreach (Leader leader in leaders)
+        {
+            table += $"{leader.email,-30}\t{leader.score,3}\n";
+        }
+
+        return table;
     }
 }

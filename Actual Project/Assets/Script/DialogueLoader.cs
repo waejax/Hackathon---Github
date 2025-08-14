@@ -13,10 +13,14 @@ public class DialogueLoader : MonoBehaviour
     List<string> allInfo;
     public int demoStart = 0;
     public int demoLineCount = 7;
+    [SerializeField] private string lastScene;
+    // 🔹 Your PHP endpoint
+    private string updateLastSceneURL = "http://localhost/hackathon/update_last_scene.php";
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        StartCoroutine(UpdateLastSceneInDB(lastScene));
         LoadDemo(demoStart, demoLineCount);
     }
 
@@ -132,4 +136,24 @@ public class DialogueLoader : MonoBehaviour
     {
         StartCoroutine(GetInfoDialog(infoIcon, movementScript));
     }
+
+    IEnumerator UpdateLastSceneInDB(string sceneName)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("userID", GameManager.Instance.userID);
+        form.AddField("lastScene", sceneName);
+
+        UnityWebRequest www = UnityWebRequest.Post(updateLastSceneURL, form);
+        yield return www.SendWebRequest();
+
+        if (www.result == UnityWebRequest.Result.Success)
+        {
+            Debug.Log("Last scene updated to: " + sceneName);
+        }
+        else
+        {
+            Debug.LogError("Failed to update last scene: " + www.error);
+        }
+    }
 }
+

@@ -1566,7 +1566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62750da921a811c41be3aa3d9d2cab05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.05
+  speed: 0.03
   background: {fileID: 696319379}
 --- !u!64 &696319378
 MeshCollider:
@@ -1929,7 +1929,7 @@ MonoBehaviour:
   dialogBox: {fileID: 721426529}
   dialogText: {fileID: 1654111410}
   continueText: {fileID: 897310166}
-  lettersPerSecond: 45
+  lettersPerSecond: 25
   playerTransform: {fileID: 2133348179}
 --- !u!4 &1061846068
 Transform:
@@ -3034,6 +3034,7 @@ MonoBehaviour:
   infoURL: http://localhost/hackathon/info.php
   demoStart: 0
   demoLineCount: 7
+  lastScene: PrimaryLevelEvidence
 --- !u!1 &1524180356
 GameObject:
   m_ObjectHideFlags: 0

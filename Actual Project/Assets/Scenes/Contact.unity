@@ -805,7 +805,14 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: 'Address: Jalan Sungai Pandan, Kuala Belait, KA 1931, Brunei Darussalam
+
+    Enquiries:
+    3331560
+
+    Reporting Phone: 3331513 / 8721003
+
+    Location:'
 --- !u!222 &790030297
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2466,7 +2473,14 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: 'Address: Old Airport Berakas, BB 3510, Brunei Darussalam
+
+    Enquiries:
+    2381113 / 2381114
+
+    Reporting Phone: 8721002 / 8130002
+
+    Location:'
 --- !u!222 &1847795793
 CanvasRenderer:
   m_ObjectHideFlags: 0

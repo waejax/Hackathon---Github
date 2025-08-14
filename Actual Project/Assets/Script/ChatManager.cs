@@ -11,13 +11,16 @@ public class ChatManager : MonoBehaviour
 
     [Header("References")]
     public Transform contentTransform; // Content object under ScrollView
-    public InputField userInput; // Regular Unity UI InputField
+    public TMP_InputField userInput;
     public ScrollRect scrollRect; // for auto-scrolling
     public OpenAIChatAPI openAIChatAPI;
     public Button closeButton;
 
     void Start()
     {
+        // Configure TMP_InputField for multi-line scrolling
+        userInput.lineType = TMP_InputField.LineType.MultiLineNewline;
+ 
         // Assign Exit button action
         closeButton.onClick.AddListener(OnCloseButtonClicked);
     }

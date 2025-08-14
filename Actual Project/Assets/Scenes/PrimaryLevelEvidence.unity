@@ -798,7 +798,7 @@ GameObject:
   - component: {fileID: 256393936}
   - component: {fileID: 256393935}
   - component: {fileID: 256393934}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: brick_0 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -839,7 +839,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.014294714}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -849,7 +849,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.328125, y: 0.328125}
+  m_Size: {x: 0.328125, y: 0.29953557}
   m_EdgeRadius: 0
 --- !u!212 &256393935
 SpriteRenderer:
@@ -1411,7 +1411,7 @@ GameObject:
   - component: {fileID: 656964197}
   - component: {fileID: 656964196}
   - component: {fileID: 656964195}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: brick_0 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1452,7 +1452,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.014463209}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1462,7 +1462,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.328125, y: 0.328125}
+  m_Size: {x: 0.328125, y: 0.29919857}
   m_EdgeRadius: 0
 --- !u!212 &656964196
 SpriteRenderer:
@@ -2147,7 +2147,7 @@ Transform:
   m_GameObject: {fileID: 1187647591}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -421.6, y: -231.88, z: 0}
+  m_LocalPosition: {x: -424.25, y: -234.19, z: 0}
   m_LocalScale: {x: 4.6605997, y: 4.6605997, z: 7}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2347,7 +2347,7 @@ Transform:
   m_GameObject: {fileID: 1327779669}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -413.1, y: -231.9, z: 0}
+  m_LocalPosition: {x: -409.07, y: -229.99, z: 0}
   m_LocalScale: {x: 6.3925586, y: 6.3925595, z: 6.392558}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2995,7 +2995,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1449869113}
-  - component: {fileID: 1449869114}
+  - component: {fileID: 1449869115}
   m_Layer: 0
   m_Name: DatabaseManager
   m_TagString: Untagged
@@ -3018,7 +3018,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1449869114
+--- !u!114 &1449869115
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3045,7 +3045,7 @@ GameObject:
   - component: {fileID: 1524180359}
   - component: {fileID: 1524180358}
   - component: {fileID: 1524180357}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: brick_0 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3086,7 +3086,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.01128529}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -3096,7 +3096,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.328125, y: 0.328125}
+  m_Size: {x: 0.328125, y: 0.30555442}
   m_EdgeRadius: 0
 --- !u!212 &1524180358
 SpriteRenderer:
@@ -3963,7 +3963,7 @@ GameObject:
   - component: {fileID: 1944319299}
   - component: {fileID: 1944319298}
   - component: {fileID: 1944319297}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: brick_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4004,7 +4004,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.011363953}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -4014,7 +4014,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.328125, y: 0.328125}
+  m_Size: {x: 0.328125, y: 0.3053971}
   m_EdgeRadius: 0
 --- !u!212 &1944319298
 SpriteRenderer:
@@ -4176,7 +4176,7 @@ GameObject:
   - component: {fileID: 2075439527}
   - component: {fileID: 2075439526}
   - component: {fileID: 2075439525}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: brick_0 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4217,7 +4217,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.0142946765}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -4227,7 +4227,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.328125, y: 0.328125}
+  m_Size: {x: 0.328125, y: 0.29953563}
   m_EdgeRadius: 0
 --- !u!212 &2075439526
 SpriteRenderer:
@@ -4310,7 +4310,7 @@ GameObject:
   - component: {fileID: 2087522892}
   - component: {fileID: 2087522891}
   - component: {fileID: 2087522893}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: brick_0 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4421,7 +4421,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.015496291}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -4431,7 +4431,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.328125, y: 0.328125}
+  m_Size: {x: 0.328125, y: 0.29713243}
   m_EdgeRadius: 0
 --- !u!1 &2116973951
 GameObject:

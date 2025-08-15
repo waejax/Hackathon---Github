@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: evidence2
+  m_Name: envelope
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -24,7 +24,7 @@ AnimationClip:
       value: {fileID: 3088658754663721215, guid: 98dd4cbdcb720aa45a3bf251b6463dc9, type: 3}
     - time: 0.33333334
       value: {fileID: -2786951254525262433, guid: 98dd4cbdcb720aa45a3bf251b6463dc9, type: 3}
-    - time: 0.6666667
+    - time: 0.75
       value: {fileID: -7579818564097781075, guid: 98dd4cbdcb720aa45a3bf251b6463dc9, type: 3}
     - time: 1.0833334
       value: {fileID: -2786951254525262433, guid: 98dd4cbdcb720aa45a3bf251b6463dc9, type: 3}

@@ -36,8 +36,8 @@ public class WorkLevelLogic : MonoBehaviour
         // Typewriter effect for scenario
         StartCoroutine(TypeSentence("You've been job hunting for months. Your uncle is a director at a big company and offers you a position — without going through an interview."));
 
-	truthChoiceText.text = "Go through the proper application process";
-	lieChoiceText.text = "Accept the job through family connection";
+	truthChoiceText.text = "Reject the offer";
+	lieChoiceText.text = "Accept the offer";
 
         // Set consequences for truth
         GameManager.Instance.truthConsequence = new ConsequenceData

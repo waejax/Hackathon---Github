@@ -1097,7 +1097,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 4181d45e69a76ad4398d9d052e489a2e, type: 2}
-    m_FontSize: 15
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -1788,7 +1788,7 @@ MonoBehaviour:
   lieChoiceText: {fileID: 1705523409}
   ChatbotButton: {fileID: 187185491}
   pulseSpeed: 2
-  pulseAmount: 0.05
+  pulseAmount: 0.02
 --- !u!4 &1343798270
 Transform:
   m_ObjectHideFlags: 0
@@ -2602,7 +2602,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 4181d45e69a76ad4398d9d052e489a2e, type: 2}
-    m_FontSize: 15
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1

@@ -34,9 +34,9 @@ public class SecondaryLevelLogic : MonoBehaviour
         lieOriginalScale = lieCollider.transform.localScale;
 
         // Typewriter effect for scenario
-        StartCoroutine(TypeSentence("You failed your exam by 2 marks. Your parent is the teacher. Do you ask them to pass you?"));
+        StartCoroutine(TypeSentence("You failed your exam by 2 marks. Your parent is the teacher. What do you do?"));
 
-	truthChoiceText.text = "Accept the grade and retake the test";
+	truthChoiceText.text = "Retake the exam";
 	lieChoiceText.text = "Ask for a fake passing mark";
 
         // Set consequences for truth

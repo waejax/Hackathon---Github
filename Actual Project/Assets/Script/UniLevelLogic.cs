@@ -36,8 +36,8 @@ public class UniLevelLogic : MonoBehaviour
         // Typewriter effect for scenario
         StartCoroutine(TypeSentence("You live near campus, but only students who live far away are eligible for a travel allowance. You’re thinking of using your cousin’s address to get the money."));
 
-	truthChoiceText.text = "Use your real address and skip the allowance";
-	lieChoiceText.text = "Use your cousin’s address to claim the allowance";
+	truthChoiceText.text = "Use your real address";
+	lieChoiceText.text = "Use your cousin’s address";
 
         // Set consequences for truth
         GameManager.Instance.truthConsequence = new ConsequenceData

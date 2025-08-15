@@ -132,7 +132,6 @@ GameObject:
   - component: {fileID: 381086}
   - component: {fileID: 381085}
   - component: {fileID: 381088}
-  - component: {fileID: 381084}
   - component: {fileID: 381083}
   m_Layer: 0
   m_Name: slip_0
@@ -183,18 +182,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &381084
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 381081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a51782fa177cd344ac457b5e3bae3aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &381085
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -799,7 +786,7 @@ GameObject:
   - component: {fileID: 256393935}
   - component: {fileID: 256393934}
   m_Layer: 8
-  m_Name: brick_0 (4)
+  m_Name: brick 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1226,7 +1213,6 @@ GameObject:
   - component: {fileID: 449922704}
   - component: {fileID: 449922703}
   - component: {fileID: 449922702}
-  - component: {fileID: 449922701}
   m_Layer: 0
   m_Name: Info_0
   m_TagString: Untagged
@@ -1234,18 +1220,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &449922701
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 449922700}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a50367fb2b059a4da0a372df33d6027, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &449922702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1611,7 +1585,7 @@ GameObject:
   - component: {fileID: 656964196}
   - component: {fileID: 656964195}
   m_Layer: 8
-  m_Name: brick_0 (2)
+  m_Name: brick 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2111,7 +2085,6 @@ GameObject:
   - component: {fileID: 893466530}
   - component: {fileID: 893466529}
   - component: {fileID: 893466528}
-  - component: {fileID: 893466527}
   - component: {fileID: 893466526}
   - component: {fileID: 893466525}
   m_Layer: 0
@@ -2167,18 +2140,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bc769f8ff8891154d927c5c0f6cfd5bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &893466527
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 893466524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a51782fa177cd344ac457b5e3bae3aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!50 &893466528
@@ -3207,7 +3168,7 @@ GameObject:
   - component: {fileID: 1524180358}
   - component: {fileID: 1524180357}
   m_Layer: 8
-  m_Name: brick_0 (5)
+  m_Name: brick 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4338,7 +4299,7 @@ GameObject:
   - component: {fileID: 2075439526}
   - component: {fileID: 2075439525}
   m_Layer: 8
-  m_Name: brick_0 (3)
+  m_Name: brick 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4472,7 +4433,7 @@ GameObject:
   - component: {fileID: 2087522891}
   - component: {fileID: 2087522893}
   m_Layer: 8
-  m_Name: brick_0 (1)
+  m_Name: brick 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -1410,7 +1410,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 449922700}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a51782fa177cd344ac457b5e3bae3aa, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a50367fb2b059a4da0a372df33d6027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &497573249
@@ -2455,7 +2455,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1061846066}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc5b5e8c6c116de47972d4c48932ff86, type: 3}
   m_Name: 
@@ -3162,7 +3162,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1449869113
 Transform:
   m_ObjectHideFlags: 0
@@ -3194,7 +3194,6 @@ MonoBehaviour:
   infoURL: http://localhost/hackathon/info.php
   demoStart: 0
   demoLineCount: 7
-  lastScene: PrimaryLevelEvidence
 --- !u!1 &1524180356
 GameObject:
   m_ObjectHideFlags: 0

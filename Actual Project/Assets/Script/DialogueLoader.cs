@@ -4,6 +4,7 @@ using UnityEngine.Networking;
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using UnityEngine.SceneManagement;
 
 public class DialogueLoader : MonoBehaviour
 {
@@ -12,16 +13,22 @@ public class DialogueLoader : MonoBehaviour
     List<string> allDemo;
     List<string> allInfo;
     public int demoStart = 0;
-    public int demoLineCount = 7;
+    public int demoLineCount = 5;
     [SerializeField] private string lastScene;
+    private string currentScene;
     // 🔹 Your PHP endpoint
     private string updateLastSceneURL = "http://localhost/hackathon/update_last_scene.php";
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        currentScene = SceneManager.GetActiveScene().name;
         StartCoroutine(UpdateLastSceneInDB(lastScene));
-        LoadDemo(demoStart, demoLineCount);
+        
+        if (currentScene.Equals("GameDemo", StringComparison.OrdinalIgnoreCase))
+        {
+            LoadDemo(demoStart, demoLineCount);
+        }
     }
 
     public void LoadDemo(int startIndex, int count, bool isInfoDialogue = false)
@@ -87,7 +94,10 @@ public class DialogueLoader : MonoBehaviour
                         movementScript.enabled = true;
                     }
 
-                    LoadDemo(7, 2, true);
+                    if (currentScene.Equals("GameDemo", StringComparison.OrdinalIgnoreCase))
+                    {
+                        LoadDemo(5, 2, true);
+                    }
                 }));
             }
         }
@@ -121,7 +131,10 @@ public class DialogueLoader : MonoBehaviour
 
     public void onEvidenceIncrease()
     {
-        LoadDemo(9, 6, true);
+        if (currentScene.Equals("GameDemo", StringComparison.OrdinalIgnoreCase))
+        {
+            LoadDemo(7, 6, true);
+        }
     }
 
     public void TriggerNextDialog(int startIndex, int count)

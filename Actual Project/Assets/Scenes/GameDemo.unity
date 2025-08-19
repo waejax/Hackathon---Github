@@ -1856,7 +1856,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -220, y: 82}
+  m_AnchoredPosition: {x: -287.43, y: 187}
   m_SizeDelta: {x: 574.8613, y: 147.4937}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &721426531
@@ -2790,7 +2790,7 @@ MonoBehaviour:
   demoURL: http://localhost/hackathon/demo.php
   infoURL: http://localhost/hackathon/info.php
   demoStart: 0
-  demoLineCount: 7
+  demoLineCount: 5
   lastScene: 
 --- !u!1 &1544481192
 GameObject:

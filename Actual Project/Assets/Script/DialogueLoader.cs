@@ -16,6 +16,8 @@ public class DialogueLoader : MonoBehaviour
     public int demoLineCount = 5;
     [SerializeField] private string lastScene;
     private string currentScene;
+    public GameObject demoPlayer;
+    public GameObject player;
     // 🔹 Your PHP endpoint
     private string updateLastSceneURL = "http://localhost/hackathon/update_last_scene.php";
 
@@ -52,7 +54,20 @@ public class DialogueLoader : MonoBehaviour
             Dialog dialog = JsonUtility.FromJson<Dialog>(json);
             allDemo = dialog.Lines;
 
-            StartCoroutine(DialogueManager.Instance.ShowDialog(allDemo, startIndex, count, isInfoDialogue));
+            if (demoPlayer != null)
+            {
+                demoPlayer.SetActive(true);
+                player.SetActive(false);
+            }
+
+            yield return DialogueManager.Instance.ShowDialog(allDemo, startIndex, count, isInfoDialogue, () =>
+            {
+                if (demoPlayer != null)
+                {
+                    demoPlayer.SetActive(false);
+                    player.SetActive(true);
+                }
+            });
         }
         else
         {

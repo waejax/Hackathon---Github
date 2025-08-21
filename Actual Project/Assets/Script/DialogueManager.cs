@@ -37,14 +37,19 @@ public class DialogueManager : MonoBehaviour
         Instance = this;
 
         dialogRectTransform = dialogBox.GetComponent<RectTransform>();
-        originalSize = dialogRectTransform.sizeDelta;
-        originalPos = dialogRectTransform.localPosition;
 
         continueTextRect = continueText.GetComponent<RectTransform>();
-        originalContinuePos = continueTextRect.localPosition;
 
         // demoDialogSize = originalSize;
         // demoDialogPos = playerTransform.position + new Vector3(-12f, 0, 0);
+    }
+
+    private void Start()
+    {
+        originalSize = dialogRectTransform.sizeDelta;
+        originalPos = dialogRectTransform.localPosition;
+
+        originalContinuePos = continueTextRect.localPosition;
     }
 
     public IEnumerator ShowDialog(List<string> lines, int startIndex, int count, bool isInfoDialogue = false, Action onDialogComplete = null)
@@ -62,6 +67,7 @@ public class DialogueManager : MonoBehaviour
             dialogRectTransform.sizeDelta = infoDialogSize;
 
             Vector3 worldPos = playerTransform.position + new Vector3(-15.5f, -2f, 0);
+            //Vector3 worldPos = playerTransform.position + new Vector3(0f, 1f, 0);
             Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
 
             Vector2 localPoint;

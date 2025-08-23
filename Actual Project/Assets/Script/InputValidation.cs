@@ -6,9 +6,11 @@ public class InputValidation : MonoBehaviour
 {
     public InputField subjectInput;
     public InputField incidentDetailsInput;
+    public InputField infoSourceInput;
+    public InputField corruptionTypeInput;
     public InputField peopleInvolvedInput;
-    public InputField reporterNameInput;
-    public InputField emailInput;
+    public InputField addressInput;
+    public InputField positonInput;
     public InputField numberInput;
     public InputField icInput;
 
@@ -31,20 +33,44 @@ public class InputValidation : MonoBehaviour
             return false;
         }
 
+        if (infoSourceInput != null && string.IsNullOrWhiteSpace(infoSourceInput.text))
+        {
+            errorText.text = "Source of Info is required";
+            return false;
+        }
+
+        if (corruptionTypeInput != null && string.IsNullOrWhiteSpace(corruptionTypeInput.text))
+        {
+            errorText.text = "Type of corruption/gratification is required";
+            return false;
+        }
+
         if (peopleInvolvedInput != null && string.IsNullOrWhiteSpace(peopleInvolvedInput.text))
         {
             errorText.text = "People Involved is required";
             return false;
         }
 
-        if (emailInput != null && !string.IsNullOrWhiteSpace(emailInput.text))
+        if (addressInput != null && string.IsNullOrWhiteSpace(addressInput.text))
         {
-            if (!Regex.IsMatch(emailInput.text, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
-            {
-                errorText.text = "Invalid email format. Expected format: name@company.domain";
-                return false;
-            }
+            errorText.text = "Address is required";
+            return false;
         }
+
+        if (positonInput != null && string.IsNullOrWhiteSpace(positonInput.text))
+        {
+            errorText.text = "Position is required";
+            return false;
+        }
+
+        // if (emailInput != null && !string.IsNullOrWhiteSpace(emailInput.text))
+        // {
+        //     if (!Regex.IsMatch(emailInput.text, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+        //     {
+        //         errorText.text = "Invalid email format. Expected format: name@company.domain";
+        //         return false;
+        //     }
+        // }
 
         if (numberInput != null && !string.IsNullOrWhiteSpace(numberInput.text))
         {

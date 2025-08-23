@@ -5,9 +5,11 @@ public class ReportData : MonoBehaviour
     public static ReportData Instance;
     public string subject;
     public string incidentDetails;
-    public string peopleInvolved;
-    public string reporterName;
-    public string email;
+    public string InfoSource;
+    public string corruptionType;
+    public string peopleInvolvedName;
+    public string address;
+    public string position;
     public string number;
     public string ic;
 
@@ -28,9 +30,11 @@ public class ReportData : MonoBehaviour
     {
         subject = "";
         incidentDetails = "";
-        peopleInvolved = "";
-        reporterName = "";
-        email = "";
+        InfoSource = "";
+        corruptionType = "";
+        peopleInvolvedName = "";
+        address = "";
+        position = "";
         number = "";
         ic = "";
     }

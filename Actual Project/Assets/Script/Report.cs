@@ -8,9 +8,11 @@ public class Report : MonoBehaviour
 {
     public InputField subjectInput;
     public InputField incidentDetailsInput;
+    public InputField infoSourceInput;
+    public InputField corruptionTypeInput;
     public InputField peopleInvolvedInput;
-    public InputField reporterNameInput;
-    public InputField emailInput;
+    public InputField addressInput;
+    public InputField positionInput;
     public InputField numberInput;
     public InputField icInput;
 
@@ -26,14 +28,20 @@ public class Report : MonoBehaviour
         if (incidentDetailsInput != null)
             incidentDetailsInput.text = ReportData.Instance.incidentDetails;
 
+        if (infoSourceInput != null)
+            infoSourceInput.text = ReportData.Instance.InfoSource;
+
+        if (corruptionTypeInput != null)
+            corruptionTypeInput.text = ReportData.Instance.corruptionType;
+
         if (peopleInvolvedInput != null)
-            peopleInvolvedInput.text = ReportData.Instance.peopleInvolved;
+            peopleInvolvedInput.text = ReportData.Instance.peopleInvolvedName;
 
-        if (reporterNameInput != null)
-            reporterNameInput.text = ReportData.Instance.reporterName;
+        if (addressInput != null)
+            addressInput.text = ReportData.Instance.address;
 
-        if (emailInput != null)
-            emailInput.text = ReportData.Instance.email;
+        if (positionInput != null)
+            positionInput.text = ReportData.Instance.position;
 
         if (numberInput != null)
             numberInput.text = ReportData.Instance.number;
@@ -50,14 +58,20 @@ public class Report : MonoBehaviour
         if (incidentDetailsInput != null)
             ReportData.Instance.incidentDetails = incidentDetailsInput.text;
 
+        if (infoSourceInput != null)
+            ReportData.Instance.InfoSource = infoSourceInput.text;
+
+        if (corruptionTypeInput != null)
+            ReportData.Instance.corruptionType = corruptionTypeInput.text;
+
         if (peopleInvolvedInput != null)
-            ReportData.Instance.peopleInvolved = peopleInvolvedInput.text;
+            ReportData.Instance.peopleInvolvedName = peopleInvolvedInput.text;
 
-        if (reporterNameInput != null)
-            ReportData.Instance.reporterName = reporterNameInput.text;
+        if (addressInput != null)
+            ReportData.Instance.address = addressInput.text;
 
-        if (emailInput != null)
-            ReportData.Instance.email = emailInput.text;
+        if (positionInput != null)
+            ReportData.Instance.position = positionInput.text;
 
         if (numberInput != null)
             ReportData.Instance.number = numberInput.text;
@@ -79,17 +93,32 @@ public class Report : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("subject", ReportData.Instance.subject);
         form.AddField("incident", ReportData.Instance.incidentDetails);
-        form.AddField("people", ReportData.Instance.peopleInvolved);
+        form.AddField("info", ReportData.Instance.InfoSource);
+        form.AddField("type", ReportData.Instance.corruptionType);
 
-        if (!string.IsNullOrWhiteSpace(ReportData.Instance.reporterName))
-            form.AddField("name", ReportData.Instance.reporterName);
-        else
-            form.AddField("name", "");
+        form.AddField("name", ReportData.Instance.peopleInvolvedName);
+        form.AddField("address", ReportData.Instance.address);
+        form.AddField("position", ReportData.Instance.position);
 
-        if (!string.IsNullOrWhiteSpace(ReportData.Instance.email))
-            form.AddField("email", ReportData.Instance.email);
-        else
-            form.AddField("email", "");
+        // if (!string.IsNullOrWhiteSpace(ReportData.Instance.peopleInvolvedName))
+        //     form.AddField("name", ReportData.Instance.peopleInvolvedName);
+        // else
+        //     form.AddField("name", "");
+
+        // if (!string.IsNullOrWhiteSpace(ReportData.Instance.address))
+        //     form.AddField("address", ReportData.Instance.address);
+        // else
+        //     form.AddField("address", "");
+
+        // if (!string.IsNullOrWhiteSpace(ReportData.Instance.position))
+        //     form.AddField("position", ReportData.Instance.position);
+        // else
+        //     form.AddField("position", "");
+
+        // if (!string.IsNullOrWhiteSpace(ReportData.Instance.address))
+        //     form.AddField("email", ReportData.Instance.address);
+        // else
+        //     form.AddField("email", "");
 
         if (!string.IsNullOrWhiteSpace(ReportData.Instance.number))
             form.AddField("number", ReportData.Instance.number);

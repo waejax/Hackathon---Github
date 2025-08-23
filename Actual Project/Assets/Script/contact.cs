@@ -33,9 +33,9 @@ public class contact : MonoBehaviour
 
             foreach (ContactData contact in contactList.contacts) {
                 if (contact.name.Contains("HQ"))
-                    bandar.text = "Address: " + contact.address + "\nEnquiries: " + contact.Qphone1 + "\t/ " + contact.Qphone2 + "\nReporting Phone: " + contact.Rphone1 + "\t/ " + contact.Rphone2 + "\nLocation: ";
+                    bandar.text = "Address: " + contact.address + "\nReporting Phone: " + contact.Rphone1 + "\nEnquiries: " + contact.Qphone1 + "\t/ " + contact.Qphone2 + "\nLocation: ";
                 else if (contact.name.Contains("Kuala Belait"))
-                    kb.text = "Address: " + contact.address + "\nEnquiries: " + contact.Qphone1 + "\nReporting Phone: " + contact.Rphone1 + "\t/ " + contact.Rphone2 + "\nLocation: ";
+                    kb.text = "Address: " + contact.address + "\nReporting Phone: " + contact.Rphone1 + "\t/ " + contact.Rphone2 + "\nEnquiries: " + contact.Qphone1 + "\nLocation: ";
             }
         }
         else

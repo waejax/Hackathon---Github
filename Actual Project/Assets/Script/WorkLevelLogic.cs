@@ -49,7 +49,7 @@ public class WorkLevelLogic : MonoBehaviour
             resultOption2 = "You prove your worth through fairness and eventually succeed.",
             scoreOption1 = 5,
             scoreOption2 = 10,
-            nextScene = "Start"
+            nextScene = "FinalSummary"
         };
 
         // Set consequences for lie
@@ -62,7 +62,7 @@ public class WorkLevelLogic : MonoBehaviour
             resultOption2 = "You get the job, but you’re excluded from team projects.",
             scoreOption1 = -5,
             scoreOption2 = -10,
-            nextScene = "Start"
+            nextScene = "FinalSummary"
         };
 
         // Keep only Chatbot button as clickable

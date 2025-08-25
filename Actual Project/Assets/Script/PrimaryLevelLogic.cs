@@ -31,15 +31,15 @@ public class PrimaryLevelLogic : MonoBehaviour
         truthOriginalScale = truthCollider.transform.localScale;
         lieOriginalScale = lieCollider.transform.localScale;
 
-        StartCoroutine(TypeSentence("You came to school late. The teacher asks why."));
+        StartCoroutine(TypeSentence("You came into class and noticed that everyone was\nalready seated. The teacher ask why you are late."));
 
         GameManager.Instance.truthConsequence = new ConsequenceData
         {
             previewText = "Potential Consequences:\n- You might be praised\nOR\n- Still get a warning",
             previewText1 = "You might be praised",
-            previewText2 = "You still get a warning",
+            previewText2 = "You get a warning",
             resultOption1 = "Your teacher praises your honesty and gives you a light warning.",
-            resultOption2 = "Your teacher notes your honesty but still reports it to the principal.",
+            resultOption2 = "Your teacher notes your honesty and kindly reminds you to be early next time.",
             scoreOption1 = 10,
             scoreOption2 = 5,
             nextScene = "SecondaryLevel"

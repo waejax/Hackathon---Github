@@ -1113,7 +1113,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: You came to school late. Your teacher asks why.
+  m_Text: "You came into class and noticed that everyone was \nalready seated. The
+    teacher ask why you are late."
 --- !u!222 &924496669
 CanvasRenderer:
   m_ObjectHideFlags: 0

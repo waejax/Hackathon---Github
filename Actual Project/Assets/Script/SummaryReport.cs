@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class summaryReport : MonoBehaviour
 {
     public Text summaryText;
-    private string emailAddress = "info.bmr@acb.gov.bn";
+    // private string emailAddress = "info.bmr@acb.gov.bn";
     public string dbURL = "http://localhost/hackathon/insert_report.php";
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -23,26 +23,26 @@ public class summaryReport : MonoBehaviour
 
     public void Submit(string sceneName)
     {
-        //StartCoroutine(Report.SendReport(dbURL, sceneName));
+        StartCoroutine(Report.SendReport(dbURL, sceneName));
 
-        string subject = EscapeURL("Corruption Report");
+        // string subject = EscapeURL("Corruption Report");
 
-        string body = EscapeURL(
-            $"Incident: {ReportData.Instance.incidentDetails}\n" +
-            $"Source of Info: {ReportData.Instance.InfoSource}\n" +
-            $"Type of Corruption: {ReportData.Instance.corruptionType}\n\n" +
-            $"Name: {ReportData.Instance.peopleInvolvedName}\n" + $"Address: {ReportData.Instance.address}\n" +
-            $"Position: {ReportData.Instance.position}\n" +
-            $"Phone Number: {ReportData.Instance.number}\n" + $"IC: {ReportData.Instance.ic}\n" +
-            "Evidence: "
-        );
+        // string body = EscapeURL(
+        //     $"Incident: {ReportData.Instance.incidentDetails}\n" +
+        //     $"Source of Info: {ReportData.Instance.InfoSource}\n" +
+        //     $"Type of Corruption: {ReportData.Instance.corruptionType}\n\n" +
+        //     $"Name: {ReportData.Instance.peopleInvolvedName}\n" + $"Address: {ReportData.Instance.address}\n" +
+        //     $"Position: {ReportData.Instance.position}\n" +
+        //     $"Phone Number: {ReportData.Instance.number}\n" + $"IC: {ReportData.Instance.ic}\n" +
+        //     "Evidence: "
+        // );
 
-        string mailto = $"mailto:{emailAddress}?subject={subject}&body={body}";
-        Application.OpenURL(mailto);
+        // string mailto = $"mailto:{emailAddress}?subject={subject}&body={body}";
+        // Application.OpenURL(mailto);
     }
 
-    string EscapeURL(string text)
-    {
-        return WWW.EscapeURL(text).Replace("+", "%20");
-    }
+    // string EscapeURL(string text)
+    // {
+    //     return WWW.EscapeURL(text).Replace("+", "%20");
+    // }
 }

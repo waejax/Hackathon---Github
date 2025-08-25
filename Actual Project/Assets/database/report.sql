@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 12, 2025 at 10:22 AM
+-- Generation Time: Aug 25, 2025 at 03:51 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -31,11 +31,13 @@ CREATE TABLE `report` (
   `id` int(11) NOT NULL,
   `subject` text NOT NULL,
   `incident` text NOT NULL,
+  `info` text NOT NULL,
+  `corruption` text NOT NULL,
   `people` text NOT NULL,
-  `repName` date DEFAULT NULL,
-  `repEmail` varchar(50) DEFAULT NULL,
-  `repNo` int(11) DEFAULT NULL,
-  `repIC` int(11) DEFAULT NULL
+  `peopleAddress` text NOT NULL,
+  `position` text NOT NULL,
+  `peopleNo` int(11) DEFAULT NULL,
+  `peopleIc` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -56,7 +58,7 @@ ALTER TABLE `report`
 -- AUTO_INCREMENT for table `report`
 --
 ALTER TABLE `report`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

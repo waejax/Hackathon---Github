@@ -17,22 +17,30 @@ file_put_contents("post_data.txt", print_r($_POST, true));
 
 $subject = isset($_POST['subject']) ? $_POST['subject'] : "";
 $incident = isset($_POST['incident']) ? $_POST['incident'] : "";
-$people = isset($_POST['people']) ? $_POST['people'] : "";
+//$people = isset($_POST['people']) ? $_POST['people'] : "";
 $name = isset($_POST['name']) ? $_POST['name'] : "";
-$email = isset($_POST['email']) ? $_POST['email'] : "";
+//$email = isset($_POST['email']) ? $_POST['email'] : "";
 $number = isset($_POST['number']) ? $_POST['number'] : "";
 $ic = isset($_POST['ic']) ? $_POST['ic'] : "";
+$address = isset($_POST['address']) ? $_POST['address'] : "";
+$position = isset($_POST['position']) ? $_POST['position'] : "";
+$corruption = isset($_POST['type']) ? $_POST['type'] : "";
+$info = isset($_POST['info']) ? $_POST['info'] : "";
 
 $subject = $conn->real_escape_string($subject);
 $incident = $conn->real_escape_string($incident);
-$people = $conn->real_escape_string($people);
+//$people = $conn->real_escape_string($people);
 $name = $conn->real_escape_string($name);
-$email = $conn->real_escape_string($email);
+//$email = $conn->real_escape_string($email);
 $number = $conn->real_escape_string($number);
 $ic = $conn->real_escape_string($ic);
+$address = $conn->real_escape_string($address);
+$position = $conn->real_escape_string($position);
+$corruption = $conn->real_escape_string($corruption);
+$info = $conn->real_escape_string($info);
 
-$sql = "INSERT INTO report (subject, incident, people, repName, repEmail, repNo, repIC) VALUES
-    ('$subject', '$incident', '$people', '$name', '$email', '$number', '$ic')";
+$sql = "INSERT INTO report (subject, incident, info, corruption, people, peopleAddress, position, peopleNo, peopleIc) VALUES
+    ('$subject', '$incident', '$info', '$corruption', '$name', '$address', '$position', '$number', '$ic')";
 
 if ($conn->query($sql) == TRUE) {
     echo "New record created successfully";

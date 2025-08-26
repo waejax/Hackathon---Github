@@ -14,16 +14,13 @@ if ($conn->connect_error) {
     exit;
 }
 
-$sql = "SELECT email, moralityScore FROM user ORDER BY moralityScore DESC";
+$sql = "SELECT userID, email, points, moralityScore FROM user ORDER BY moralityScore DESC";
 $result = $conn->query($sql);
 
 $leaders = array();
 
 while ($row = $result->fetch_assoc()) {
-    $leaders[] = array(
-        "email" => $row["email"],
-        "score" => $row["moralityScore"]
-    );
+    $leaders[] = $row;
 }
 
 echo json_encode($leaders);

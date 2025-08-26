@@ -18,8 +18,10 @@ public class leaderboardManager : MonoBehaviour, IPointerClickHandler
     [System.Serializable]
     public class Leader
     {
+        public string userID;
         public string email;
-        public string score;
+        public string moralityScore;
+        public string points;
     }
 
     [System.Serializable]
@@ -67,7 +69,7 @@ public class leaderboardManager : MonoBehaviour, IPointerClickHandler
         foreach (Leader leader in leaders)
         {
             emailText.text += rank + ". " + leader.email + "\n";
-            scoreText.text += leader.score + "\n";
+            scoreText.text += leader.moralityScore + "\n";
             rank++;
         }
     }
@@ -96,7 +98,10 @@ public class leaderboardManager : MonoBehaviour, IPointerClickHandler
         {
             Leader selectedLeader = currentLeaders[clickedIndex];
             PlayerPrefs.SetString("SelectedPlayerEmail", selectedLeader.email);
-            PlayerPrefs.SetString("SelectedPlayerScore", selectedLeader.score);
+            PlayerPrefs.SetString("SelectedPlayerUserID", selectedLeader.userID);
+            PlayerPrefs.SetString("SelectedPlayerPoints", selectedLeader.points);
+            PlayerPrefs.SetString("SelectedPlayerScore", selectedLeader.moralityScore);
+
             SceneManager.LoadScene("ad-player");
         }
     }

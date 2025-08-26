@@ -662,7 +662,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 121, y: 48.559998}
+  m_AnchoredPosition: {x: 121, y: 14.938004}
   m_SizeDelta: {x: 309.28, y: 24.881}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &629973487
@@ -697,9 +697,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   subjectInput: {fileID: 0}
   incidentDetailsInput: {fileID: 0}
+  infoSourceInput: {fileID: 0}
+  corruptionTypeInput: {fileID: 0}
   peopleInvolvedInput: {fileID: 0}
-  reporterNameInput: {fileID: 0}
-  emailInput: {fileID: 0}
+  addressInput: {fileID: 0}
+  positionInput: {fileID: 0}
   numberInput: {fileID: 0}
   icInput: {fileID: 0}
   inputValidation: {fileID: 0}
@@ -2136,8 +2138,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 121, y: -55.596733}
-  m_SizeDelta: {x: 309.28, y: 183.4318}
+  m_AnchoredPosition: {x: 121, y: -56}
+  m_SizeDelta: {x: 231.1188, y: 116.9948}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1666826259
 MonoBehaviour:

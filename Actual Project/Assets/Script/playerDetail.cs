@@ -11,7 +11,16 @@ public class playerDetail : MonoBehaviour
 
     void Start()
     {
-        emailText.text = PlayerPrefs.GetString("SelectedPlayerEmail", "Unknown");
-        detailText.text = PlayerPrefs.GetString("SelectedPlayerScore", "0");
+        string email = PlayerPrefs.GetString("SelectedPlayerEmail", "Unknown");
+        string userID = PlayerPrefs.GetString("SelectedPlayerUserID", "N/A");
+        string points = PlayerPrefs.GetString("SelectedPlayerPoints", "0");
+        string score = PlayerPrefs.GetString("SelectedPlayerScore", "0");
+
+        emailText.text = email;
+
+        detailText.text =
+        $"\nUser ID: {userID}\n" +
+        $"Points: {points}\n" +
+        $"Score: {score}\n";
     }
 }

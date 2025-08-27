@@ -3194,6 +3194,9 @@ MonoBehaviour:
   infoURL: http://localhost/hackathon/info.php
   demoStart: 0
   demoLineCount: 7
+  lastScene: 
+  demoPlayer: {fileID: 0}
+  player: {fileID: 0}
 --- !u!1 &1524180356
 GameObject:
   m_ObjectHideFlags: 0

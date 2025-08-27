@@ -32,6 +32,7 @@ public class infoReceived : MonoBehaviour, IPointerClickHandler
         public string position;
         public string peopleNo;
         public string peopleIc;
+        public string evidence;
     }
 
     [System.Serializable]
@@ -131,7 +132,9 @@ public class infoReceived : MonoBehaviour, IPointerClickHandler
         $"Address: {report.peopleAddress}\n" +
         $"Position: {report.position}\n" +
         $"Number: {report.peopleNo}\n" +
-        $"IC: {report.peopleIc}\n";
+        $"IC: {report.peopleIc}\n\n" +
+
+        $"Evidence File(s): {report.evidence}";
     }
 
     public void ClosePopup()

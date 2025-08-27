@@ -14,7 +14,7 @@ if ($conn->connect_error) {
     exit;
 }
 
-$sql = "SELECT id, subject, incident, info, corruption, people, peopleAddress, position, peopleNo, peopleIc FROM report";
+$sql = "SELECT id, subject, incident, info, corruption, people, peopleAddress, position, peopleNo, peopleIc, evidence FROM report";
 $result = $conn->query($sql);
 
 $reports = array();

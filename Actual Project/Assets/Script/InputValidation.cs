@@ -15,7 +15,7 @@ public class InputValidation : MonoBehaviour
     public InputField icInput;
 
     public Text errorText;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
     public bool Validate()
     {
         if (errorText != null)

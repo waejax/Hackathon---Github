@@ -5,7 +5,6 @@ using UnityEngine.Networking;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
-using Unity.VisualScripting;
 
 public class leaderboardManager : MonoBehaviour, IPointerClickHandler
 {
@@ -28,6 +27,14 @@ public class leaderboardManager : MonoBehaviour, IPointerClickHandler
     public class LeaderList
     {
         public List<Leader> leaders;
+        public Stats stats;
+    }
+
+    [System.Serializable]
+    public class Stats
+    {
+        public int total;
+        public float avgScore;
     }
 
     void Start()
@@ -44,9 +51,6 @@ public class leaderboardManager : MonoBehaviour, IPointerClickHandler
         {
             string json = www.downloadHandler.text;
             Debug.Log("Json from php: " + json);
-
-            json = "{\"leaders\":" + json + "}";
-            Debug.Log("wrraped json: " + json);
 
             LeaderList leaderList = JsonUtility.FromJson<LeaderList>(json);
 

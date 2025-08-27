@@ -23,7 +23,9 @@ public class summaryReport : MonoBehaviour
 
     public void Submit(string sceneName)
     {
-        StartCoroutine(Report.SendReport(dbURL, sceneName));
+        Report report = FindObjectOfType<Report>();
+
+        report.StartCoroutine(report.SendReport(dbURL, sceneName));
 
         // string subject = EscapeURL("Corruption Report");
 

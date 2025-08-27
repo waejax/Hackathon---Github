@@ -189,7 +189,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Info Insight
+  m_Text: Game Insight
 --- !u!222 &38530208
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2194,9 +2194,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   subjectInput: {fileID: 0}
   incidentDetailsInput: {fileID: 0}
+  infoSourceInput: {fileID: 0}
+  corruptionTypeInput: {fileID: 0}
   peopleInvolvedInput: {fileID: 0}
-  reporterNameInput: {fileID: 0}
-  emailInput: {fileID: 0}
+  addressInput: {fileID: 0}
+  positionInput: {fileID: 0}
   numberInput: {fileID: 0}
   icInput: {fileID: 0}
   inputValidation: {fileID: 0}

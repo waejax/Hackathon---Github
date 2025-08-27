@@ -1362,7 +1362,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Info Insight
+  m_Text: Game Insight
 --- !u!222 &988250494
 CanvasRenderer:
   m_ObjectHideFlags: 0

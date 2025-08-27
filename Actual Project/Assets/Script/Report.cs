@@ -3,6 +3,12 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
 using System.Collections;
+using System.IO;
+using System.Collections.Generic;
+using System.Linq;
+#if UNITY_EDITOR
+    using UnityEditor;
+#endif
 
 public class Report : MonoBehaviour
 {
@@ -15,10 +21,19 @@ public class Report : MonoBehaviour
     public InputField positionInput;
     public InputField numberInput;
     public InputField icInput;
+    public Text selectedFileText;
 
     public InputValidation inputValidation;
 
     public string dbURL = "http://localhost/hackathon/insert_report.php";
+    private List<string> selectedFilePaths = new List<string>();
+
+    public static Report Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     public void Start()
     {
@@ -48,6 +63,8 @@ public class Report : MonoBehaviour
 
         if (icInput != null)
             icInput.text = ReportData.Instance.ic;
+
+        UpdateSelectedFile();
     }
 
     public void MoveScene(string sceneName)
@@ -88,8 +105,15 @@ public class Report : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
-    public static IEnumerator SendReport(string dbURL, string sceneName)
+    public IEnumerator SendReport(string dbURL, string sceneName)
     {
+        if (!selectedFilePaths.Any())
+        {
+            selectedFileText.color = Color.red;
+            selectedFileText.text = "Please attach at least one file.";
+            yield break;
+        }
+
         WWWForm form = new WWWForm();
         form.AddField("subject", ReportData.Instance.subject);
         form.AddField("incident", ReportData.Instance.incidentDetails);
@@ -130,6 +154,17 @@ public class Report : MonoBehaviour
         else
             form.AddField("ic", "");
 
+        for (int i = 0; i < selectedFilePaths.Count; i++)
+        {
+            string path = selectedFilePaths[i];
+            if (File.Exists(path))
+            {
+                byte[] data = File.ReadAllBytes(path);
+                string filename = Path.GetFileName(path);
+                form.AddBinaryData($"evidence{i}", data, filename);
+            }
+        }
+
         UnityWebRequest www = UnityWebRequest.Post(dbURL, form);
         yield return www.SendWebRequest();
 
@@ -142,6 +177,35 @@ public class Report : MonoBehaviour
         else
         {
             Debug.LogError("Error submitting: " + www.error);
+        }
+    }
+
+    public void PickEvidence()
+    {
+#if UNITY_EDITOR
+        string path = EditorUtility.OpenFilePanel("Select Evidence File", "", "");
+        if (!string.IsNullOrEmpty(path) && File.Exists(path))
+        {
+            if (!selectedFilePaths.Contains(path))
+                selectedFilePaths.Add(path);
+        }
+        UpdateSelectedFile();
+#else
+            Debug.LogWarning("File picking is only supported in the Unity Editor. For mobile/desktop builds, implement platform-specific file pickers.");
+#endif
+    }
+
+    public void UpdateSelectedFile()
+    {
+        if (selectedFilePaths.Count == 0)
+        {
+            selectedFileText.text = "No files selected";
+            selectedFileText.color = Color.red;
+        }
+        else
+        {
+            selectedFileText.text = string.Join("\n", selectedFilePaths.Select(p => Path.GetFileName(p)));
+            selectedFileText.color = Color.black;
         }
     }
 }

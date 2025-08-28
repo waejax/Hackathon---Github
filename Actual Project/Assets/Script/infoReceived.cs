@@ -3,8 +3,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using System.Collections;
-using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using System.Linq;
+using TMPro;
 
 public class infoReceived : MonoBehaviour, IPointerClickHandler
 {
@@ -14,10 +15,11 @@ public class infoReceived : MonoBehaviour, IPointerClickHandler
     public Text corruptionText;
 
     public GameObject detailPopup;
-    public Text detailText;
-
+    public TextMeshProUGUI detailText;
+    public InputField searchInput;
 
     private List<Report> currentReports;
+    private List<Report> allReports;
 
     [System.Serializable]
     public class Report
@@ -46,6 +48,23 @@ public class infoReceived : MonoBehaviour, IPointerClickHandler
         StartCoroutine(LoadReports());
     }
 
+    public void OnSearch()
+    {
+        string query = searchInput.text.Trim().ToLower();
+
+        if (string.IsNullOrEmpty(query))
+        {
+            DisplayReport(allReports);
+            return;
+        }
+
+        List<Report> filtered = allReports
+        .Where(report => report.incident.ToLower().Contains(query) || report.people.ToLower().Contains(query) || report.corruption.ToLower().Contains(query))
+        .ToList();
+
+        DisplayReport(filtered);
+    }
+
     IEnumerator LoadReports()
     {
         UnityWebRequest www = UnityWebRequest.Get(reportURL);
@@ -61,7 +80,8 @@ public class infoReceived : MonoBehaviour, IPointerClickHandler
 
             ReportList reportList = JsonUtility.FromJson<ReportList>(json);
 
-            DisplayReport(reportList.reports);
+            allReports = reportList.reports;
+            DisplayReport(allReports);
         }
         else
         {
@@ -94,6 +114,18 @@ public class infoReceived : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (detailPopup.activeSelf)
+        {
+            int linkIndex = TMP_TextUtilities.FindIntersectingLink(detailText, eventData.position, null);
+            if (linkIndex != -1)
+            {
+                TMP_LinkInfo linkInfo = detailText.textInfo.linkInfo[linkIndex];
+                string url = linkInfo.GetLinkID();
+                Application.OpenURL(url);
+                return;
+            }
+        }
+        
         Vector2 localMousePos;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             incidentText.rectTransform,
@@ -123,7 +155,9 @@ public class infoReceived : MonoBehaviour, IPointerClickHandler
     {
         detailPopup.SetActive(true);
 
-        detailText.text =
+        string baseURL = "http://localhost/hackathon/";
+
+        string detailInfo =
         $"Subject: {report.subject}\n" +
         $"Incident: {report.incident}\n" +
         $"Source of Info: {report.info}\n" +
@@ -134,7 +168,24 @@ public class infoReceived : MonoBehaviour, IPointerClickHandler
         $"Number: {report.peopleNo}\n" +
         $"IC: {report.peopleIc}\n\n" +
 
-        $"Evidence File(s): {report.evidence}";
+        $"Evidence File(s):\n";
+
+        if (!string.IsNullOrEmpty(report.evidence))
+        {
+            string[] evidenceFiles = report.evidence.Split(',');
+
+            for (int i = 0; i < evidenceFiles.Length; i++)
+            {
+                string filename = evidenceFiles[i].Trim();
+                detailInfo += $"<color=blue><u><link=\"{baseURL + filename}\">{filename}</link></u></color>\n";
+            }
+        }
+        else
+        {
+            detailInfo += "No evidence files submitted.";
+        }
+
+        detailText.text = detailInfo;
     }
 
     public void ClosePopup()

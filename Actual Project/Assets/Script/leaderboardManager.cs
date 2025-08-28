@@ -5,13 +5,16 @@ using UnityEngine.Networking;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using System.Linq;
 
 public class leaderboardManager : MonoBehaviour, IPointerClickHandler
 {
     public string leaderboardURL = "http://localhost/hackathon/leaderboard.php";
     public Text emailText;
     public Text scoreText;
+    public InputField searchInput;
     private List<Leader> currentLeaders;
+    private List<Leader> allLeaders;
 
 
     [System.Serializable]
@@ -42,6 +45,26 @@ public class leaderboardManager : MonoBehaviour, IPointerClickHandler
         StartCoroutine(LoadLeaderboard());
     }
 
+    public void OnSearch()
+    {
+        string query = searchInput.text.Trim().ToLower();
+
+        if (string.IsNullOrEmpty(query))
+        {
+            DisplayLeaderboard(allLeaders);
+            return;
+        }
+
+        List<Leader> filtered = allLeaders
+            .Where(leader =>
+                (!string.IsNullOrEmpty(leader.email) && leader.email.ToLower().Contains(query)) ||
+                (!string.IsNullOrEmpty(leader.moralityScore) && leader.moralityScore.ToLower().Contains(query))
+            )
+            .ToList();
+
+        DisplayLeaderboard(filtered);
+    }
+
     IEnumerator LoadLeaderboard()
     {
         UnityWebRequest www = UnityWebRequest.Get(leaderboardURL);
@@ -54,7 +77,8 @@ public class leaderboardManager : MonoBehaviour, IPointerClickHandler
 
             LeaderList leaderList = JsonUtility.FromJson<LeaderList>(json);
 
-            DisplayLeaderboard(leaderList.leaders);
+            allLeaders = leaderList.leaders;
+            DisplayLeaderboard(allLeaders);
         }
         else
         {

@@ -5,7 +5,6 @@ using UnityEngine.Networking;
 using System.Collections;
 using UnityEngine.EventSystems;
 using System.Linq;
-using TMPro;
 
 public class infoReceived : MonoBehaviour, IPointerClickHandler
 {
@@ -15,11 +14,12 @@ public class infoReceived : MonoBehaviour, IPointerClickHandler
     public Text corruptionText;
 
     public GameObject detailPopup;
-    public TextMeshProUGUI detailText;
+    public Text detailText;
     public InputField searchInput;
 
     private List<Report> currentReports;
     private List<Report> allReports;
+    private List<string> evidenceLink = new List<string>();
 
     [System.Serializable]
     public class Report
@@ -116,31 +116,50 @@ public class infoReceived : MonoBehaviour, IPointerClickHandler
     {
         if (detailPopup.activeSelf)
         {
-            int linkIndex = TMP_TextUtilities.FindIntersectingLink(detailText, eventData.position, null);
-            if (linkIndex != -1)
+            Vector2 localMousePos;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                detailText.rectTransform,
+                eventData.position,
+                eventData.pressEventCamera,
+                out localMousePos
+            );
+
+            float pivotOffsetY = detailText.rectTransform.rect.height * detailText.rectTransform.pivot.y;
+            float yFromTop = pivotOffsetY - localMousePos.y;
+
+            float lineHeight = detailText.fontSize * detailText.lineSpacing;
+            int clickedLine = Mathf.FloorToInt(yFromTop / lineHeight);
+
+            Debug.Log($"Clicked detail line: {clickedLine}");
+
+            string[] lines = detailText.text.Split('\n');
+            int evidenceStartLine = System.Array.IndexOf(lines, "Evidence File(s):") + 1;
+
+            int evidenceIndex = clickedLine - evidenceStartLine;
+
+            if (evidenceIndex >= 0 && evidenceIndex < evidenceLink.Count)
             {
-                TMP_LinkInfo linkInfo = detailText.textInfo.linkInfo[linkIndex];
-                string url = linkInfo.GetLinkID();
-                Application.OpenURL(url);
+                Debug.Log($"Opening link: {evidenceLink[evidenceIndex]}");
+                Application.OpenURL(evidenceLink[evidenceIndex]);
                 return;
             }
         }
-        
-        Vector2 localMousePos;
+
+        Vector2 localMousePosIncident;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             incidentText.rectTransform,
             eventData.position,
             eventData.pressEventCamera,
-            out localMousePos
+            out localMousePosIncident
         );
 
-        float pivotOffsetY = incidentText.rectTransform.rect.height * incidentText.rectTransform.pivot.y;
+        float pivotOffsetYIncident = incidentText.rectTransform.rect.height * incidentText.rectTransform.pivot.y;
 
-        float yFromTop = pivotOffsetY - localMousePos.y;
+        float yFromTopIncident = pivotOffsetYIncident - localMousePosIncident.y;
 
-        float lineHeight = incidentText.fontSize * incidentText.lineSpacing;
+        float lineHeightIncident = incidentText.fontSize * incidentText.lineSpacing;
 
-        int clickedIndex = Mathf.FloorToInt(yFromTop / lineHeight);
+        int clickedIndex = Mathf.FloorToInt(yFromTopIncident / lineHeightIncident);
 
         Debug.Log($"Clicked line: {clickedIndex}");
 
@@ -177,7 +196,12 @@ public class infoReceived : MonoBehaviour, IPointerClickHandler
             for (int i = 0; i < evidenceFiles.Length; i++)
             {
                 string filename = evidenceFiles[i].Trim();
-                detailInfo += $"<color=blue><u><link=\"{baseURL + filename}\">{filename}</link></u></color>\n";
+                if (!string.IsNullOrEmpty(filename))
+                {
+                    string fullUrl = baseURL + filename;
+                    evidenceLink.Add(fullUrl);
+                    detailInfo += $"{i + 1}. {filename}\n";
+                }
             }
         }
         else

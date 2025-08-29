@@ -18,6 +18,9 @@ public class DialogueLoader : MonoBehaviour
     private string currentScene;
     public GameObject demoPlayer;
     public GameObject player;
+    private List<string> collectedInfo = new List<string>();
+    private static DialogueLoader instance;
+
     // 🔹 Your PHP endpoint
     private string updateLastSceneURL = "http://localhost/hackathon/update_last_scene.php";
 
@@ -30,6 +33,19 @@ public class DialogueLoader : MonoBehaviour
         if (currentScene.Equals("GameDemo", StringComparison.OrdinalIgnoreCase))
         {
             LoadDemo(demoStart, demoLineCount);
+        }
+    }
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 
@@ -98,7 +114,12 @@ public class DialogueLoader : MonoBehaviour
             if (dialog.Lines != null && dialog.Lines.Count > 0)
             {
                 string fullInfo = dialog.Lines[0];
-                List<string> splitSentences = SplitIntoSentences(dialog.Lines[0]);
+                List<string> splitSentences = SplitIntoSentences(fullInfo);
+
+                if (!collectedInfo.Contains(fullInfo))
+                {
+                    collectedInfo.Add(fullInfo);
+                }
 
                 yield return StartCoroutine(DialogueManager.Instance.ShowDialog(splitSentences, 0, splitSentences.Count, true, () =>
                 {
@@ -111,7 +132,7 @@ public class DialogueLoader : MonoBehaviour
 
                     if (currentScene.Equals("GameDemo", StringComparison.OrdinalIgnoreCase))
                     {
-                        LoadDemo(5, 2, true);
+                        LoadDemo(5, 2, false);
                     }
                 }));
             }
@@ -148,7 +169,7 @@ public class DialogueLoader : MonoBehaviour
     {
         if (currentScene.Equals("GameDemo", StringComparison.OrdinalIgnoreCase))
         {
-            LoadDemo(7, 6, true);
+            LoadDemo(7, 6, false);
         }
     }
 
@@ -163,6 +184,11 @@ public class DialogueLoader : MonoBehaviour
     public void TriggerInfoDialog(GameObject infoIcon, playerMove movementScript)
     {
         StartCoroutine(GetInfoDialog(infoIcon, movementScript));
+    }
+
+    public List<string> getCollectedInfo()
+    {
+        return collectedInfo;
     }
 
     IEnumerator UpdateLastSceneInDB(string sceneName)

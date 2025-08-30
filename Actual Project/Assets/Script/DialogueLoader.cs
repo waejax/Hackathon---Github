@@ -13,7 +13,7 @@ public class DialogueLoader : MonoBehaviour
     List<string> allDemo;
     List<string> allInfo;
     public int demoStart = 0;
-    public int demoLineCount = 5;
+    public int demoLineCount = 7;
     [SerializeField] private string lastScene;
     private string currentScene;
     public GameObject demoPlayer;
@@ -32,7 +32,7 @@ public class DialogueLoader : MonoBehaviour
         
         if (currentScene.Equals("GameDemo", StringComparison.OrdinalIgnoreCase))
         {
-            LoadDemo(demoStart, demoLineCount);
+            LoadDemo(0, 7, false);
         }
     }
 
@@ -132,7 +132,7 @@ public class DialogueLoader : MonoBehaviour
 
                     if (currentScene.Equals("GameDemo", StringComparison.OrdinalIgnoreCase))
                     {
-                        LoadDemo(5, 2, false);
+                        LoadDemo(7, 2, false);
                     }
                 }));
             }
@@ -169,7 +169,7 @@ public class DialogueLoader : MonoBehaviour
     {
         if (currentScene.Equals("GameDemo", StringComparison.OrdinalIgnoreCase))
         {
-            LoadDemo(7, 6, false);
+            LoadDemo(9, 6, false);
         }
     }
 

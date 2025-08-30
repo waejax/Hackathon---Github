@@ -125,6 +125,14 @@ public class leaderboardManager : MonoBehaviour, IPointerClickHandler
         if (clickedIndex >= 0 && clickedIndex < currentLeaders.Count)
         {
             Leader selectedLeader = currentLeaders[clickedIndex];
+
+            List<Leader> sortedLeader = allLeaders.OrderByDescending(l =>
+                int.Parse(l.moralityScore)).ToList();
+
+            int rank = sortedLeader.FindIndex(l => l.email == selectedLeader.email) + 1;
+
+            PlayerPrefs.SetInt("SelectedPlayerRank", rank);
+            
             PlayerPrefs.SetString("SelectedPlayerEmail", selectedLeader.email);
             PlayerPrefs.SetString("SelectedPlayerUserID", selectedLeader.userID);
             PlayerPrefs.SetString("SelectedPlayerPoints", selectedLeader.points);

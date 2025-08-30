@@ -12,6 +12,7 @@ public class infoReceived : MonoBehaviour, IPointerClickHandler
     public Text incidentText;
     public Text peopleText;
     public Text corruptionText;
+    public Text matchText;
 
     public GameObject detailPopup;
     public Text detailText;
@@ -109,6 +110,11 @@ public class infoReceived : MonoBehaviour, IPointerClickHandler
             incidentText.text = "No report Received";
             peopleText.text = "";
             corruptionText.text = "";
+            matchText.text = "No match";
+        }
+        else
+        {
+            matchText.text = $"{reports.Count} records found";
         }
     }
 

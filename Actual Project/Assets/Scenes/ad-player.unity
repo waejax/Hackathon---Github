@@ -362,6 +362,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emailText: {fileID: 463876973}
   detailText: {fileID: 1666826259}
+  rankText: {fileID: 1505548895}
 --- !u!4 &461051332
 Transform:
   m_ObjectHideFlags: 0
@@ -1436,7 +1437,7 @@ GameObject:
   - component: {fileID: 1505548896}
   - component: {fileID: 1505548895}
   m_Layer: 5
-  m_Name: sub-title
+  m_Name: rank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

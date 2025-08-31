@@ -13,7 +13,7 @@ public class DialogueLoader : MonoBehaviour
     List<string> allDemo;
     List<string> allInfo;
     public int demoStart = 0;
-    public int demoLineCount = 7;
+    public int demoLineCount = 5;
     [SerializeField] private string lastScene;
     private string currentScene;
     public GameObject demoPlayer;
@@ -147,6 +147,7 @@ public class DialogueLoader : MonoBehaviour
             }
         }
     }
+
 
     private List<string> SplitIntoSentences(string block)
     {

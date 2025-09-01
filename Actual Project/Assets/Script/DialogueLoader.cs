@@ -10,6 +10,7 @@ public class DialogueLoader : MonoBehaviour
 {
     public string demoURL = "http://localhost/hackathon/demo.php";
     public string infoURL = "http://localhost/hackathon/info.php";
+    public string primaryURL = "http://localhost/hackathon/primarylevel.php";
     List<string> allDemo;
     List<string> allInfo;
     public int demoStart = 0;
@@ -29,10 +30,16 @@ public class DialogueLoader : MonoBehaviour
     {
         currentScene = SceneManager.GetActiveScene().name;
         StartCoroutine(UpdateLastSceneInDB(lastScene));
-        
+
         if (currentScene.Equals("GameDemo", StringComparison.OrdinalIgnoreCase))
         {
             LoadDemo(0, 7, false);
+
+        }
+                
+        if (currentScene.Equals("PrimaryLevelEvidence", StringComparison.OrdinalIgnoreCase))
+        {
+            LoadDemo(15, 3, false);
         }
     }
 
@@ -91,14 +98,14 @@ public class DialogueLoader : MonoBehaviour
         }
     }
 
-    public IEnumerator GetInfoDialog(GameObject infoIcon, playerMove movementScript)
+    public IEnumerator GetInfoDialog(GameObject infoIcon, playerMove movementScript,string URL)
     {
         if (movementScript != null)
         {
             movementScript.enabled = false;
         }
 
-        UnityWebRequest www = UnityWebRequest.Get(infoURL);
+        UnityWebRequest www = UnityWebRequest.Get(URL);
         yield return www.SendWebRequest();
 
         if (www.result == UnityWebRequest.Result.Success)
@@ -172,6 +179,7 @@ public class DialogueLoader : MonoBehaviour
         {
             LoadDemo(9, 6, false);
         }
+
     }
 
     public void TriggerNextDialog(int startIndex, int count)
@@ -184,7 +192,16 @@ public class DialogueLoader : MonoBehaviour
 
     public void TriggerInfoDialog(GameObject infoIcon, playerMove movementScript)
     {
-        StartCoroutine(GetInfoDialog(infoIcon, movementScript));
+
+        if (currentScene.Equals("PrimaryLevelEvidence", StringComparison.OrdinalIgnoreCase))
+        {
+            StartCoroutine(GetInfoDialog(infoIcon, movementScript, primaryURL));
+        }
+        else
+        {
+            StartCoroutine(GetInfoDialog(infoIcon, movementScript, infoURL));
+        }
+
     }
 
     public List<string> getCollectedInfo()

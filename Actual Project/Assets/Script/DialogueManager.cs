@@ -69,7 +69,7 @@ public class DialogueManager : MonoBehaviour
         {
             dialogRectTransform.sizeDelta = infoDialogSize;
 
-            if (currentScene == "GameDemo")
+            if (currentScene == "GameDemo" || currentScene == "PrimaryLevelEvidence")
             {
                 dialogRectTransform.anchorMin = new Vector2(0.5f, 0.5f);
                 dialogRectTransform.anchorMax = new Vector2(0.5f, 0.5f);
@@ -138,7 +138,7 @@ public class DialogueManager : MonoBehaviour
             currentLine++;
 
             continueText.text = "";
-            
+
             if (currentLine < endLine)
             {
                 StartCoroutine(TypeDialog(fullDialog[currentLine]));
@@ -151,6 +151,14 @@ public class DialogueManager : MonoBehaviour
                 OnCloseDialog?.Invoke();
             }
         }
+        else if (Input.GetKeyDown(KeyCode.E) && isTyping)
+        {
+            StopAllCoroutines();
+            dialogText.text = fullDialog[currentLine];
+            isTyping = false;
+            continueText.text = "Press Z to continue";
+        }
+        
     }
 
     public IEnumerator TypeDialog(string line)

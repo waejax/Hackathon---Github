@@ -30,6 +30,7 @@ public class infoCollected : MonoBehaviour
             foreach (string line in collectedInfo)
             {
                 displayText += "- " + line + "\n";
+                
             }
 
             infoText.text = displayText;

@@ -25,6 +25,7 @@ public class DialogueLoader : MonoBehaviour
     // 🔹 Your PHP endpoint
     private string updateLastSceneURL = "http://localhost/hackathon/update_last_scene.php";
 
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -39,11 +40,11 @@ public class DialogueLoader : MonoBehaviour
                 
         else if (currentScene.Equals("PrimaryLevelEvidence", StringComparison.OrdinalIgnoreCase))
         {
-            LoadDemo(15, 3, false);
+            LoadDemo(15, 3, true);
         }
     }
 
-    void Awake()
+      void Awake()
     {
         if (instance == null)
         {

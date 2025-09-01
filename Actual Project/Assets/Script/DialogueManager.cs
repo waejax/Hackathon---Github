@@ -33,6 +33,7 @@ public class DialogueManager : MonoBehaviour
     int endLine;
     bool isTyping;
 
+
     private void Awake()
     {
         Instance = this;
@@ -99,7 +100,7 @@ public class DialogueManager : MonoBehaviour
         {
             dialogRectTransform.sizeDelta = originalSize;
 
-            if (currentScene == "GameDemo")
+            if (currentScene == "GameDemo" || currentScene == "PrimaryLevelEvidence")
             {
                 dialogRectTransform.anchorMin = new Vector2(0.5f, 0);
                 dialogRectTransform.anchorMax = new Vector2(0.5f, 0);

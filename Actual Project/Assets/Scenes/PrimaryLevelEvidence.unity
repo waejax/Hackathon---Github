@@ -2819,7 +2819,7 @@ MonoBehaviour:
   dialogText: {fileID: 1654111410}
   continueText: {fileID: 897310166}
   lettersPerSecond: 20
-  playerTransform: {fileID: 348047901}
+  playerTransform: {fileID: 1038762808}
 --- !u!4 &1061846068
 Transform:
   m_ObjectHideFlags: 0

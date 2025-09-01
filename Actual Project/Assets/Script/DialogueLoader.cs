@@ -37,7 +37,7 @@ public class DialogueLoader : MonoBehaviour
 
         }
                 
-        if (currentScene.Equals("PrimaryLevelEvidence", StringComparison.OrdinalIgnoreCase))
+        else if (currentScene.Equals("PrimaryLevelEvidence", StringComparison.OrdinalIgnoreCase))
         {
             LoadDemo(15, 3, false);
         }

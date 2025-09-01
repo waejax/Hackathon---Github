@@ -52,7 +52,7 @@ public class ChatManager : MonoBehaviour
     }
 
 
-    public void CreateMessage(string message, bool isUser)
+    /*public void CreateMessage(string message, bool isUser)
     {
         GameObject prefab = isUser ? userMessage : botMessage;
         GameObject newMessage = Instantiate(prefab, contentTransform);
@@ -63,7 +63,24 @@ public class ChatManager : MonoBehaviour
         // Force UI to update and scroll to bottom
         Canvas.ForceUpdateCanvases();
         scrollRect.verticalNormalizedPosition = 0f;
+    }*/
+
+    public void CreateMessage(string message, bool isUser)
+    {
+        GameObject prefab = isUser ? userMessage : botMessage;
+        GameObject newMessage = Instantiate(prefab, contentTransform);
+
+        TMP_Text messageTMP = newMessage.GetComponentInChildren<TMP_Text>();
+        messageTMP.text = message;
+
+        // Force layout rebuild so the container resizes
+        LayoutRebuilder.ForceRebuildLayoutImmediate(newMessage.GetComponent<RectTransform>());
+
+        // Update Scroll
+        Canvas.ForceUpdateCanvases();
+        scrollRect.verticalNormalizedPosition = 0f;
     }
+
 
     System.Collections.IEnumerator RespondWithBot(string userInput)
     {

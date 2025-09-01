@@ -69,7 +69,7 @@ public class DialogueManager : MonoBehaviour
         {
             dialogRectTransform.sizeDelta = infoDialogSize;
 
-            if (currentScene == "GameDemo" || currentScene == "PrimaryLevelEvidence")
+            if (currentScene == "GameDemo")
             {
                 dialogRectTransform.anchorMin = new Vector2(0.5f, 0.5f);
                 dialogRectTransform.anchorMax = new Vector2(0.5f, 0.5f);

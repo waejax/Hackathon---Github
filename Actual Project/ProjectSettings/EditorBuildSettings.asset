@@ -30,6 +30,9 @@ EditorBuildSettings:
     path: Assets/Scenes/SecondaryLevel.unity
     guid: a878d27f0e41e1041921fab88d9def78
   - enabled: 1
+    path: Assets/Scenes/SecondaryLevelEvidence.unity
+    guid: 7ef9578481c368d458c1bfcd194f8d1d
+  - enabled: 1
     path: Assets/Scenes/UniLevel.unity
     guid: 6d1e3cd7c423d1f43a638570cd73c328
   - enabled: 1

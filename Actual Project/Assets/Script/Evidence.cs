@@ -20,7 +20,7 @@ public class Evidence : MonoBehaviour
     void Update()
     {
 
-        if (evidenceCount >= 2 && !doorDestroyed)
+        if (evidenceCount >= 3 && !doorDestroyed)
         {
             doorDestroyed = true;
 
@@ -46,7 +46,7 @@ public class Evidence : MonoBehaviour
 
         if (evidenceCount == 1)
         {
-            DialogueLoader dialogueLoader = FindObjectOfType<DialogueLoader>();
+            DialogueLoader dialogueLoader = FindFirstObjectByType<DialogueLoader>();
             if (dialogueLoader != null)
             {
                 dialogueLoader.onEvidenceIncrease();

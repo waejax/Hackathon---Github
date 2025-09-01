@@ -67,12 +67,22 @@ public class LoginManager : MonoBehaviour
             {
                 // Response format: userID|lastScene
                 string[] parts = response.Split('|');
-                if (parts.Length >= 2)
+                if (parts.Length >= 3)
                 {
                     GameManager.Instance.userID = int.Parse(parts[0]);
                     string lastScene = parts[1];
+                    string role = parts[2].ToLower();
 
-                    SceneManager.LoadScene(lastScene);
+                    if (role == "user")
+                    {
+                        SceneManager.LoadScene("GameDemo");
+                    }
+                    else if (role == "admin")
+                    {
+                        SceneManager.LoadScene("ad-allPlayers");
+                    }
+
+                    //SceneManager.LoadScene(lastScene);
                 }
                 else
                 {

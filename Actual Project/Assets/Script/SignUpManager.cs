@@ -60,6 +60,7 @@ public class SignUpManager : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("emailPost", email);
         form.AddField("passwordPost", password);
+        form.AddField("rolePost", "user");
 
         UnityWebRequest www = UnityWebRequest.Post(signupURL, form);
         yield return www.SendWebRequest();

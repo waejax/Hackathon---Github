@@ -14,16 +14,28 @@ if ($conn->connect_error) {
     exit;
 }
 
-$sql = "SELECT userID, email, points, moralityScore FROM user ORDER BY moralityScore DESC";
-$result = $conn->query($sql);
+$sqlLeader = "SELECT userID, email, points, moralityScore FROM user ORDER BY moralityScore DESC";
+$resultLeader = $conn->query($sqlLeader);
 
 $leaders = array();
 
-while ($row = $result->fetch_assoc()) {
+while ($row = $resultLeader->fetch_assoc()) {
     $leaders[] = $row;
 }
 
-echo json_encode($leaders);
+$sqlStats = "SELECT count(*) as total,
+    AVG(moralityScore) as avgScore
+    from user";
+
+$statsResult = $conn->query($sqlStats);
+$stats = $statsResult->fetch_assoc();
+
+$response = [
+    "leaders" => $leaders,
+    "stats" => $stats
+];
+
+echo json_encode($response);
 
 $conn-> close();
 ?>

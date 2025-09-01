@@ -6,11 +6,10 @@ using System.Collections.Generic;
 using System;
 using UnityEngine.SceneManagement;
 
-public class DialogueLoader : MonoBehaviour
+public class PrimaryLevelDialogueLoader : MonoBehaviour
 {
     public string demoURL = "http://localhost/hackathon/demo.php";
-    public string infoURL = "http://localhost/hackathon/info.php";
-    public string primaryURL = "http://localhost/hackathon/primarylevel.php";
+    public string primaryURL = "http://localhost/hackathon/primary.php";
     List<string> allDemo;
     List<string> allInfo;
     public int demoStart = 0;
@@ -19,9 +18,6 @@ public class DialogueLoader : MonoBehaviour
     private string currentScene;
     public GameObject demoPlayer;
     public GameObject player;
-    private List<string> collectedInfo = new List<string>();
-    private static DialogueLoader instance;
-
     // 🔹 Your PHP endpoint
     private string updateLastSceneURL = "http://localhost/hackathon/update_last_scene.php";
 
@@ -30,29 +26,10 @@ public class DialogueLoader : MonoBehaviour
     {
         currentScene = SceneManager.GetActiveScene().name;
         StartCoroutine(UpdateLastSceneInDB(lastScene));
-
+        
         if (currentScene.Equals("GameDemo", StringComparison.OrdinalIgnoreCase))
         {
-            LoadDemo(0, 7, false);
-
-        }
-                
-        if (currentScene.Equals("PrimaryLevelEvidence", StringComparison.OrdinalIgnoreCase))
-        {
-            LoadDemo(15, 3, false);
-        }
-    }
-
-    void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
+            LoadDemo(demoStart, demoLineCount);
         }
     }
 
@@ -98,14 +75,14 @@ public class DialogueLoader : MonoBehaviour
         }
     }
 
-    public IEnumerator GetInfoDialog(GameObject infoIcon, playerMove movementScript,string URL)
+    public IEnumerator GetInfoDialog(GameObject infoIcon, playerMove movementScript)
     {
         if (movementScript != null)
         {
             movementScript.enabled = false;
         }
 
-        UnityWebRequest www = UnityWebRequest.Get(URL);
+        UnityWebRequest www = UnityWebRequest.Get(primaryURL);
         yield return www.SendWebRequest();
 
         if (www.result == UnityWebRequest.Result.Success)
@@ -121,12 +98,7 @@ public class DialogueLoader : MonoBehaviour
             if (dialog.Lines != null && dialog.Lines.Count > 0)
             {
                 string fullInfo = dialog.Lines[0];
-                List<string> splitSentences = SplitIntoSentences(fullInfo);
-
-                if (!collectedInfo.Contains(fullInfo))
-                {
-                    collectedInfo.Add(fullInfo);
-                }
+                List<string> splitSentences = SplitIntoSentences(dialog.Lines[0]);
 
                 yield return StartCoroutine(DialogueManager.Instance.ShowDialog(splitSentences, 0, splitSentences.Count, true, () =>
                 {
@@ -137,9 +109,9 @@ public class DialogueLoader : MonoBehaviour
                         movementScript.enabled = true;
                     }
 
-                    if (currentScene.Equals("GameDemo", StringComparison.OrdinalIgnoreCase))
+                    if (currentScene.Equals("PrimaryLevelEvidence", StringComparison.OrdinalIgnoreCase))
                     {
-                        LoadDemo(7, 2, false);
+                        LoadDemo(5, 2, true);
                     }
                 }));
             }
@@ -154,7 +126,6 @@ public class DialogueLoader : MonoBehaviour
             }
         }
     }
-
 
     private List<string> SplitIntoSentences(string block)
     {
@@ -175,11 +146,10 @@ public class DialogueLoader : MonoBehaviour
 
     public void onEvidenceIncrease()
     {
-        if (currentScene.Equals("GameDemo", StringComparison.OrdinalIgnoreCase))
+        if (currentScene.Equals("PrimaryLevelEvidence", StringComparison.OrdinalIgnoreCase))
         {
-            LoadDemo(9, 6, false);
+            LoadDemo(7, 6, true);
         }
-
     }
 
     public void TriggerNextDialog(int startIndex, int count)
@@ -192,21 +162,7 @@ public class DialogueLoader : MonoBehaviour
 
     public void TriggerInfoDialog(GameObject infoIcon, playerMove movementScript)
     {
-
-        if (currentScene.Equals("PrimaryLevelEvidence", StringComparison.OrdinalIgnoreCase))
-        {
-            StartCoroutine(GetInfoDialog(infoIcon, movementScript, primaryURL));
-        }
-        else
-        {
-            StartCoroutine(GetInfoDialog(infoIcon, movementScript, infoURL));
-        }
-
-    }
-
-    public List<string> getCollectedInfo()
-    {
-        return collectedInfo;
+        StartCoroutine(GetInfoDialog(infoIcon, movementScript));
     }
 
     IEnumerator UpdateLastSceneInDB(string sceneName)

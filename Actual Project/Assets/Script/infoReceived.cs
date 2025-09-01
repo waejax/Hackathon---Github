@@ -3,8 +3,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using System.Collections;
-using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using System.Linq;
 
 public class infoReceived : MonoBehaviour, IPointerClickHandler
 {
@@ -12,12 +12,15 @@ public class infoReceived : MonoBehaviour, IPointerClickHandler
     public Text incidentText;
     public Text peopleText;
     public Text corruptionText;
+    public Text matchText;
 
     public GameObject detailPopup;
     public Text detailText;
-
+    public InputField searchInput;
 
     private List<Report> currentReports;
+    private List<Report> allReports;
+    private List<string> evidenceLink = new List<string>();
 
     [System.Serializable]
     public class Report
@@ -32,6 +35,7 @@ public class infoReceived : MonoBehaviour, IPointerClickHandler
         public string position;
         public string peopleNo;
         public string peopleIc;
+        public string evidence;
     }
 
     [System.Serializable]
@@ -43,6 +47,23 @@ public class infoReceived : MonoBehaviour, IPointerClickHandler
     void Start()
     {
         StartCoroutine(LoadReports());
+    }
+
+    public void OnSearch()
+    {
+        string query = searchInput.text.Trim().ToLower();
+
+        if (string.IsNullOrEmpty(query))
+        {
+            DisplayReport(allReports);
+            return;
+        }
+
+        List<Report> filtered = allReports
+        .Where(report => report.incident.ToLower().Contains(query) || report.people.ToLower().Contains(query) || report.corruption.ToLower().Contains(query))
+        .ToList();
+
+        DisplayReport(filtered);
     }
 
     IEnumerator LoadReports()
@@ -60,7 +81,8 @@ public class infoReceived : MonoBehaviour, IPointerClickHandler
 
             ReportList reportList = JsonUtility.FromJson<ReportList>(json);
 
-            DisplayReport(reportList.reports);
+            allReports = reportList.reports;
+            DisplayReport(allReports);
         }
         else
         {
@@ -88,26 +110,62 @@ public class infoReceived : MonoBehaviour, IPointerClickHandler
             incidentText.text = "No report Received";
             peopleText.text = "";
             corruptionText.text = "";
+            matchText.text = "No match";
+        }
+        else
+        {
+            matchText.text = $"{reports.Count} records found";
         }
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Vector2 localMousePos;
+        if (detailPopup.activeSelf)
+        {
+            Vector2 localMousePos;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                detailText.rectTransform,
+                eventData.position,
+                eventData.pressEventCamera,
+                out localMousePos
+            );
+
+            float pivotOffsetY = detailText.rectTransform.rect.height * detailText.rectTransform.pivot.y;
+            float yFromTop = pivotOffsetY - localMousePos.y;
+
+            float lineHeight = detailText.fontSize * detailText.lineSpacing;
+            int clickedLine = Mathf.FloorToInt(yFromTop / lineHeight);
+
+            Debug.Log($"Clicked detail line: {clickedLine}");
+
+            string[] lines = detailText.text.Split('\n');
+            int evidenceStartLine = System.Array.IndexOf(lines, "Evidence File(s):") + 1;
+
+            int evidenceIndex = clickedLine - evidenceStartLine;
+
+            if (evidenceIndex >= 0 && evidenceIndex < evidenceLink.Count)
+            {
+                Debug.Log($"Opening link: {evidenceLink[evidenceIndex]}");
+                Application.OpenURL(evidenceLink[evidenceIndex]);
+                return;
+            }
+        }
+
+        Vector2 localMousePosIncident;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             incidentText.rectTransform,
             eventData.position,
             eventData.pressEventCamera,
-            out localMousePos
+            out localMousePosIncident
         );
 
-        float pivotOffsetY = incidentText.rectTransform.rect.height * incidentText.rectTransform.pivot.y;
+        float pivotOffsetYIncident = incidentText.rectTransform.rect.height * incidentText.rectTransform.pivot.y;
 
-        float yFromTop = pivotOffsetY - localMousePos.y;
+        float yFromTopIncident = pivotOffsetYIncident - localMousePosIncident.y;
 
-        float lineHeight = incidentText.fontSize * incidentText.lineSpacing;
+        float lineHeightIncident = incidentText.fontSize * incidentText.lineSpacing;
 
-        int clickedIndex = Mathf.FloorToInt(yFromTop / lineHeight);
+        int clickedIndex = Mathf.FloorToInt(yFromTopIncident / lineHeightIncident);
 
         Debug.Log($"Clicked line: {clickedIndex}");
 
@@ -122,7 +180,9 @@ public class infoReceived : MonoBehaviour, IPointerClickHandler
     {
         detailPopup.SetActive(true);
 
-        detailText.text =
+        string baseURL = "http://localhost/hackathon/";
+
+        string detailInfo =
         $"Subject: {report.subject}\n" +
         $"Incident: {report.incident}\n" +
         $"Source of Info: {report.info}\n" +
@@ -131,7 +191,31 @@ public class infoReceived : MonoBehaviour, IPointerClickHandler
         $"Address: {report.peopleAddress}\n" +
         $"Position: {report.position}\n" +
         $"Number: {report.peopleNo}\n" +
-        $"IC: {report.peopleIc}\n";
+        $"IC: {report.peopleIc}\n\n" +
+
+        $"Evidence File(s):\n";
+
+        if (!string.IsNullOrEmpty(report.evidence))
+        {
+            string[] evidenceFiles = report.evidence.Split(',');
+
+            for (int i = 0; i < evidenceFiles.Length; i++)
+            {
+                string filename = evidenceFiles[i].Trim();
+                if (!string.IsNullOrEmpty(filename))
+                {
+                    string fullUrl = baseURL + filename;
+                    evidenceLink.Add(fullUrl);
+                    detailInfo += $"{i + 1}. {filename}\n";
+                }
+            }
+        }
+        else
+        {
+            detailInfo += "No evidence files submitted.";
+        }
+
+        detailText.text = detailInfo;
     }
 
     public void ClosePopup()

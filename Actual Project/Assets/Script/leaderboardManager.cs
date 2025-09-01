@@ -5,14 +5,16 @@ using UnityEngine.Networking;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
-using Unity.VisualScripting;
+using System.Linq;
 
 public class leaderboardManager : MonoBehaviour, IPointerClickHandler
 {
     public string leaderboardURL = "http://localhost/hackathon/leaderboard.php";
     public Text emailText;
     public Text scoreText;
+    public InputField searchInput;
     private List<Leader> currentLeaders;
+    private List<Leader> allLeaders;
 
 
     [System.Serializable]
@@ -28,11 +30,39 @@ public class leaderboardManager : MonoBehaviour, IPointerClickHandler
     public class LeaderList
     {
         public List<Leader> leaders;
+        public Stats stats;
+    }
+
+    [System.Serializable]
+    public class Stats
+    {
+        public int total;
+        public float avgScore;
     }
 
     void Start()
     {
         StartCoroutine(LoadLeaderboard());
+    }
+
+    public void OnSearch()
+    {
+        string query = searchInput.text.Trim().ToLower();
+
+        if (string.IsNullOrEmpty(query))
+        {
+            DisplayLeaderboard(allLeaders);
+            return;
+        }
+
+        List<Leader> filtered = allLeaders
+            .Where(leader =>
+                (!string.IsNullOrEmpty(leader.email) && leader.email.ToLower().Contains(query)) ||
+                (!string.IsNullOrEmpty(leader.moralityScore) && leader.moralityScore.ToLower().Contains(query))
+            )
+            .ToList();
+
+        DisplayLeaderboard(filtered);
     }
 
     IEnumerator LoadLeaderboard()
@@ -45,12 +75,10 @@ public class leaderboardManager : MonoBehaviour, IPointerClickHandler
             string json = www.downloadHandler.text;
             Debug.Log("Json from php: " + json);
 
-            json = "{\"leaders\":" + json + "}";
-            Debug.Log("wrraped json: " + json);
-
             LeaderList leaderList = JsonUtility.FromJson<LeaderList>(json);
 
-            DisplayLeaderboard(leaderList.leaders);
+            allLeaders = leaderList.leaders;
+            DisplayLeaderboard(allLeaders);
         }
         else
         {
@@ -97,6 +125,14 @@ public class leaderboardManager : MonoBehaviour, IPointerClickHandler
         if (clickedIndex >= 0 && clickedIndex < currentLeaders.Count)
         {
             Leader selectedLeader = currentLeaders[clickedIndex];
+
+            List<Leader> sortedLeader = allLeaders.OrderByDescending(l =>
+                int.Parse(l.moralityScore)).ToList();
+
+            int rank = sortedLeader.FindIndex(l => l.email == selectedLeader.email) + 1;
+
+            PlayerPrefs.SetInt("SelectedPlayerRank", rank);
+            
             PlayerPrefs.SetString("SelectedPlayerEmail", selectedLeader.email);
             PlayerPrefs.SetString("SelectedPlayerUserID", selectedLeader.userID);
             PlayerPrefs.SetString("SelectedPlayerPoints", selectedLeader.points);

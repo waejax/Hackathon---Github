@@ -39,8 +39,30 @@ $position = $conn->real_escape_string($position);
 $corruption = $conn->real_escape_string($corruption);
 $info = $conn->real_escape_string($info);
 
-$sql = "INSERT INTO report (subject, incident, info, corruption, people, peopleAddress, position, peopleNo, peopleIc) VALUES
-    ('$subject', '$incident', '$info', '$corruption', '$name', '$address', '$position', '$number', '$ic')";
+$uploadDir = "uploads/";
+if (!is_dir($uploadDir)) {
+    mkdir($uploadDir, 0777, true);
+}
+
+$storedPaths = [];
+foreach ($_FILES as $key => $file)
+{
+    if (strpos($key, 'evidence') === 0 && $file['error'] == UPLOAD_ERR_OK)
+    {
+        $tmp = $file['tmp_name'];
+        $orig = basename($file['name']);
+        $newName = time() . "_" . uniqid() . "_" . $orig;
+        $dest = $uploadDir . $newName;
+
+        if (move_uploaded_file($tmp, $dest))
+            $storedPaths[] = $dest;
+    }
+}
+
+$evidenceField = $conn->real_escape_string(implode(',', $storedPaths));
+
+$sql = "INSERT INTO report (subject, incident, info, corruption, people, peopleAddress, position, peopleNo, peopleIc, evidence) VALUES
+    ('$subject', '$incident', '$info', '$corruption', '$name', '$address', '$position', '$number', '$ic', '$evidenceField')";
 
 if ($conn->query($sql) == TRUE) {
     echo "New record created successfully";

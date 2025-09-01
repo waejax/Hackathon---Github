@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -62,25 +63,53 @@ public class DialogueManager : MonoBehaviour
         currentLine = startIndex;
         endLine = Mathf.Min(startIndex + count, fullDialog.Count);
 
+        string currentScene = SceneManager.GetActiveScene().name;
+
         if (isInfoDialogue)
         {
             dialogRectTransform.sizeDelta = infoDialogSize;
 
-            Vector3 worldPos = playerTransform.position + new Vector3(-15.5f, -2f, 0);
-            //Vector3 worldPos = playerTransform.position + new Vector3(0f, 1f, 0);
-            Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
+            if (currentScene == "GameDemo" || currentScene == "PrimaryLevelEvidence")
+            {
+                dialogRectTransform.anchorMin = new Vector2(0.5f, 0.5f);
+                dialogRectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+                dialogRectTransform.pivot = new Vector2(0.5f, 0.5f);
+                dialogRectTransform.anchoredPosition = Vector2.zero;
 
-            Vector2 localPoint;
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(dialogRectTransform.parent as RectTransform, screenPos, null, out localPoint);
+                continueTextRect.anchorMin = new Vector2(1f, 0f);
+                continueTextRect.anchorMax = new Vector2(1f, 0f);
+                continueTextRect.pivot = new Vector2(1f, 0f);
+                continueTextRect.anchoredPosition = new Vector2(-20, 10);
+            }
+            else
+            {
+                Vector3 worldPos = playerTransform.position + new Vector3(-15.5f, -2f, 0);
+                //Vector3 worldPos = playerTransform.position + new Vector3(0f, 1f, 0);
+                Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
 
-            dialogRectTransform.localPosition = localPoint;
+                Vector2 localPoint;
+                RectTransformUtility.ScreenPointToLocalPointInRectangle(dialogRectTransform.parent as RectTransform, screenPos, null, out localPoint);
 
-            continueTextRect.localPosition = new Vector3(infoDialogSize.x / 2 - 10, 10, 0);
+                dialogRectTransform.localPosition = localPoint;
+
+                continueTextRect.localPosition = new Vector3(infoDialogSize.x / 2 - 10, 10, 0);
+            }
         }
         else
         {
             dialogRectTransform.sizeDelta = originalSize;
-            dialogBox.transform.localPosition = originalPos;
+
+            if (currentScene == "GameDemo")
+            {
+                dialogRectTransform.anchorMin = new Vector2(0.5f, 0);
+                dialogRectTransform.anchorMax = new Vector2(0.5f, 0);
+                dialogRectTransform.pivot = new Vector2(0, 0);
+                dialogRectTransform.anchoredPosition = new Vector2(-83.9084f, 193.89f);
+            }
+            else
+            {
+                dialogBox.transform.localPosition = originalPos;
+            }
 
             continueTextRect.localPosition = originalContinuePos;
         }
@@ -109,7 +138,7 @@ public class DialogueManager : MonoBehaviour
             currentLine++;
 
             continueText.text = "";
-            
+
             if (currentLine < endLine)
             {
                 StartCoroutine(TypeDialog(fullDialog[currentLine]));
@@ -122,6 +151,14 @@ public class DialogueManager : MonoBehaviour
                 OnCloseDialog?.Invoke();
             }
         }
+        else if (Input.GetKeyDown(KeyCode.E) && isTyping)
+        {
+            StopAllCoroutines();
+            dialogText.text = fullDialog[currentLine];
+            isTyping = false;
+            continueText.text = "Press Z to continue";
+        }
+        
     }
 
     public IEnumerator TypeDialog(string line)

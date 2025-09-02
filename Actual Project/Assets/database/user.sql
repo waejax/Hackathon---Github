@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 12, 2025 at 08:52 AM
+-- Generation Time: Sep 02, 2025 at 04:49 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.1.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,6 +31,7 @@ CREATE TABLE `user` (
   `userID` int(100) NOT NULL,
   `email` varchar(500) NOT NULL,
   `password` varchar(50) NOT NULL,
+  `role` varchar(50) NOT NULL DEFAULT 'user',
   `points` int(100) NOT NULL,
   `moralityScore` int(100) NOT NULL,
   `lastScene` varchar(30) DEFAULT NULL
@@ -40,12 +41,15 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`userID`, `email`, `password`, `points`, `moralityScore`, `lastScene`) VALUES
-(1, 'ummi@gmail.com', 'hackathon', 0, 0, NULL),
-(2, 'raudhah@gmail.com', 'hackathon', 0, 0, NULL),
-(3, 'waezul@gmail.com', 'hackathon', 0, 0, NULL),
-(4, 'adam@gmail.com', 'hackathon', 0, 0, NULL),
-(5, 'lily@gmail.com', 'hackathon', 0, 0, NULL);
+INSERT INTO `user` (`userID`, `email`, `password`, `role`, `points`, `moralityScore`, `lastScene`) VALUES
+(1, 'ummi@gmail.com', 'hackathon', 'admin', 0, 0, 'PrimaryLevelEvidence'),
+(2, 'raudhah@gmail.com', 'hackathon', 'admin', 0, 0, ''),
+(3, 'waezul@gmail.com', 'hackathon', 'admin', 0, 0, NULL),
+(4, 'adam@gmail.com', 'hackathon', 'user', 0, 0, NULL),
+(5, 'lily@gmail.com', 'hackathon', 'user', 0, 0, NULL),
+(6, 'tasya@gmail.com', 'hi', 'user', 0, 0, NULL),
+(7, 'muni@gmail.com', 'hi', 'user', 0, 0, NULL),
+(8, 'hi@gmail.com', 'hi', 'user', 0, 25, 'WorkLevel');
 
 --
 -- Indexes for dumped tables
@@ -65,7 +69,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `userID` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `userID` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

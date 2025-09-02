@@ -14,7 +14,7 @@ if ($conn->connect_error) {
     exit;
 }
 
-$sqlLeader = "SELECT userID, email, points, moralityScore FROM user ORDER BY moralityScore DESC";
+$sqlLeader = "SELECT userID, email, points, moralityScore FROM user WHERE role = 'user' ORDER BY moralityScore DESC";
 $resultLeader = $conn->query($sqlLeader);
 
 $leaders = array();
@@ -25,7 +25,7 @@ while ($row = $resultLeader->fetch_assoc()) {
 
 $sqlStats = "SELECT count(*) as total,
     AVG(moralityScore) as avgScore
-    from user";
+    from user WHERE role = 'user'";
 
 $statsResult = $conn->query($sqlStats);
 $stats = $statsResult->fetch_assoc();

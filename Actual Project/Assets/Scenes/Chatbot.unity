@@ -1785,7 +1785,7 @@ GameObject:
   - component: {fileID: 1809616447}
   - component: {fileID: 1809616446}
   m_Layer: 0
-  m_Name: APImanger
+  m_Name: APImanager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

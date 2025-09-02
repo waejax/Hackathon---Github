@@ -14,13 +14,14 @@ public class DialogueLoader : MonoBehaviour
     List<string> allDemo;
     List<string> allInfo;
     public int demoStart = 0;
-    public int demoLineCount = 5;
+    public int demoLineCount = 4;
     [SerializeField] private string lastScene;
     private string currentScene;
     public GameObject demoPlayer;
     public GameObject player;
     private List<string> collectedInfo = new List<string>();
     private static DialogueLoader instance;
+    public GameObject infoIcon;
 
     // 🔹 Your PHP endpoint
     private string updateLastSceneURL = "http://localhost/hackathon/update_last_scene.php";
@@ -34,10 +35,14 @@ public class DialogueLoader : MonoBehaviour
 
         if (currentScene.Equals("GameDemo", StringComparison.OrdinalIgnoreCase))
         {
-            LoadDemo(0, 7, false);
+            LoadDemo(0, 4, false);
 
         }
-                
+        else if (currentScene.Equals("instruction", StringComparison.OrdinalIgnoreCase))
+        {
+            LoadDemo(4, 4, false);
+        }
+
         else if (currentScene.Equals("PrimaryLevelEvidence", StringComparison.OrdinalIgnoreCase))
         {
             LoadDemo(15, 3, true);
@@ -90,6 +95,7 @@ public class DialogueLoader : MonoBehaviour
                 {
                     demoPlayer.SetActive(false);
                     player.SetActive(true);
+                    infoIcon.SetActive(false);
                 }
             });
         }

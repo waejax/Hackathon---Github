@@ -8,7 +8,7 @@ public class OpenAIChatAPI : MonoBehaviour
     public string apiKey = "your_deepseek_api_key_here";
 
     [Header("References")]
-    public ChatManager chatManager;
+    public ChatBotManager chatManager;
 
     private string endpoint = "https://api.deepseek.com/v1/chat/completions";
 
@@ -45,11 +45,11 @@ public class OpenAIChatAPI : MonoBehaviour
                 string jsonResponse = request.downloadHandler.text;
                 OpenAIResponse response = JsonUtility.FromJson<OpenAIResponse>(jsonResponse);
                 string aiReply = response.choices[0].message.content.Trim();
-                chatManager.CreateMessage(aiReply, false);
+                chatManager.AddMessage(aiReply, false);
             }
             else
             {
-                chatManager.CreateMessage("Error: " + request.error + "\n" + request.downloadHandler.text, false);
+                chatManager.AddMessage("Error: " + request.error + "\n" + request.downloadHandler.text, false);
             }
         }
     }

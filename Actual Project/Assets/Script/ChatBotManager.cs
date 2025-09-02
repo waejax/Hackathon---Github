@@ -1,19 +1,31 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Collections;
+using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class ChatBotManager : MonoBehaviour
 {
+    [Header("UI References")]
     public RectTransform messagesContent;
     public ScrollRect scrollRect;
     public TMP_InputField inputField;
     public Button sendButton;
-    public GameObject messagePrefab;
+    public Button closeButton;
+
+    [Header("Prefabs")]
+    public GameObject userMessagePrefab;
+    public GameObject botMessagePrefab;
+
+    [Header("DeepSeek API")]
+    public OpenAIChatAPI openAIChatAPI; // reference to your existing script
 
     void Start()
     {
         sendButton.onClick.AddListener(OnSend);
+
+        // Assign Exit button action
+        closeButton.onClick.AddListener(OnCloseButtonClicked);
     }
 
     void OnSend()
@@ -21,32 +33,40 @@ public class ChatBotManager : MonoBehaviour
         string text = inputField.text.Trim();
         if (string.IsNullOrEmpty(text)) return;
 
-        AddMessage(text, true);
         inputField.text = "";
 
-        // Simulate bot reply
-        StartCoroutine(FakeBotReply(text));
+        // Add user message immediately
+        AddMessage(text, true);
+
+        // Send message to your OpenAIChatAPI
+        openAIChatAPI.SendMessageToOpenAI(text);
     }
 
-    void AddMessage(string text, bool isUser)
+    public void AddMessage(string text, bool isUser)
     {
-        var go = Instantiate(messagePrefab, messagesContent);
-        var ui = go.GetComponent<MessageUI>();
-        ui.Setup(text, isUser);
+        var prefab = isUser ? userMessagePrefab : botMessagePrefab;
+        GameObject go = Instantiate(prefab, messagesContent);
+        go.GetComponent<MessageUI>().Setup(text);
 
+        // Force layout to update immediately so the next message stacks properly
+        LayoutRebuilder.ForceRebuildLayoutImmediate(go.GetComponent<RectTransform>());
+        LayoutRebuilder.ForceRebuildLayoutImmediate(messagesContent);
+
+        // Scroll to bottom
         Canvas.ForceUpdateCanvases();
-        StartCoroutine(ScrollToBottom());
-    }
-
-    IEnumerator ScrollToBottom()
-    {
-        yield return null;
         scrollRect.verticalNormalizedPosition = 0f;
     }
 
-    IEnumerator FakeBotReply(string userText)
+    void OnCloseButtonClicked()
     {
-        yield return new WaitForSeconds(1f);
-        AddMessage("Echo: " + userText, false);
+        if (GameManager.Instance != null && !string.IsNullOrEmpty(GameManager.Instance.chatbotReturnScene))
+        {
+            SceneManager.LoadScene(GameManager.Instance.chatbotReturnScene);
+        }
+        else
+        {
+            Debug.LogWarning("GameManager.Instance or chatbotReturnScene not set. Returning to Start scene.");
+            SceneManager.LoadScene("Start");
+        }
     }
 }

@@ -1061,7 +1061,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &332402131
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1607,7 +1607,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &467935225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1615,7 +1615,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 467935224}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a50367fb2b059a4da0a372df33d6027, type: 3}
   m_Name: 
@@ -1666,7 +1666,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 467935224}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -1781,8 +1781,8 @@ Transform:
   m_GameObject: {fileID: 467935224}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.49, y: -5.77, z: 0}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
+  m_LocalPosition: {x: -19.84, y: 1.27, z: 0}
+  m_LocalScale: {x: 6.5820003, y: 6.5820003, z: 2.6328}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2963,7 +2963,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87c4b2c620e9a2a4dac449a510ce4aeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextSceneName: instruction
+  nextSceneName: PrimaryLevelEvidence
 --- !u!1 &1336130169
 GameObject:
   m_ObjectHideFlags: 0
@@ -2990,7 +2990,7 @@ Transform:
   m_GameObject: {fileID: 1336130169}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -289.5927, y: -160.71, z: 0}
+  m_LocalPosition: {x: -289.5927, y: -160.8575, z: 0}
   m_LocalScale: {x: 2.227099, y: 2.4396567, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3447,10 +3447,11 @@ MonoBehaviour:
   infoURL: http://localhost/hackathon/info.php
   primaryURL: http://localhost/hackathon/primarylevel.php
   demoStart: 0
-  demoLineCount: 4
+  demoLineCount: 5
   lastScene: 
   demoPlayer: {fileID: 332402130}
   player: {fileID: 348047892}
+  infoIcon: {fileID: 467935224}
 --- !u!1 &1544481192
 GameObject:
   m_ObjectHideFlags: 0
@@ -3579,7 +3580,7 @@ Transform:
   m_GameObject: {fileID: 1544481192}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.5199995, y: -11.46, z: 0}
+  m_LocalPosition: {x: -4.5199995, y: -11.114327, z: 0}
   m_LocalScale: {x: 45, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4580,7 +4581,7 @@ Transform:
   m_GameObject: {fileID: 1977104281}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 282.89413, y: 156.88432, z: 0}
+  m_LocalPosition: {x: 282.89413, y: 157.23, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

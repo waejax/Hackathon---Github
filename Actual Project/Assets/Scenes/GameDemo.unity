@@ -3451,6 +3451,7 @@ MonoBehaviour:
   lastScene: 
   demoPlayer: {fileID: 332402130}
   player: {fileID: 348047892}
+  infoIcon: {fileID: 467935224}
 --- !u!1 &1544481192
 GameObject:
   m_ObjectHideFlags: 0

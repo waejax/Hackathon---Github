@@ -28,25 +28,45 @@ public class DialogueLoader : MonoBehaviour
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void onSceneLoad(Scene scene, LoadSceneMode mode)
     {
-        currentScene = SceneManager.GetActiveScene().name;
+        currentScene = scene.name;
         StartCoroutine(UpdateLastSceneInDB(lastScene));
 
         if (currentScene.Equals("GameDemo", StringComparison.OrdinalIgnoreCase))
         {
-            LoadDemo(0, 4, false);
+            StartCoroutine(GameDemoDialog());
 
         }
         else if (currentScene.Equals("instruction", StringComparison.OrdinalIgnoreCase))
         {
-            LoadDemo(4, 4, false);
+            StartCoroutine(instructionDialog());
         }
 
         else if (currentScene.Equals("PrimaryLevelEvidence", StringComparison.OrdinalIgnoreCase))
         {
             LoadDemo(15, 3, true);
         }
+    }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += onSceneLoad;
+    }
+
+    private IEnumerator GameDemoDialog()
+    {
+        yield return StartCoroutine(GetDemoDialog(0, 4, false));
+        yield return new WaitForSeconds(5f);
+        yield return StartCoroutine(GetDemoDialog(4, 1, false));
+    }
+
+    private IEnumerator instructionDialog()
+    {
+        yield return StartCoroutine(GetDemoDialog(5, 4, false));
+        yield return new WaitForSeconds(5f);
+        yield return StartCoroutine(GetDemoDialog(9, 1, false));
+        SceneManager.LoadScene("PrimaryLevelEvidence");
     }
 
       void Awake()

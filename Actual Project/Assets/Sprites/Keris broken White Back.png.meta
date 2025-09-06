@@ -1,28 +1,22 @@
 fileFormatVersion: 2
-guid: 38e07ffc508128d4d98e6cb520b78f1d
+guid: 788e96482785a7f4993d63196a39fb57
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 426157795023456325
-    second: Keris Broken 1_0
+      213: 4513235920626460239
+    second: Keris broken White Back_0
   - first:
-      213: -1157719506795710422
-    second: Keris Broken 1_1
+      213: -3490272899764261395
+    second: Keris broken White Back_1
   - first:
-      213: 4473367627212335974
-    second: Keris Broken 1_2
+      213: 6449049411949017435
+    second: Keris broken White Back_2
   - first:
-      213: 248933927703000733
-    second: Keris Broken 1_3
+      213: 2037962059339583567
+    second: Keris broken White Back_3
   - first:
-      213: 3531429700285573698
-    second: Keris Broken 1_4
-  - first:
-      213: -4942624791789977020
-    second: Keris Broken 1_5
-  - first:
-      213: 7402866372212640642
-    second: Keris Broken 1_6
+      213: 8235702133144727624
+    second: Keris broken White Back_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -55,7 +49,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -69,7 +63,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 64
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -93,7 +87,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -131,13 +125,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Keris Broken 1_0
+      name: Keris broken White Back_0
       rect:
         serializedVersion: 2
-        x: 19
-        y: 65
-        width: 20
-        height: 63
+        x: 99
+        y: 329
+        width: 92
+        height: 307
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -146,20 +140,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 54803a6b1440ae500800000000000000
-      internalID: 426157795023456325
+      spriteID: f46297c582c32ae30800000000000000
+      internalID: 4513235920626460239
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Keris Broken 1_1
+      name: Keris broken White Back_1
       rect:
         serializedVersion: 2
-        x: 92
-        y: 92
-        width: 10
-        height: 16
+        x: 459
+        y: 459
+        width: 52
+        height: 82
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -168,20 +162,64 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a28b6ef0e34feefe0800000000000000
-      internalID: -1157719506795710422
+      spriteID: dede0683a4f009fc0800000000000000
+      internalID: -3490272899764261395
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Keris Broken 1_2
+      name: Keris broken White Back_2
       rect:
         serializedVersion: 2
-        x: 153
+        x: 764
+        y: 444
+        width: 57
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b59b92a8540af7950800000000000000
+      internalID: 6449049411949017435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Keris broken White Back_3
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 119
+        width: 72
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f40d8a402bb484c10800000000000000
+      internalID: 2037962059339583567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Keris broken White Back_4
+      rect:
+        serializedVersion: 2
+        x: 429
         y: 89
-        width: 11
-        height: 18
+        width: 102
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -190,96 +228,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 66b29b1f728941e30800000000000000
-      internalID: 4473367627212335974
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Keris Broken 1_3
-      rect:
-        serializedVersion: 2
-        x: 39
-        y: 65
-        width: 20
-        height: 23
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d96b74d9614647300800000000000000
-      internalID: 248933927703000733
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Keris Broken 1_4
-      rect:
-        serializedVersion: 2
-        x: 152
-        y: 0
-        width: 20
-        height: 65
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 24a29c22a98220130800000000000000
-      internalID: 3531429700285573698
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Keris Broken 1_5
-      rect:
-        serializedVersion: 2
-        x: 25
-        y: 24
-        width: 14
-        height: 19
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 442c15360f4486bb0800000000000000
-      internalID: -4942624791789977020
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Keris Broken 1_6
-      rect:
-        serializedVersion: 2
-        x: 86
-        y: 18
-        width: 20
-        height: 23
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 28b4b635eb34cb660800000000000000
-      internalID: 7402866372212640642
+      spriteID: 840b40a94771b4270800000000000000
+      internalID: 8235702133144727624
       vertices: []
       indices: 
       edges: []
@@ -298,13 +248,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Keris Broken 1_0: 426157795023456325
-      Keris Broken 1_1: -1157719506795710422
-      Keris Broken 1_2: 4473367627212335974
-      Keris Broken 1_3: 248933927703000733
-      Keris Broken 1_4: 3531429700285573698
-      Keris Broken 1_5: -4942624791789977020
-      Keris Broken 1_6: 7402866372212640642
+      Keris broken White Back_0: 4513235920626460239
+      Keris broken White Back_1: -3490272899764261395
+      Keris broken White Back_2: 6449049411949017435
+      Keris broken White Back_3: 2037962059339583567
+      Keris broken White Back_4: 8235702133144727624
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

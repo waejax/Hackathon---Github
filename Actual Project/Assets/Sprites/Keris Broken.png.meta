@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -103,12 +103,16 @@ TextureImporter:
       name: Keris Broken_0
       rect:
         serializedVersion: 2
+<<<<<<< HEAD
         x: 24
         y: 22
-        width: 52
-        height: 92
+=======
+        x: 100
+        y: 650
+        width: 90
+        height: 305
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -121,11 +125,105 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Keris Broken_1
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 739
+        width: 62
+        height: 97
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d750d2ea83cff9d0800000000000000
+      internalID: -2738255047139764271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Keris Broken_2
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 489
+>>>>>>> 80927d604baa8bbca0027035e4b9c4ea2511613d
+        width: 52
+        height: 92
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+<<<<<<< HEAD
+      spriteID: 9eb9db006247bb0f0800000000000000
+      internalID: -1100157977391948823
+=======
+      spriteID: 1eae5f4a455da6c00800000000000000
+      internalID: 894762035508013793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Keris Broken_3
+      rect:
+        serializedVersion: 2
+        x: 434
+        y: 409
+        width: 102
+        height: 127
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fa8cf97ccd923f70800000000000000
+      internalID: 9165561693197863667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Keris Broken_4
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 169
+        width: 57
+        height: 92
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd2e807f1ee4fd2e0800000000000000
+      internalID: -2098872168912198948
+>>>>>>> 80927d604baa8bbca0027035e4b9c4ea2511613d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 9e85135df69f70a459140f121c952d8d
     internalID: 0
     vertices: []
     indices: 

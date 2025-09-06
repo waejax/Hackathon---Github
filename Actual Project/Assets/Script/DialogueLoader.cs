@@ -21,6 +21,7 @@ public class DialogueLoader : MonoBehaviour
     public GameObject player;
     private List<string> collectedInfo = new List<string>();
     private static DialogueLoader instance;
+    public GameObject shardIcon;
     public GameObject infoIcon;
 
     // 🔹 Your PHP endpoint
@@ -45,7 +46,7 @@ public class DialogueLoader : MonoBehaviour
 
         else if (currentScene.Equals("PrimaryLevelEvidence", StringComparison.OrdinalIgnoreCase))
         {
-            LoadDemo(12, 3, false);
+            LoadDemo(15, 3, false);
         }
     }
 
@@ -181,6 +182,44 @@ public class DialogueLoader : MonoBehaviour
             }
         }
     }
+    public IEnumerator GetShardDialog(int startIndex, int count, bool isInfoDialogue = false)
+    {
+        UnityWebRequest www = UnityWebRequest.Get(primaryURL);
+        yield return www.SendWebRequest();
+
+        if (www.result == UnityWebRequest.Result.Success)
+        {
+            string json = www.downloadHandler.text;
+            Debug.Log("Json from php: " + json);
+
+            json = "{\"Lines\":" + json + "}";
+            Debug.Log("wrraped json: " + json);
+
+            Dialog dialog = JsonUtility.FromJson<Dialog>(json);
+            allDemo = dialog.Lines;
+
+            if (demoPlayer != null)
+            {
+                demoPlayer.SetActive(true);
+                player.SetActive(false);
+            }
+
+            yield return DialogueManager.Instance.ShowDialog(allDemo, startIndex, count, isInfoDialogue, () =>
+            {
+                if (demoPlayer != null)
+                {
+                    demoPlayer.SetActive(false);
+                    player.SetActive(true);
+                    infoIcon.SetActive(false);
+                }
+            });
+        }
+        else
+        {
+            Debug.LogError("Error: " + www.error);
+        }
+    }
+
 
 
     private List<string> SplitIntoSentences(string block)
@@ -231,6 +270,18 @@ public class DialogueLoader : MonoBehaviour
             StartCoroutine(GetInfoDialog(infoIcon, movementScript, gameLevel));
         }
 
+    }
+
+    public void TriggerShardDialog(GameObject infoIcon, playerMove movementScript, string level)
+    {
+        string gameLevel;
+
+        gameLevel = infoURL + "?level=" + Uri.EscapeDataString(level);
+        if (currentScene.Equals("PrimaryLevelEvidence", StringComparison.OrdinalIgnoreCase))
+        {
+            StartCoroutine(GetShardDialog(6, 2, false));
+        }
+        
     }
 
     public List<string> getCollectedInfo()

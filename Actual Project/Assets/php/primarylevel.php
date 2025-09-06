@@ -14,7 +14,7 @@ if ($conn->connect_error) {
     exit;
 }
 
-$sql = "SELECT line FROM primarylevel ORDER BY id ASC LIMIT 1";
+$sql = "SELECT line FROM primarylevel ORDER BY RAND() ASC LIMIT 1";
 $result = $conn->query($sql);
 
 $primary = array();

@@ -42,7 +42,7 @@ public class PrimaryLevelLogic : MonoBehaviour
             resultOption2 = "Your teacher notes your honesty and kindly reminds you to be early next time.",
             scoreOption1 = 10,
             scoreOption2 = 5,
-            nextScene = "SecondaryLevelEvidence"
+            nextScene = "transition"
         };
 
         GameManager.Instance.lieConsequence = new ConsequenceData
@@ -54,7 +54,7 @@ public class PrimaryLevelLogic : MonoBehaviour
             resultOption2 = "The teacher checks the attendance log and catches your lie. You get detention.",
             scoreOption1 = -5,
             scoreOption2 = -10,
-            nextScene = "SecondaryLevelEvidence"
+            nextScene = "transition"
         };
 
         ChatbotButton.onClick.AddListener(() =>

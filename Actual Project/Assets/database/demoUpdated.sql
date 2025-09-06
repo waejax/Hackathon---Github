@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 06, 2025 at 10:51 AM
+-- Generation Time: Sep 06, 2025 at 03:08 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -39,18 +39,18 @@ CREATE TABLE `demo` (
 INSERT INTO `demo` (`id`, `line`) VALUES
 (1, 'Hello, Welcome to Awang Budiman: Leap towards Goodness!'),
 (2, 'I am Awang Budiman, I will be your \'budi\' throughout this game'),
-(3, 'Use the left and right arrow to move, and space bar to jump'),
-(4, 'Now you know how to move along the screen!'),
-(5, 'Move to the right until the end of the screen'),
-(6, 'The icon above the player is an info icon'),
-(7, 'Info icon will help you during the actual game'),
-(8, 'There is a pause button on the top right.'),
-(9, 'Click on the \'information\' tab to see the info you have collected'),
-(10, 'Click on the \'control\' tab to see how the game work'),
-(11, 'I\'ve lost my keris'),
-(12, 'Play the game to help me find it!'),
+(3, 'I\'ve lost my keris. I need your help to find it.'),
+(4, 'Use the left and right arrow to move, and space bar to jump'),
+(5, 'Now you know how to move along the screen!'),
+(6, 'Move to the right until the end of the screen'),
+(7, 'The icon above the player is an info icon'),
+(8, 'Info icon will help you during the actual game'),
+(9, 'There is a pause button on the top right.'),
+(10, 'Click on the \'information\' tab to see the info you have collected'),
+(11, 'Click on the \'control\' tab to see how the game work'),
+(12, 'Now you are ready to help me find my keris!'),
 (13, 'Welcome to the first level.'),
-(14, 'Here in this level, we learn good values.'),
+(14, 'In this level, we learn good values.'),
 (15, 'Hit the info icon to learn more about it!');
 
 --

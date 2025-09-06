@@ -1620,6 +1620,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a50367fb2b059a4da0a372df33d6027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 
 --- !u!114 &467935226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3296,6 +3297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a50367fb2b059a4da0a372df33d6027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 
 --- !u!58 &1395105570
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4011,6 +4013,10 @@ PrefabInstance:
     - target: {fileID: 4005279071029102033, guid: 687ee768169273a46a4e7b2d80af9095, type: 3}
       propertyPath: m_Name
       value: OptionsPopup169
+      objectReference: {fileID: 0}
+    - target: {fileID: 4005279071029102033, guid: 687ee768169273a46a4e7b2d80af9095, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

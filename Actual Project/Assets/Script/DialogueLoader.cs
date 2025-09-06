@@ -217,8 +217,9 @@ public class DialogueLoader : MonoBehaviour
         }
     }
 
-    public void TriggerInfoDialog(GameObject infoIcon, playerMove movementScript)
+    public void TriggerInfoDialog(GameObject infoIcon, playerMove movementScript, string level)
     {
+        string gameLevel;
 
         if (currentScene.Equals("PrimaryLevelEvidence", StringComparison.OrdinalIgnoreCase))
         {
@@ -226,7 +227,8 @@ public class DialogueLoader : MonoBehaviour
         }
         else
         {
-            StartCoroutine(GetInfoDialog(infoIcon, movementScript, infoURL));
+            gameLevel = infoURL + "?level=" + Uri.EscapeDataString(level);
+            StartCoroutine(GetInfoDialog(infoIcon, movementScript, gameLevel));
         }
 
     }

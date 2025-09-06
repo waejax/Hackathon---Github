@@ -83,6 +83,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/transition.unity
     guid: 7f6cf87683d77ec428dcddde2f542112
+  - enabled: 1
+    path: Assets/Scenes/transition2.unity
+    guid: c0b04d19f65f0584482e704ab026cad5
+  - enabled: 1
+    path: Assets/Scenes/transition3.unity
+    guid: 219024614788ab64da07eabda3159562
+  - enabled: 1
+    path: Assets/Scenes/transition4.unity
+    guid: ba9a53c1c84c6f64a9ea9ea27be7312e
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

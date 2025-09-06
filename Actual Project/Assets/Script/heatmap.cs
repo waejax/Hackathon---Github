@@ -46,7 +46,7 @@ public class heatmap : MonoBehaviour
 
     void InitLocationMap()
     {
-        locationMap["bsb"] = new Vector2(190, -10);
+        locationMap["bsb"] = new Vector2(51, 63);
         locationMap["kg tungku"] = new Vector2(45, 75);
         locationMap["kg kiulap"] = new Vector2(65, 70);
         locationMap["kg rimba"] = new Vector2(56, 79);
@@ -80,7 +80,7 @@ public class heatmap : MonoBehaviour
     {
         foreach (Report r in reports)
         {
-            string location = NormalizeLocation(r.peopleAddress);
+            string location = NormalizeLocation(r.incident);
 
             if (locationMap.ContainsKey(location))
             {
@@ -91,7 +91,7 @@ public class heatmap : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("Unknown location: " + r.peopleAddress);
+                Debug.LogWarning("Unknown location: " + r.incident);
             }
         }
     }

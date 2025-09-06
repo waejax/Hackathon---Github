@@ -49,7 +49,7 @@ public class UniLevelLogic : MonoBehaviour
             resultOption2 = "You stay honest and gain your professor’s respect.",
             scoreOption1 = 10,
             scoreOption2 = 5,
-            nextScene = "WorkLevel"
+            nextScene = "transition3"
         };
 
         // Set consequences for lie
@@ -62,7 +62,7 @@ public class UniLevelLogic : MonoBehaviour
             resultOption2 = "You get the money, but someone finds out and you’re suspended.",
             scoreOption1 = -5,
             scoreOption2 = -10,
-            nextScene = "WorkLevel"
+            nextScene = "transition3"
         };
 
         // Keep only Chatbot button as clickable

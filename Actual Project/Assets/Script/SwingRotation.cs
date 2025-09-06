@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SwingRotation : MonoBehaviour
 {
@@ -10,7 +11,10 @@ public class SwingRotation : MonoBehaviour
 
     void Start()
     {
-        transform.rotation = Quaternion.Euler(0f, 0f, 45f);
+        if (SceneManager.GetActiveScene().name != "FinalSummary")
+        {
+            transform.rotation = Quaternion.Euler(0f, 0f, 45f);
+        }
         initialScale = transform.localScale;
     }
 

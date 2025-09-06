@@ -1,10 +1,22 @@
 fileFormatVersion: 2
-guid: d36c7604b1f1ef849a2afe06a22bd553
+guid: ca2e3a1c237939646ae1fd6c50d7d1fc
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7323664486574740162
-    second: p4_0
+      213: -8213997068135970926
+    second: keris_broken_0
+  - first:
+      213: -5143499594556595839
+    second: keris_broken_1
+  - first:
+      213: 7202523075226896261
+    second: keris_broken_2
+  - first:
+      213: -3255906645027903301
+    second: keris_broken_3
+  - first:
+      213: 1781790282809855855
+    second: keris_broken_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,23 +112,111 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: p4_0
+      name: keris_broken_0
       rect:
         serializedVersion: 2
-        x: 350
-        y: 26
-        width: 324
-        height: 364
+        x: 35
+        y: 553
+        width: 92
+        height: 215
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e3da19fa3fd1d5a90800000000000000
-      internalID: -7323664486574740162
+      spriteID: 297c7a7af25020e80800000000000000
+      internalID: -8213997068135970926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: keris_broken_1
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 643
+        width: 62
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 181a614ce5e9e98b0800000000000000
+      internalID: -5143499594556595839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: keris_broken_2
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 393
+        width: 52
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5870479839084f360800000000000000
+      internalID: 7202523075226896261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: keris_broken_3
+      rect:
+        serializedVersion: 2
+        x: 370
+        y: 313
+        width: 102
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb827492822b0d2d0800000000000000
+      internalID: -3255906645027903301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: keris_broken_4
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 73
+        width: 57
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6fcf1762d03ab810800000000000000
+      internalID: 1781790282809855855
       vertices: []
       indices: 
       edges: []
@@ -125,7 +225,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 0b9d23251b0c3c64d853399af2d67853
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +235,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      p4_0: -7323664486574740162
+      keris_broken_0: -8213997068135970926
+      keris_broken_1: -5143499594556595839
+      keris_broken_2: 7202523075226896261
+      keris_broken_3: -3255906645027903301
+      keris_broken_4: 1781790282809855855
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

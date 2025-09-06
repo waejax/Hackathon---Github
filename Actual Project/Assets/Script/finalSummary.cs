@@ -18,28 +18,47 @@ public class FinalSummary : MonoBehaviour
 
         if (score > 30)
         {
-            rank.text = "An Integrity Champion!";
-            describe.text = "You made excellent choices and showed strong fairness in every situation.\nYour decisions reflect honesty, responsibility, and the courage to resist corruption, even in subtle forms.\nIt builds trust and respect wherever you go so keep up this habit!";
+            rank.text = "You are\nAn Integrity Champion!";
+            // describe.text = "You made excellent choices and showed strong fairness in every situation.\nYour decisions reflect honesty, responsibility, and the courage to resist corruption, even in subtle forms.\nIt builds trust and respect wherever you go so keep up this habit!";
         }
         else if (score > 20)
         {
-            rank.text = "On The Right Track!";
-            describe.text = "You made mostly fair and honest choices, showing that you understand the importance of acting with integrity.\nA few decisions could have been stronger, but overall you are building a good foundation.\nRemember that even small shortcuts can harm fairness in the long run.";
+            rank.text = "You are\nA Strong Moral Character!";
+            // describe.text = "You made mostly fair and honest choices, showing that you understand the importance of acting with integrity.\nA few decisions could have been stronger, but overall you are building a good foundation.\nRemember that even small shortcuts can harm fairness in the long run.";
         }
         else if (score > 10)
         {
-            rank.text = "Learning and Improving";
-            describe.text = "You are beginning to recognize corruption, but sometimes you leaned toward the easier or unfair option.\nSince you show that you are still learning to evaluate evidence and think critically, with more awareness, you will be able to spot hidden corruption more clearly.";
+            rank.text = "You are\nA striver for what is right!";
+            // describe.text = "You are beginning to recognize corruption, but sometimes you leaned toward the easier or unfair option.\nSince you show that you are still learning to evaluate evidence and think critically, with more awareness, you will be able to spot hidden corruption more clearly.";
         }
         else if (score > 0)
         {
-            rank.text = "An Awareness Builder";
-            describe.text = "You made several choices that favoured unfairness, which shows how corruption can often be disguised as normal behavior.\nTo learn and improve, pay close attention to the evidence and think about how your actions can affect others.\nWith practice, you will become stronger at spotting unfair situations.";
+            rank.text = "You are\nA Considerate Actor!";
+            // describe.text = "You made several choices that favoured unfairness, which shows how corruption can often be disguised as normal behavior.\nTo learn and improve, pay close attention to the evidence and think about how your actions can affect others.\nWith practice, you will become stronger at spotting unfair situations.";
         }
-        else
+        else if (score == 0)
         {
-            rank.text = "A Reflective Learner";
-            describe.text = "You often chose paths that encourage corruption, but that is part of the learning process.\nCorruption is not always obvious, and sometimes it takes practice to see the harm it causes.\nUse this as an opportunity to reflect and try again with a new perspective.\nEvery attempt helps you get closer to making fair and honest choices.";
+            rank.text = "You are\nA Balanced Decision Maker!";
+            // describe.text = "You often chose paths that encourage corruption, but that is part of the learning process.\nCorruption is not always obvious, and sometimes it takes practice to see the harm it causes.\nUse this as an opportunity to reflect and try again with a new perspective.\nEvery attempt helps you get closer to making fair and honest choices.";
+        }
+        else if (score < 0)
+        {
+            rank.text = "You are\nA Pragmatic Challenger!";
+            // describe.text = "You made excellent choices and showed strong fairness in every situation.\nYour decisions reflect honesty, responsibility, and the courage to resist corruption, even in subtle forms.\nIt builds trust and respect wherever you go so keep up this habit!";
+        }
+        else if (score < -10)
+        {
+            rank.text = "You are\nA Survivor of Difficult Choices!";
+            // describe.text = "You made excellent choices and showed strong fairness in every situation.\nYour decisions reflect honesty, responsibility, and the courage to resist corruption, even in subtle forms.\nIt builds trust and respect wherever you go so keep up this habit!";
+        }
+        else if (score < -20)
+        {
+            rank.text = "You are\nFocused on results over rules!";
+            // describe.text = "You made excellent choices and showed strong fairness in every situation.\nYour decisions reflect honesty, responsibility, and the courage to resist corruption, even in subtle forms.\nIt builds trust and respect wherever you go so keep up this habit!";
+        }
+        else if (score < -30)
+        {
+            rank.text = "You are\nA seeker of Personal gain!";
         }
 
         homeButton.onClick.AddListener(() =>

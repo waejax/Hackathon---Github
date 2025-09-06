@@ -5,18 +5,6 @@ TextureImporter:
   - first:
       213: -1100157977391948823
     second: Keris Broken_0
-  - first:
-      213: -2738255047139764271
-    second: Keris Broken_1
-  - first:
-      213: 894762035508013793
-    second: Keris Broken_2
-  - first:
-      213: 9165561693197863667
-    second: Keris Broken_3
-  - first:
-      213: -2098872168912198948
-    second: Keris Broken_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -108,19 +96,6 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -128,12 +103,12 @@ TextureImporter:
       name: Keris Broken_0
       rect:
         serializedVersion: 2
-        x: 100
-        y: 650
-        width: 90
-        height: 305
+        x: 0
+        y: 0
+        width: 0
+        height: 0
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -146,99 +121,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: Keris Broken_1
-      rect:
-        serializedVersion: 2
-        x: 424
-        y: 739
-        width: 62
-        height: 97
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1d750d2ea83cff9d0800000000000000
-      internalID: -2738255047139764271
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Keris Broken_2
-      rect:
-        serializedVersion: 2
-        x: 119
-        y: 489
-        width: 52
-        height: 92
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1eae5f4a455da6c00800000000000000
-      internalID: 894762035508013793
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Keris Broken_3
-      rect:
-        serializedVersion: 2
-        x: 434
-        y: 409
-        width: 102
-        height: 127
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3fa8cf97ccd923f70800000000000000
-      internalID: 9165561693197863667
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Keris Broken_4
-      rect:
-        serializedVersion: 2
-        x: 109
-        y: 169
-        width: 57
-        height: 92
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: cd2e807f1ee4fd2e0800000000000000
-      internalID: -2098872168912198948
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 9e85135df69f70a459140f121c952d8d
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -249,10 +136,6 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       Keris Broken_0: -1100157977391948823
-      Keris Broken_1: -2738255047139764271
-      Keris Broken_2: 894762035508013793
-      Keris Broken_3: 9165561693197863667
-      Keris Broken_4: -2098872168912198948
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -49,7 +49,7 @@ public class SecondaryLevelLogic : MonoBehaviour
             resultOption2 = "You retake the exam quietly without help, and no one notices.",
             scoreOption1 = 10,
             scoreOption2 = 5,
-            nextScene = "UniLevel"
+            nextScene = "transition2"
         };
 
         // Set consequences for lie
@@ -62,7 +62,7 @@ public class SecondaryLevelLogic : MonoBehaviour
             resultOption2 = "You pass quietly, but it weighs on your conscience.",
             scoreOption1 = -10,
             scoreOption2 = -5,
-            nextScene = "UniLevel"
+            nextScene = "transition2"
         };
 
         // Keep only Chatbot button as clickable

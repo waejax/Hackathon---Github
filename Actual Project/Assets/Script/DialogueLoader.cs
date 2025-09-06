@@ -56,16 +56,16 @@ public class DialogueLoader : MonoBehaviour
 
     private IEnumerator GameDemoDialog()
     {
-        yield return StartCoroutine(GetDemoDialog(0, 4, false));
+        yield return StartCoroutine(GetDemoDialog(0, 3, false));
         yield return new WaitForSeconds(5f);
-        yield return StartCoroutine(GetDemoDialog(4, 1, false));
+        yield return StartCoroutine(GetDemoDialog(3, 2, false));
+        yield return new WaitForSeconds(5f);
+        yield return StartCoroutine(GetDemoDialog(5, 1, false));
     }
 
     private IEnumerator instructionDialog()
     {
-        yield return StartCoroutine(GetDemoDialog(5, 5, false));
-        yield return new WaitForSeconds(5f);
-        yield return StartCoroutine(GetDemoDialog(10, 2, false));
+        yield return StartCoroutine(GetDemoDialog(6, 6, false));
         SceneManager.LoadScene("PrimaryLevelEvidence");
     }
 

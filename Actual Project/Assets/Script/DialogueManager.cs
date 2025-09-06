@@ -13,7 +13,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] int lettersPerSecond;
     [SerializeField] private Transform playerTransform;
     private Vector2 originalSize;
-    private Vector2 infoDialogSize = new Vector2(700, 200);
+    private Vector2 infoDialogSize = new Vector2(500, 200);
     private RectTransform dialogRectTransform;
     private Vector3 originalPos;
 
@@ -101,17 +101,17 @@ public class DialogueManager : MonoBehaviour
         {
             dialogRectTransform.sizeDelta = originalSize;
 
-            if (currentScene == "GameDemo" || currentScene == "PrimaryLevelEvidence")
-            {
-                dialogRectTransform.anchorMin = new Vector2(0.5f, 0);
-                dialogRectTransform.anchorMax = new Vector2(0.5f, 0);
-                dialogRectTransform.pivot = new Vector2(0, 0);
-                dialogRectTransform.anchoredPosition = new Vector2(-83.9084f, 193.89f);
-            }
-            else
-            {
-                dialogBox.transform.localPosition = originalPos;
-            }
+            // if (currentScene == "GameDemo" || currentScene == "PrimaryLevelEvidence")
+            // {
+            //     dialogRectTransform.anchorMin = new Vector2(0.5f, 0);
+            //     dialogRectTransform.anchorMax = new Vector2(0.5f, 0);
+            //     dialogRectTransform.pivot = new Vector2(0, 0);
+            //     dialogRectTransform.anchoredPosition = new Vector2(-83.9084f, 193.89f);
+            // }
+            // else
+            // {
+            //     dialogBox.transform.localPosition = originalPos;
+            // }
 
             continueTextRect.localPosition = originalContinuePos;
         }

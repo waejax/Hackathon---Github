@@ -46,10 +46,14 @@ public class heatmap : MonoBehaviour
 
     void InitLocationMap()
     {
-        locationMap["bsb"] = new Vector2(100, 200);
-        locationMap["kg tungku"] = new Vector2(220, 100);
-        locationMap["kg kiulap"] = new Vector2(170, 160);
-        locationMap["kg rimba"] = new Vector2(80, 210);
+        locationMap["bsb"] = new Vector2(190, -10);
+        locationMap["kg tungku"] = new Vector2(45, 75);
+        locationMap["kg kiulap"] = new Vector2(65, 70);
+        locationMap["kg rimba"] = new Vector2(56, 79);
+        locationMap["bangar"] = new Vector2(97, 39);
+        locationMap["tutong"] = new Vector2(-11, 44);
+        locationMap["seria"] = new Vector2(-82, 10);
+        locationMap["kb"] = new Vector2(-112, 7);
     }
 
     IEnumerator LoadReports()
@@ -122,6 +126,14 @@ public class heatmap : MonoBehaviour
             return "kg tungku";
         if (loc.Contains("rimba"))
             return "kg rimba";
+        if (loc.Contains("bangar"))
+            return "bangar";
+        if (loc.Contains("tutong"))
+            return "tutong";
+        if (loc.Contains("seria"))
+            return "seria";
+        if (loc.Contains("belait") || loc.Contains("kb"))
+            return "kuala belait";
         if (loc.Contains("bsb") || loc.Contains("bandar") || loc.Contains("bandar seri begawan"))
             return "bsb";
 

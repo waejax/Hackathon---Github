@@ -9,12 +9,14 @@ $password = "";
 
 $conn = new mysqli($host, $username, $password, $dbname);
 
+$level = $_GET['level'];
+
 if ($conn->connect_error) {
     echo json_encode(["error" => "Connection failed: ".$conn->connect_error]);
     exit;
 }
 
-$sql = "SELECT line FROM info ORDER BY RAND() LIMIT 1";
+$sql = "SELECT line FROM info WHERE level = '$level' ORDER BY RAND() LIMIT 1";
 $result = $conn->query($sql);
 
 $info = array();

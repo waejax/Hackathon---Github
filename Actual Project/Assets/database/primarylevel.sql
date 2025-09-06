@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 01, 2025 at 04:34 PM
+-- Generation Time: Sep 06, 2025 at 09:32 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.1.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -37,8 +37,12 @@ CREATE TABLE `primarylevel` (
 --
 
 INSERT INTO `primarylevel` (`id`, `line`) VALUES
-(1, 'Always tell the truth, even if it feels scary, because honesty helps people trust you. Sharing your toys, food, or time makes others happy, and it shows you care about their feelings. Be kind to everyone you meet, because the kindness you give often comes back to you in surprising ways.'),
-(2, 'Forgive others when they make mistakes, because everyone needs another chance to do better. Work hard and never give up, even if something is difficult, because effort always makes you stronger. Treat others the way you want to be treated, with kindness, fairness, and respect.');
+(1, 'Treat others the way you want to be treated, with kindness, fairness, and respect.'),
+(2, 'Be kind to everyone you meet, because the kindness you give often comes back to you in surprising ways.'),
+(3, 'Work hard and never give up, even if something is difficult, because effort always makes you stronger.'),
+(4, 'Sharing your toys, food, or time makes others happy, and it shows you care about their feelings.'),
+(5, 'Forgive others when they make mistakes, because everyone needs another chance to do better.'),
+(6, 'Always tell the truth, even if it feels scary, because honesty helps people trust you.');
 
 --
 -- Indexes for dumped tables
@@ -58,7 +62,7 @@ ALTER TABLE `primarylevel`
 -- AUTO_INCREMENT for table `primarylevel`
 --
 ALTER TABLE `primarylevel`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

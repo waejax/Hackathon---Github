@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 02, 2025 at 01:46 PM
+-- Generation Time: Sep 06, 2025 at 10:51 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -41,20 +41,17 @@ INSERT INTO `demo` (`id`, `line`) VALUES
 (2, 'I am Awang Budiman, I will be your \'budi\' throughout this game'),
 (3, 'Use the left and right arrow to move, and space bar to jump'),
 (4, 'Now you know how to move along the screen!'),
-(5, 'The icon above the player is an info icon'),
-(6, 'Info icon will help you during the actual game'),
-(7, 'There is a pause button on the top right.'),
-(8, 'Click on the \'instruction\' tab to see how the game work'),
-(9, 'Hit more icon to learn interesting info!'),
-(10, 'You just encounter an evidence'),
-(11, 'Collect as many evidence as you can'),
-(12, 'This will help you on the upcoming game'),
-(13, 'The number on the top left will show you the number of evidence you have collected'),
-(14, 'You are required to collect a minimum of 2 evidence before you can move to the next stage'),
-(15, 'You are now ready to start playing!'),
-(16, 'Welcome to the first level.'),
-(17, 'Here in this level, we learn good values.'),
-(18, 'Hit the info icon to learn more about it!');
+(5, 'Move to the right until the end of the screen'),
+(6, 'The icon above the player is an info icon'),
+(7, 'Info icon will help you during the actual game'),
+(8, 'There is a pause button on the top right.'),
+(9, 'Click on the \'information\' tab to see the info you have collected'),
+(10, 'Click on the \'control\' tab to see how the game work'),
+(11, 'I\'ve lost my keris'),
+(12, 'Play the game to help me find it!'),
+(13, 'Welcome to the first level.'),
+(14, 'Here in this level, we learn good values.'),
+(15, 'Hit the info icon to learn more about it!');
 
 --
 -- Indexes for dumped tables

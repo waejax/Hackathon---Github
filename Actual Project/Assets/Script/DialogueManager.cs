@@ -13,7 +13,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] int lettersPerSecond;
     [SerializeField] private Transform playerTransform;
     private Vector2 originalSize;
-    private Vector2 infoDialogSize = new Vector2(700, 200);
+    private Vector2 infoDialogSize = new Vector2(500, 200);
     private RectTransform dialogRectTransform;
     private Vector3 originalPos;
 
@@ -69,48 +69,49 @@ public class DialogueManager : MonoBehaviour
         if (isInfoDialogue)
         {
             dialogRectTransform.sizeDelta = infoDialogSize;
+            continueTextRect.localPosition = originalContinuePos;
 
-            if (currentScene == "GameDemo" || currentScene == "PrimaryLevelEvidence")
-            {
-                dialogRectTransform.anchorMin = new Vector2(0.5f, 0.5f);
-                dialogRectTransform.anchorMax = new Vector2(0.5f, 0.5f);
-                dialogRectTransform.pivot = new Vector2(0.5f, 0.5f);
-                dialogRectTransform.anchoredPosition = Vector2.zero;
+            // if (currentScene == "GameDemo" || currentScene == "PrimaryLevelEvidence")
+            // {
+            //     dialogRectTransform.anchorMin = new Vector2(0.5f, 0.5f);
+            //     dialogRectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+            //     dialogRectTransform.pivot = new Vector2(0.5f, 0.5f);
+            //     dialogRectTransform.anchoredPosition = Vector2.zero;
 
-                continueTextRect.anchorMin = new Vector2(1f, 0f);
-                continueTextRect.anchorMax = new Vector2(1f, 0f);
-                continueTextRect.pivot = new Vector2(1f, 0f);
-                continueTextRect.anchoredPosition = new Vector2(-20, 10);
-            }
-            else
-            {
-                Vector3 worldPos = playerTransform.position + new Vector3(-15.5f, -2f, 0);
-                //Vector3 worldPos = playerTransform.position + new Vector3(0f, 1f, 0);
-                Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
+            //     continueTextRect.anchorMin = new Vector2(1f, 0f);
+            //     continueTextRect.anchorMax = new Vector2(1f, 0f);
+            //     continueTextRect.pivot = new Vector2(1f, 0f);
+            //     continueTextRect.anchoredPosition = new Vector2(-20, 10);
+            // }
+            // else
+            // {
+            //     Vector3 worldPos = playerTransform.position + new Vector3(-15.5f, -2f, 0);
+            //     //Vector3 worldPos = playerTransform.position + new Vector3(0f, 1f, 0);
+            //     Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
 
-                Vector2 localPoint;
-                RectTransformUtility.ScreenPointToLocalPointInRectangle(dialogRectTransform.parent as RectTransform, screenPos, null, out localPoint);
+            //     Vector2 localPoint;
+            //     RectTransformUtility.ScreenPointToLocalPointInRectangle(dialogRectTransform.parent as RectTransform, screenPos, null, out localPoint);
 
-                dialogRectTransform.localPosition = localPoint;
+            //     dialogRectTransform.localPosition = localPoint;
 
-                continueTextRect.localPosition = new Vector3(infoDialogSize.x / 2 - 10, 10, 0);
-            }
+            //     continueTextRect.localPosition = new Vector3(infoDialogSize.x / 2 - 10, 10, 0);
+            // }
         }
         else
         {
             dialogRectTransform.sizeDelta = originalSize;
 
-            if (currentScene == "GameDemo" || currentScene == "PrimaryLevelEvidence")
-            {
-                dialogRectTransform.anchorMin = new Vector2(0.5f, 0);
-                dialogRectTransform.anchorMax = new Vector2(0.5f, 0);
-                dialogRectTransform.pivot = new Vector2(0, 0);
-                dialogRectTransform.anchoredPosition = new Vector2(-83.9084f, 193.89f);
-            }
-            else
-            {
-                dialogBox.transform.localPosition = originalPos;
-            }
+            // if (currentScene == "GameDemo" || currentScene == "PrimaryLevelEvidence")
+            // {
+            //     dialogRectTransform.anchorMin = new Vector2(0.5f, 0);
+            //     dialogRectTransform.anchorMax = new Vector2(0.5f, 0);
+            //     dialogRectTransform.pivot = new Vector2(0, 0);
+            //     dialogRectTransform.anchoredPosition = new Vector2(-83.9084f, 193.89f);
+            // }
+            // else
+            // {
+            //     dialogBox.transform.localPosition = originalPos;
+            // }
 
             continueTextRect.localPosition = originalContinuePos;
         }

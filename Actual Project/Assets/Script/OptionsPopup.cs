@@ -14,12 +14,17 @@ public class PopupSceneManager : MonoBehaviour
     public Button closeButton;
     public Button mainMenuButton;
 
+    public GameObject instructionPopup;
+    public Button instructionButton;
+    public Button instructionCloseButton;
+
     private string homeScene = "Start";
 
     void Start()
     {
         // Ensure popup is hidden at start
         popupPanel.SetActive(false);
+        instructionPopup.SetActive(false);
 
         // Assign button listeners
         openPopupButton.onClick.AddListener(OpenPopup);
@@ -31,6 +36,9 @@ public class PopupSceneManager : MonoBehaviour
         contactButton.onClick.AddListener(() => LoadScene("Contact"));
 
         mainMenuButton.onClick.AddListener(() => LoadScene(homeScene));
+
+        instructionButton.onClick.AddListener(OpenInstructionPopup);
+        instructionCloseButton.onClick.AddListener(CloseInstructionPopup);
     }
 
     public void OpenPopup()
@@ -40,6 +48,15 @@ public class PopupSceneManager : MonoBehaviour
 
     void ClosePopup() {
         popupPanel.SetActive(false);
+    }
+
+    public void OpenInstructionPopup()
+    {
+        instructionPopup.SetActive(true);
+    }
+
+    void CloseInstructionPopup() {
+        instructionPopup.SetActive(false);
     }
 
     void LoadScene(string sceneName)

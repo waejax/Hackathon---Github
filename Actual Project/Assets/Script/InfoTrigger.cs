@@ -3,6 +3,7 @@ using UnityEngine;
 public class InfoTrigger : MonoBehaviour
 {
     private bool trigger = false;
+    public string level;
 
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -19,7 +20,7 @@ public class InfoTrigger : MonoBehaviour
                     movement.enabled = false;
                 }
 
-                loader.TriggerInfoDialog(this.gameObject, movement);
+                loader.TriggerInfoDialog(this.gameObject, movement, level);
             }
         }
     }

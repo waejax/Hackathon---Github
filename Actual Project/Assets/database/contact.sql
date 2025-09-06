@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 11, 2025 at 11:50 AM
+-- Generation Time: Sep 06, 2025 at 09:29 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -31,19 +31,19 @@ CREATE TABLE `contact` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
   `address` text NOT NULL,
-  `Qphone1` int(11) NOT NULL,
-  `Qphone2` int(11) DEFAULT NULL,
   `Rphone1` int(11) NOT NULL,
-  `Rphone2` int(11) DEFAULT NULL
+  `Rphone2` int(11) DEFAULT NULL,
+  `Qphone1` int(11) NOT NULL,
+  `Qphone2` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `contact`
 --
 
-INSERT INTO `contact` (`id`, `name`, `address`, `Qphone1`, `Qphone2`, `Rphone1`, `Rphone2`) VALUES
-(1, 'Anti-Corruption Bureau HQ', 'Old Airport Berakas, BB 3510, Brunei Darussalam', 2381113, 2381114, 8721002, 8130002),
-(2, 'Anti-Corruption Bureau Kuala Belait Branch', 'Jalan Sungai Pandan, Kuala Belait, KA 1931, Brunei Darussalam', 3331560, NULL, 3331513, 8721003);
+INSERT INTO `contact` (`id`, `name`, `address`, `Rphone1`, `Rphone2`, `Qphone1`, `Qphone2`) VALUES
+(1, 'Anti-Corruption Bureau HQ', 'Old Airport Berakas, BB 3510, Brunei Darussalam', 8721002, 0, 2381113, 2381114),
+(2, 'Anti-Corruption Bureau Kuala Belait Branch', 'Jalan Sungai Pandan, Kuala Belait, KA 1931, Brunei Darussalam', 3331513, 8721003, 3331560, 0);
 
 --
 -- Indexes for dumped tables

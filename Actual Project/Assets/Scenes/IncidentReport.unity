@@ -314,6 +314,9 @@ MonoBehaviour:
   contactButton: {fileID: 1496821522}
   closeButton: {fileID: 1496821521}
   mainMenuButton: {fileID: 1496821519}
+  instructionPopup: {fileID: 0}
+  instructionButton: {fileID: 0}
+  instructionCloseButton: {fileID: 0}
 --- !u!4 &95360824
 Transform:
   m_ObjectHideFlags: 0
@@ -1860,6 +1863,7 @@ MonoBehaviour:
   positionInput: {fileID: 0}
   numberInput: {fileID: 0}
   icInput: {fileID: 0}
+  selectedFileText: {fileID: 0}
   inputValidation: {fileID: 2046013864}
   dbURL: http://localhost/hackathon/insert_report.php
 --- !u!4 &1475216980
@@ -2647,11 +2651,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_Font: {fileID: 12800000, guid: 4181d45e69a76ad4398d9d052e489a2e, type: 2}
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 0
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 1
@@ -2960,8 +2964,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 20
+    m_Font: {fileID: 12800000, guid: 4181d45e69a76ad4398d9d052e489a2e, type: 2}
+    m_FontSize: 30
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
@@ -3264,8 +3268,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 16
+    m_Font: {fileID: 12800000, guid: 4181d45e69a76ad4398d9d052e489a2e, type: 2}
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1

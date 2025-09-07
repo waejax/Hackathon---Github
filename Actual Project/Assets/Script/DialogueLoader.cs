@@ -289,7 +289,10 @@ public class DialogueLoader : MonoBehaviour
         {
             StartCoroutine(GetShardDialog(10, 1, false));
         }
-        
+        if (currentScene.Equals("WorkLevelEvidence", StringComparison.OrdinalIgnoreCase))
+        {
+            StartCoroutine(GetShardDialog(11, 2, false));
+        }
     }
 
     public List<string> getCollectedInfo()

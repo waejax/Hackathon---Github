@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 07, 2025 at 02:46 AM
+-- Generation Time: Sep 07, 2025 at 05:04 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -44,7 +44,12 @@ INSERT INTO `primarylevel` (`id`, `line`) VALUES
 (5, 'Forgive others when they make mistakes, because everyone needs another chance to do better.'),
 (6, 'Always tell the truth, even if it feels scary, because honesty helps people trust you.'),
 (7, 'You have encountered the first shard!'),
-(8, 'Collect all four shards to help budiman find his keris!');
+(8, 'Collect all four shards to help budiman find his keris!'),
+(9, 'One more piece returns to me, the blade grows stronger!\r\n'),
+(10, 'Continue on your journey. There is 2 more!'),
+(11, 'We are almost done. This shard shines with your honesty!'),
+(12, 'At last, the blade can be whole again.'),
+(13, 'Every trial taught me humility. This final piece isn’t just metal; it’s a lesson');
 
 --
 -- Indexes for dumped tables

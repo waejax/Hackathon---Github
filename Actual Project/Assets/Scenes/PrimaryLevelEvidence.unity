@@ -131,6 +131,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: control
       objectReference: {fileID: 0}
+    - target: {fileID: 855334784409606272, guid: a4705e5203970ba4aaf656f02aba83ed, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6926736507208032003, guid: a4705e5203970ba4aaf656f02aba83ed, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -386,7 +390,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &123096776
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1074,8 +1078,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.96875, y: 1.515625}
-    newSize: {x: 0.62, y: 0.97}
+    oldSize: {x: 0.52, y: 0.82}
+    newSize: {x: 0.52, y: 0.82}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -1126,12 +1130,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2738255047139764271, guid: d448c08b94e9b91499c6e6120811a54a, type: 3}
+  m_Sprite: {fileID: -3490272899764261395, guid: 788e96482785a7f4993d63196a39fb57, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.62, y: 0.97}
+  m_Size: {x: 0.52, y: 0.82}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1145,8 +1149,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 421974183}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.19, y: -8.51, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 6.1900024, y: -8.51001, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2187,7 +2191,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: testing
+  m_Text: 
 --- !u!222 &957570601
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4006,7 +4010,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 137271130}
   - {fileID: 2116973956}
-  - {fileID: 2133348179}
   - {fileID: 617998760}
   - {fileID: 497573252}
   - {fileID: 1449869113}
@@ -4018,9 +4021,10 @@ SceneRoots:
   - {fileID: 348047901}
   - {fileID: 1812749602}
   - {fileID: 950742949}
+  - {fileID: 421974186}
+  - {fileID: 2133348179}
   - {fileID: 449922707}
   - {fileID: 796251779}
   - {fileID: 557572383}
   - {fileID: 1552281574}
-  - {fileID: 421974186}
   - {fileID: 879155714}

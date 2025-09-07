@@ -46,7 +46,7 @@ public class DialogueLoader : MonoBehaviour
 
         else if (currentScene.Equals("PrimaryLevelEvidence", StringComparison.OrdinalIgnoreCase))
         {
-            LoadDemo(15, 3, false);
+            LoadDemo(12, 3, false);
         }
     }
 
@@ -280,6 +280,10 @@ public class DialogueLoader : MonoBehaviour
         if (currentScene.Equals("PrimaryLevelEvidence", StringComparison.OrdinalIgnoreCase))
         {
             StartCoroutine(GetShardDialog(6, 2, false));
+        }
+                if (currentScene.Equals("SecondaryLevelEvidence", StringComparison.OrdinalIgnoreCase))
+        {
+            StartCoroutine(GetShardDialog(8, 2, false));
         }
         
     }

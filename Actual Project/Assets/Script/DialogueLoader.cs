@@ -281,6 +281,10 @@ public class DialogueLoader : MonoBehaviour
         {
             StartCoroutine(GetShardDialog(6, 2, false));
         }
+                if (currentScene.Equals("SecondaryLevelEvidence", StringComparison.OrdinalIgnoreCase))
+        {
+            StartCoroutine(GetShardDialog(8, 2, false));
+        }
         
     }
 

@@ -1372,7 +1372,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: an integrity champion!
+  m_Text: "you are \nan integrity champion!"
 --- !u!222 &1778795160
 CanvasRenderer:
   m_ObjectHideFlags: 0

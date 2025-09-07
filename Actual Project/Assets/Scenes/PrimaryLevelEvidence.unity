@@ -131,6 +131,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: control
       objectReference: {fileID: 0}
+    - target: {fileID: 855334784409606272, guid: a4705e5203970ba4aaf656f02aba83ed, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6926736507208032003, guid: a4705e5203970ba4aaf656f02aba83ed, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -386,7 +390,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &123096776
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1134,7 +1138,7 @@ SpriteRenderer:
   m_Size: {x: 0.62, y: 0.97}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &421974186
@@ -1145,8 +1149,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 421974183}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.19, y: -8.51, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 6.1900024, y: -8.51001, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4006,7 +4010,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 137271130}
   - {fileID: 2116973956}
-  - {fileID: 2133348179}
   - {fileID: 617998760}
   - {fileID: 497573252}
   - {fileID: 1449869113}
@@ -4018,9 +4021,10 @@ SceneRoots:
   - {fileID: 348047901}
   - {fileID: 1812749602}
   - {fileID: 950742949}
+  - {fileID: 421974186}
+  - {fileID: 2133348179}
   - {fileID: 449922707}
   - {fileID: 796251779}
   - {fileID: 557572383}
   - {fileID: 1552281574}
-  - {fileID: 421974186}
   - {fileID: 879155714}

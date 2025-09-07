@@ -132,8 +132,8 @@ public class heatmap : MonoBehaviour
             return "tutong";
         if (loc.Contains("seria"))
             return "seria";
-        if (loc.Contains("belait") || loc.Contains("kb"))
-            return "kuala belait";
+        if (loc.Contains("kuala belait") || loc.Contains("kb"))
+            return "kb";
         if (loc.Contains("bsb") || loc.Contains("bandar") || loc.Contains("bandar seri begawan"))
             return "bsb";
 

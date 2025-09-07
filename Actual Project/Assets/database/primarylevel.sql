@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 06, 2025 at 09:32 AM
+-- Generation Time: Sep 07, 2025 at 02:46 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.1.25
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -42,7 +42,9 @@ INSERT INTO `primarylevel` (`id`, `line`) VALUES
 (3, 'Work hard and never give up, even if something is difficult, because effort always makes you stronger.'),
 (4, 'Sharing your toys, food, or time makes others happy, and it shows you care about their feelings.'),
 (5, 'Forgive others when they make mistakes, because everyone needs another chance to do better.'),
-(6, 'Always tell the truth, even if it feels scary, because honesty helps people trust you.');
+(6, 'Always tell the truth, even if it feels scary, because honesty helps people trust you.'),
+(7, 'You have encountered the first shard!'),
+(8, 'Collect all four shards to help budiman find his keris!');
 
 --
 -- Indexes for dumped tables

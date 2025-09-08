@@ -69,7 +69,8 @@ public class DialogueManager : MonoBehaviour
         if (isInfoDialogue)
         {
             dialogRectTransform.sizeDelta = infoDialogSize;
-            continueTextRect.localPosition = originalContinuePos;
+            continueTextRect.localPosition = new Vector3(infoDialogSize.x / 2 - 10, 10, 0);
+            //continueTextRect.localPosition = originalContinuePos;
 
             // if (currentScene == "GameDemo" || currentScene == "PrimaryLevelEvidence")
             // {
@@ -93,8 +94,6 @@ public class DialogueManager : MonoBehaviour
             //     RectTransformUtility.ScreenPointToLocalPointInRectangle(dialogRectTransform.parent as RectTransform, screenPos, null, out localPoint);
 
             //     dialogRectTransform.localPosition = localPoint;
-
-            //     continueTextRect.localPosition = new Vector3(infoDialogSize.x / 2 - 10, 10, 0);
             // }
         }
         else

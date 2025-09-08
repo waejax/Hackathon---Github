@@ -37,16 +37,11 @@ public class DialogueLoader : MonoBehaviour
         if (currentScene.Equals("GameDemo", StringComparison.OrdinalIgnoreCase))
         {
             StartCoroutine(GameDemoDialog());
-
-        }
-        else if (currentScene.Equals("instruction", StringComparison.OrdinalIgnoreCase))
-        {
-            StartCoroutine(instructionDialog());
         }
 
         else if (currentScene.Equals("PrimaryLevelEvidence", StringComparison.OrdinalIgnoreCase))
         {
-            LoadDemo(12, 3, false);
+            LoadDemo(7, 2, false);
         }
     }
 
@@ -59,15 +54,9 @@ public class DialogueLoader : MonoBehaviour
     {
         yield return StartCoroutine(GetDemoDialog(0, 3, false));
         yield return new WaitForSeconds(5f);
-        yield return StartCoroutine(GetDemoDialog(3, 2, false));
+        yield return StartCoroutine(GetDemoDialog(3, 3, false));
         yield return new WaitForSeconds(5f);
-        yield return StartCoroutine(GetDemoDialog(5, 1, false));
-    }
-
-    private IEnumerator instructionDialog()
-    {
-        yield return StartCoroutine(GetDemoDialog(6, 6, false));
-        SceneManager.LoadScene("PrimaryLevelEvidence");
+        yield return StartCoroutine(GetDemoDialog(6, 1, false));
     }
 
       void Awake()

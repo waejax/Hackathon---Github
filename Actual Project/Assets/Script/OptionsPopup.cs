@@ -35,7 +35,10 @@ public class PopupSceneManager : MonoBehaviour
         infoButton.onClick.AddListener(() => LoadScene("infoCollected"));
         contactButton.onClick.AddListener(() => LoadScene("Contact"));
 
-        mainMenuButton.onClick.AddListener(() => LoadScene(homeScene));
+        if (mainMenuButton != null)
+        {
+            mainMenuButton.onClick.AddListener(() => LoadScene(homeScene));
+        }
 
         instructionButton.onClick.AddListener(OpenInstructionPopup);
         instructionCloseButton.onClick.AddListener(CloseInstructionPopup);

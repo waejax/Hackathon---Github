@@ -336,7 +336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 698357871f077994493c76193d16e6c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 956456039}
   parallaxFactor: 1
   backgroundWidth: 50
 --- !u!114 &133821874

@@ -422,7 +422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a50367fb2b059a4da0a372df33d6027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: secondary
+  level: uni
 --- !u!114 &228274330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1404,7 +1404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a50367fb2b059a4da0a372df33d6027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: secondary
+  level: uni
 --- !u!1 &497573249
 GameObject:
   m_ObjectHideFlags: 0
@@ -1707,7 +1707,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a50367fb2b059a4da0a372df33d6027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: secondary
+  level: uni
 --- !u!114 &544475926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4635,8 +4635,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 2133348179}
-  offset: {x: 0, y: 0, z: 0}
   parallaxFactor: 1
+  backgroundWidth: 50
 --- !u!1 &2133348175
 GameObject:
   m_ObjectHideFlags: 0
@@ -4877,7 +4877,6 @@ SceneRoots:
   - {fileID: 617998760}
   - {fileID: 497573252}
   - {fileID: 1449869113}
-  - {fileID: 696319381}
   - {fileID: 436053221}
   - {fileID: 1331615381}
   - {fileID: 1544481195}

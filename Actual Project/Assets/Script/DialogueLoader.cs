@@ -171,8 +171,13 @@ public class DialogueLoader : MonoBehaviour
             }
         }
     }
-    public IEnumerator GetShardDialog(int startIndex, int count, bool isInfoDialogue = false)
+    public IEnumerator GetShardDialog(int startIndex, playerMove movementScript, int count, bool isInfoDialogue = false)
     {
+        if (movementScript != null)
+        {
+            movementScript.enabled = false;
+        }
+
         UnityWebRequest www = UnityWebRequest.Get(primaryURL);
         yield return www.SendWebRequest();
 
@@ -206,6 +211,10 @@ public class DialogueLoader : MonoBehaviour
         else
         {
             Debug.LogError("Error: " + www.error);
+        }
+        if (movementScript != null)
+        {
+            movementScript.enabled = true;
         }
     }
 
@@ -268,19 +277,19 @@ public class DialogueLoader : MonoBehaviour
         gameLevel = infoURL + "?level=" + Uri.EscapeDataString(level);
         if (currentScene.Equals("PrimaryLevelEvidence", StringComparison.OrdinalIgnoreCase))
         {
-            StartCoroutine(GetShardDialog(6, 2, false));
+            StartCoroutine(GetShardDialog(6,movementScript, 2, false));
         }
         if (currentScene.Equals("SecondaryLevelEvidence", StringComparison.OrdinalIgnoreCase))
         {
-            StartCoroutine(GetShardDialog(8, 2, false));
+            StartCoroutine(GetShardDialog(8, movementScript, 2, false));
         }
         if (currentScene.Equals("UniLevelEvidence", StringComparison.OrdinalIgnoreCase))
         {
-            StartCoroutine(GetShardDialog(10, 1, false));
+            StartCoroutine(GetShardDialog(10, movementScript, 1, false));
         }
         if (currentScene.Equals("WorkLevelEvidence", StringComparison.OrdinalIgnoreCase))
         {
-            StartCoroutine(GetShardDialog(11, 2, false));
+            StartCoroutine(GetShardDialog(11,movementScript, 2, false));
         }
     }
 

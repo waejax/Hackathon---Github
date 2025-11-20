@@ -2800,8 +2800,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3920b3e2a8116a744879e2ceb3165c01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scenarios: []
+  currentScenarioIndex: 0
   truthCollider: {fileID: 1574109570}
   lieCollider: {fileID: 564288020}
+  truthChoiceText: {fileID: 779079359}
+  lieChoiceText: {fileID: 1268269630}
   scenarioText: {fileID: 924496668}
   ChatbotButton: {fileID: 1146004665}
   pulseSpeed: 2

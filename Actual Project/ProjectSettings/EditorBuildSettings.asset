@@ -98,6 +98,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WorkLevelEvidence.unity
     guid: 1b0e629282e016245b439ddab9bf420c
+  - enabled: 1
+    path: Assets/Scenes/PrimaryEvidence.unity
+    guid: 46d5b8bc1a38bc14d8baa37095bbbffd
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

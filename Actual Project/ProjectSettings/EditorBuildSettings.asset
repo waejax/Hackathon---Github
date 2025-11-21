@@ -101,6 +101,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PrimaryEvidence.unity
     guid: 46d5b8bc1a38bc14d8baa37095bbbffd
+  - enabled: 1
+    path: Assets/Scenes/PrimaryEvidence1.unity
+    guid: c0ab84ca13f2474498a9799179ffce43
+  - enabled: 1
+    path: Assets/Scenes/PrimaryEvidence2.unity
+    guid: 76ada38d54a4b3948b142a5f6da83f61
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

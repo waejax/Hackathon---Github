@@ -101,7 +101,7 @@ public class PrimaryLevelLogic : MonoBehaviour
 
         ScenarioData scenario2 = new ScenarioData
         {
-            scenarioText = "You found a wallet on the ground with money inside.\nWhat do you do?",
+            scenarioText = "You found a wallet on the ground with money \ninside. What do you do?",
             truthChoiceText = "Return it to lost and found",
             lieChoiceText = "Keep it for yourself",
 
@@ -111,7 +111,7 @@ public class PrimaryLevelLogic : MonoBehaviour
                 previewText1 = "Owner is grateful and rewards you",
                 previewText2 = "No one claims it, you feel good anyway",
                 resultOption1 = "The owner is extremely grateful and rewards you for your honesty.",
-                resultOption2 = "No one claims the wallet, but you feel good about doing the right thing.",
+                resultOption2 = "No one claims the wallet, but you feel good for \ndoing the right thing.",
                 scoreOption1 = 15,
                 scoreOption2 = 10,
                 // nextScene = "transition"
@@ -134,38 +134,70 @@ public class PrimaryLevelLogic : MonoBehaviour
 
         ScenarioData scenario3 = new ScenarioData
         {
-            scenarioText = "You forgot to do your homework and the teacher is\ncollecting it now. What do you do?",
-            truthChoiceText = "Admit you forgot",
-            lieChoiceText = "Say you left it at home",
+            scenarioText = "You accidentally broke school equipment while playing in \nthe classroom. What do you do?",
+            truthChoiceText = "Confess immediately",
+            lieChoiceText = "Don't say anything",
 
             truthConsequence = new ConsequenceData
             {
-                previewText = "Potential Consequences:\n- Get extension\nOR\n- Get zero marks",
-                previewText1 = "Teacher gives you extension",
-                previewText2 = "You get zero but chance to improve",
-                resultOption1 = "Your teacher appreciates your honesty and gives you an extra day.",
-                resultOption2 = "You get zero but teacher notes your honesty for future assignments.",
-                scoreOption1 = 8,
-                scoreOption2 = 3,
+                previewText = "Potential Consequences:\n- Get praised\nOR\n- Replace it",
+                previewText1 = "Your teacher praise your honesty",
+                previewText2 = "You have to replace it",
+                resultOption1 = "Your teacher is mad but praise you for taking responsibility.",
+                resultOption2 = "Your teacher forgive you but scold you for breaking it.",
+                scoreOption1 = 10,
+                scoreOption2 = 5,
                 nextScene = "PrimaryEvidence2"
             },
 
             lieConsequence = new ConsequenceData
             {
-                previewText = "Potential Consequences:\n- Get away with it\nOR\n- Get caught lying",
-                previewText1 = "Teacher believes you",
-                previewText2 = "Teacher checks with parents",
-                resultOption1 = "The teacher believes you and gives you until tomorrow.",
-                resultOption2 = "The teacher calls your parents and finds out the truth. Double punishment.",
-                scoreOption1 = -8,
-                scoreOption2 = -15,
+                previewText = "Potential Consequences:\n- Others get blamed\nOR\n- Get caught lying",
+                previewText1 = "Someone else gets blamed",
+                previewText2 = "You get caught lying",
+                resultOption1 = "You avoid responsibility and gets other people punished.",
+                resultOption2 = "Another student told the teacher you broke it and you are punished.",
+                scoreOption1 = -15,
+                scoreOption2 = -10,
                 nextScene = "PrimaryEvidence2"
+            }
+        };
+
+        ScenarioData scenario4 = new ScenarioData
+        {
+            scenarioText = "You found a toy that you wanted at a playground.",
+            truthChoiceText = "Hand it to lost and found",
+            lieChoiceText = "Keep it for yourself",
+
+            truthConsequence = new ConsequenceData
+            {
+                previewText = "Potential Consequences:\n- Make someone happy\nOR\n- Get praised",
+                previewText1 = "Owner get their toy back",
+                previewText2 = "You get praised for doing the right thing",
+                resultOption1 = "Owner get their toy and they are happy.",
+                resultOption2 = "Your teacher appreciate your honesty.",
+                scoreOption1 = 10,
+                scoreOption2 = 15,
+                nextScene = "transition"
+            },
+
+            lieConsequence = new ConsequenceData
+            {
+                previewText = "Potential Consequences:\n- Get to keep it\nOR\n- Owner saw you take it",
+                previewText1 = "You get to keep the toy",
+                previewText2 = "Owner say you take it",
+                resultOption1 = "You kept someone's toy for yourself.",
+                resultOption2 = "The toy owner confronts you and ask for it back.",
+                scoreOption1 = -10,
+                scoreOption2 = -15,
+                nextScene = "transition"
             }
         };
 
         scenarios.Add(scenario1);
         scenarios.Add(scenario2);
         scenarios.Add(scenario3);
+        scenarios.Add(scenario4);
     }
 
     void LoadScenario(int index)
@@ -188,16 +220,13 @@ public class PrimaryLevelLogic : MonoBehaviour
 
             // Save current progress
             PlayerPrefs.SetInt("PrimaryLevelScenarioIndex", index);
-            
-            // 🔹 ADD THIS ONE LINE:
-            PlayerPrefs.SetInt("PrimaryLevelScenarioIndex", index + 1); // Save NEXT scenario
         }
         else
         {
             // All scenarios completed
             allScenariosCompleted = true;
             PlayerPrefs.DeleteKey("PrimaryLevelScenarioIndex");
-            SceneManager.LoadScene("PrimaryLevelEvidence");
+            SceneManager.LoadScene("transition");
         }
     }
 
@@ -205,6 +234,12 @@ public class PrimaryLevelLogic : MonoBehaviour
     {
         currentScenarioIndex++;
         LoadScenario(currentScenarioIndex);
+    }
+    public void CompleteCurrentScenario()
+    {
+        currentScenarioIndex++;
+        PlayerPrefs.SetInt("PrimaryLevelScenarioIndex", currentScenarioIndex);
+        PlayerPrefs.Save();
     }
 
     void Update()

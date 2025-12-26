@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public enum ChoiceType { None, Truth, Lie }
 
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
     public int moralityScore = 0;
     public string previousScene = "";
     public string chatbotReturnScene = "";
+    public Dictionary<string, int> guestProgress = new Dictionary<string, int>();
 
     private void Awake()
     {

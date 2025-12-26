@@ -37,35 +37,106 @@ public class PrimaryLevelLogic : MonoBehaviour
 
     private Vector3 truthOriginalScale;
     private Vector3 lieOriginalScale;
-    private int totalScenarios = 0;
-    private bool allScenariosCompleted = false;
 
     // 🔹 Your PHP endpoint
     private string updateLastSceneURL = "http://localhost/hackathon/update_last_scene.php";
 
+    private string scenarioKey = "PrimaryLevelScenarioIndex";
+
     void Start()
     {
-        StartCoroutine(UpdateLastSceneInDB("PrimaryLevel"));
-
         truthOriginalScale = truthCollider.transform.localScale;
         lieOriginalScale = lieCollider.transform.localScale;
 
         InitializeDefaultScenarios();
 
-        totalScenarios = scenarios.Count;
+        // Load saved progress - this is the KEY CHANGE
+        currentScenarioIndex = GetSavedScenarioIndex();
+        
+        Debug.Log("Loading scenario index: " + currentScenarioIndex);
 
-        currentScenarioIndex = PlayerPrefs.GetInt("PrimaryLevelScenarioIndex", 0);
+        if (IsPlayerRegistered())
+        {
+            StartCoroutine(UpdateLastSceneInDB("PrimaryLevel"));
+        }
+
+        // If all scenarios completed, go to transition
+        if (currentScenarioIndex >= scenarios.Count)
+        {
+            Debug.Log("All scenarios completed, loading transition");
+            SceneManager.LoadScene("transition");
+            return;
+        }
+        
         LoadScenario(currentScenarioIndex);
 
         ChatbotButton.onClick.AddListener(() =>
         {
+            SaveScenarioIndex(currentScenarioIndex);
             GameManager.Instance.chatbotReturnScene = SceneManager.GetActiveScene().name;
             SceneManager.LoadScene("Chatbot");
         });
     }
 
+    bool IsPlayerRegistered()
+    {
+        return GameManager.Instance != null && GameManager.Instance.userID > 0;
+    }
+
+    int GetSavedScenarioIndex()
+    {
+        if (IsPlayerRegistered())
+        {
+            // Registered player: Use PlayerPrefs (syncs with DB)
+            return PlayerPrefs.GetInt(scenarioKey, 0);
+        }
+        else
+        {
+            // Guest player: Check session storage first
+            if (GameManager.Instance != null && GameManager.Instance.guestProgress != null)
+            {
+                if (GameManager.Instance.guestProgress.ContainsKey(scenarioKey))
+                {
+                    return GameManager.Instance.guestProgress[scenarioKey];
+                }
+            }
+            
+            // Fallback to PlayerPrefs for guest (temporary)
+            return PlayerPrefs.GetInt("Guest_" + scenarioKey, 0);
+        }
+    }
+
+    void SaveScenarioIndex(int index)
+    {
+        if (IsPlayerRegistered())
+        {
+            // Registered player: Save to PlayerPrefs
+            PlayerPrefs.SetInt(scenarioKey, index);
+            PlayerPrefs.Save();
+        }
+        else
+        {
+            // Guest player: Save to GameManager session
+            if (GameManager.Instance != null)
+            {
+                if (GameManager.Instance.guestProgress == null)
+                {
+                    GameManager.Instance.guestProgress = new Dictionary<string, int>();
+                }
+                GameManager.Instance.guestProgress[scenarioKey] = index;
+                
+                // Also save to PlayerPrefs as temporary backup
+                PlayerPrefs.SetInt("Guest_" + scenarioKey, index);
+                PlayerPrefs.Save();
+            }
+        }
+    }
+
     void InitializeDefaultScenarios()
     {
+        // Clear existing scenarios to avoid duplicates
+        scenarios.Clear();
+        
         ScenarioData scenario1 = new ScenarioData
         {
             scenarioText = "You came into class and noticed that everyone was\nalready seated. The teacher ask why you are late.",
@@ -81,7 +152,6 @@ public class PrimaryLevelLogic : MonoBehaviour
                 resultOption2 = "Your teacher notes your honesty and kindly reminds you to be early next time.",
                 scoreOption1 = 10,
                 scoreOption2 = 5,
-                //nextScene = "transition" // for when they collect the keris
                 nextScene = "PrimaryEvidence"
             },
 
@@ -94,7 +164,6 @@ public class PrimaryLevelLogic : MonoBehaviour
                 resultOption2 = "The teacher checks the attendance log and catches your lie. You get detention.",
                 scoreOption1 = -5,
                 scoreOption2 = -10,
-                //nextScene = "transition"
                 nextScene = "PrimaryEvidence"
             }
         };
@@ -114,7 +183,6 @@ public class PrimaryLevelLogic : MonoBehaviour
                 resultOption2 = "No one claims the wallet, but you feel good for \ndoing the right thing.",
                 scoreOption1 = 15,
                 scoreOption2 = 10,
-                // nextScene = "transition"
                 nextScene = "PrimaryEvidence1"
             },
 
@@ -127,7 +195,6 @@ public class PrimaryLevelLogic : MonoBehaviour
                 resultOption2 = "Security footage shows you taking the wallet. You face consequences.",
                 scoreOption1 = -10,
                 scoreOption2 = -20,
-                // nextScene = "transition"
                 nextScene = "PrimaryEvidence1"
             }
         };
@@ -204,6 +271,8 @@ public class PrimaryLevelLogic : MonoBehaviour
     {
         if (index >= 0 && index < scenarios.Count)
         {
+            Debug.Log("Loading scenario: " + index);
+            
             ScenarioData currentScenario = scenarios[index];
             
             // Update scenario text with typing effect
@@ -218,28 +287,63 @@ public class PrimaryLevelLogic : MonoBehaviour
             GameManager.Instance.truthConsequence = currentScenario.truthConsequence;
             GameManager.Instance.lieConsequence = currentScenario.lieConsequence;
 
-            // Save current progress
-            PlayerPrefs.SetInt("PrimaryLevelScenarioIndex", index);
+            // Save which evidence scene this leads to
+            PlayerPrefs.SetString("NextEvidenceScene", GetEvidenceSceneForCurrentScenario());
+            PlayerPrefs.Save();
         }
         else
         {
-            // All scenarios completed
-            allScenariosCompleted = true;
-            PlayerPrefs.DeleteKey("PrimaryLevelScenarioIndex");
-            SceneManager.LoadScene("transition");
+            Debug.LogError("Invalid scenario index: " + index);
         }
     }
 
-    public void LoadNextScenario()
+    string GetEvidenceSceneForCurrentScenario()
     {
-        currentScenarioIndex++;
-        LoadScenario(currentScenarioIndex);
+        switch (currentScenarioIndex)
+        {
+            case 0: return "PrimaryEvidence";
+            case 1: return "PrimaryEvidence1";
+            case 2: return "PrimaryEvidence2";
+            case 3: return "transition";
+            default: return "transition";
+        }
     }
+
+    // Called when player makes a choice (truth or lie)
+    public void OnChoiceMade()
+    {
+        Debug.Log("Choice made for scenario " + currentScenarioIndex + ", loading evidence scene");
+        
+        // Save current progress BEFORE loading evidence scene
+        SaveScenarioIndex(currentScenarioIndex);
+        
+        // Determine which evidence scene to load based on current scenario
+        string evidenceScene = GetEvidenceSceneForCurrentScenario();
+
+        if (IsPlayerRegistered())
+        {
+            string sceneWithProgress = $"{evidenceScene}_{currentScenarioIndex}";
+            StartCoroutine(UpdateLastSceneInDB(sceneWithProgress));
+        }
+        
+        SceneManager.LoadScene(evidenceScene);
+    }
+
+    // Called from evidence scene doors to mark scenario as completed
     public void CompleteCurrentScenario()
     {
+        Debug.Log("Completing scenario " + currentScenarioIndex);
+        
+        // ONLY increment when evidence is completed
         currentScenarioIndex++;
-        PlayerPrefs.SetInt("PrimaryLevelScenarioIndex", currentScenarioIndex);
-        PlayerPrefs.Save();
+        SaveScenarioIndex(currentScenarioIndex);
+        
+        Debug.Log("New scenario index: " + currentScenarioIndex);
+
+        if (currentScenarioIndex >= scenarios.Count)
+        {
+            Debug.Log("All scenarios completed!");
+        }
     }
 
     void Update()
@@ -251,6 +355,11 @@ public class PrimaryLevelLogic : MonoBehaviour
 
     IEnumerator UpdateLastSceneInDB(string sceneName)
     {
+        if (!IsPlayerRegistered())
+        {
+            yield break;
+        }
+
         WWWForm form = new WWWForm();
         form.AddField("userID", GameManager.Instance.userID);
         form.AddField("lastScene", sceneName);
